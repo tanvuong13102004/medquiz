@@ -70,6 +70,10 @@ const SUBJECT_SET_CONFIG = {
 
 const SUBJECT_SET_COUNT = 10;
 const subjectSetLoadState = {};
+
+let allSubjectSetsPreloaded = false;
+let allSubjectSetsPreloadPromise = null;
+
 const READ_PAGE_SIZE = 50;
 
 let selectedQuestionCount = 15;
@@ -235,11 +239,41 @@ function setupPortal() {
     $("exercisePortalBtn")
         .addEventListener(
             "click",
-            () => {
+            async () => {
 
-                showPage(
-                    exerciseHub
+                showLoading(
+                    "Đang tải ngân hàng câu hỏi",
+                    "Đang đếm số câu của tất cả môn học..."
                 );
+
+                try {
+
+                    /*
+                        Khi bấm BÀI TẬP:
+                        - tải luôn 10 bộ của tất cả môn
+                        - tính tổng số câu từng môn
+                        - chỉ sau đó mới mở trang Bài Tập
+
+                        Vì vậy người dùng sẽ thấy số câu
+                        ngay trên tất cả ô môn học,
+                        không cần bấm từng môn nữa.
+                    */
+
+                    await preloadAllSubjectQuestionSets();
+
+                    updateSubjectCounts();
+
+                    showPage(
+                        exerciseHub
+                    );
+
+                }
+
+                finally {
+
+                    hideLoading();
+
+                }
 
             }
         );
@@ -1898,6 +1932,90 @@ async function loadSubjectQuestionSets(
 
 
     await task;
+
+}
+
+
+/* =========================================================
+   PRELOAD TẤT CẢ MÔN KHI MỞ BÀI TẬP
+========================================================= */
+
+async function preloadAllSubjectQuestionSets() {
+
+    /*
+        Nếu đã tải xong trước đó thì chỉ cập nhật lại
+        số câu và không tải 70 file lần thứ hai.
+    */
+
+    if (
+        allSubjectSetsPreloaded
+    ) {
+
+        updateSubjectCounts();
+
+        return;
+
+    }
+
+
+    /*
+        Nếu một lần preload đang chạy,
+        dùng lại Promise hiện tại để tránh tải trùng file.
+    */
+
+    if (
+        allSubjectSetsPreloadPromise
+    ) {
+
+        await allSubjectSetsPreloadPromise;
+
+        updateSubjectCounts();
+
+        return;
+
+    }
+
+
+    const subjects =
+        Object.keys(
+            SUBJECT_SET_CONFIG
+        );
+
+
+    allSubjectSetsPreloadPromise =
+        Promise.all(
+            subjects.map(
+                subject =>
+                    loadSubjectQuestionSets(
+                        subject
+                    )
+            )
+        );
+
+
+    try {
+
+        await allSubjectSetsPreloadPromise;
+
+        allSubjectSetsPreloaded =
+            true;
+
+
+        /*
+            Sau khi tất cả môn đã tải xong,
+            cập nhật số câu trên 7 ô môn học.
+        */
+
+        updateSubjectCounts();
+
+    }
+
+    finally {
+
+        allSubjectSetsPreloadPromise =
+            null;
+
+    }
 
 }
 
