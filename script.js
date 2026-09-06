@@ -5558,6 +5558,20 @@ function setupRead() {
 
                     renderReadQuestions();
 
+                    /*
+                        Sau khi chuyển sang trang câu hỏi tiếp theo,
+                        tự động cuộn mượt về đầu trang để bắt đầu đọc
+                        ngay từ câu đầu tiên của trang mới.
+                    */
+                    requestAnimationFrame(
+                        () => {
+                            window.scrollTo({
+                                top: 0,
+                                behavior: "smooth"
+                            });
+                        }
+                    );
+
                 }
 
             }
