@@ -11354,3 +11354,812 @@ body.closer-kawaii-theme::before{
 @media(max-width:820px){
     #landingPage.home-v2-page{padding:10px 0 110px!important}.home-hero-v2-fixed{height:auto;min-height:190px;padding:28px 20px}.home-hero-mascots,.hero-quote-fixed,.hero-doodle-left,.hero-doodle-right,.home-bottom-garden{display:none}.hero-copy-fixed h1{font-size:42px}.hero-copy-fixed p{font-size:15px}.home-actions-v2{grid-template-columns:1fr}.home-action-card{min-height:118px}.home-subjects-row{grid-template-columns:repeat(2,minmax(0,1fr))}.home-subjects-head small{display:none}#landingPage.home-v2-page::after{height:120px!important}}
 @media(max-width:480px){.home-action-card{grid-template-columns:50px minmax(0,1fr) 34px;padding:13px;gap:10px}.home-action-icon{width:50px;height:50px}.home-action-text strong{font-size:15px}.home-action-text small{font-size:11px}.home-subjects-v2{padding:13px}.home-subjects-head strong{font-size:15px}}
+
+
+/* =========================================================
+   FINAL BACKGROUND + RESPONSIVE LAYER
+   - Desktop: giữ nguyên bố cục hiện tại.
+   - Trang chủ: KHÔNG dùng ảnh nền đồng cỏ.
+   - Các trang khác: dùng ảnh nền đồng cỏ pastel.
+   - Mobile: chỉ thay đổi bên trong media query.
+========================================================= */
+
+/* NỀN CHO TẤT CẢ TRANG TRỪ TRANG CHỦ */
+body.study-meadow-background {
+    background-color: #fff8fb;
+    background-image:
+        linear-gradient(
+            180deg,
+            rgba(255, 250, 253, .22),
+            rgba(248, 246, 255, .18)
+        ),
+        url("assets/backgrounds/kawaii-meadow-bg.webp");
+    background-repeat: no-repeat;
+    background-position: center bottom;
+    background-size: cover;
+    background-attachment: fixed;
+}
+
+/* Để ảnh nền mới là nền chính, không chồng thêm dải cỏ SVG cũ */
+body.study-meadow-background .page-section.show::after {
+    opacity: 0 !important;
+}
+
+/* Các card vẫn đủ trắng để chữ dễ đọc trên nền ảnh */
+body.study-meadow-background .glass-card,
+body.study-meadow-background .question-set-card,
+body.study-meadow-background .subject-btn,
+body.study-meadow-background .config-group,
+body.study-meadow-background .mode-card,
+body.study-meadow-background .quiz-main,
+body.study-meadow-background .quiz-sidebar,
+body.study-meadow-background .read-card,
+body.study-meadow-background .resource-card,
+body.study-meadow-background .book-card {
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+}
+
+/* =========================================================
+   MOBILE / ĐIỆN THOẠI
+   Các rule dưới đây KHÔNG tác động giao diện desktop.
+========================================================= */
+@media (max-width: 768px) {
+
+    html,
+    body {
+        width: 100%;
+        max-width: 100%;
+        overflow-x: hidden;
+    }
+
+    body.study-meadow-background {
+        /* fixed background thường giật trên điện thoại */
+        background-attachment: scroll;
+        background-size: auto 100vh;
+        background-position: center bottom;
+        background-repeat: repeat-y;
+    }
+
+    /* HEADER */
+    .header {
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+    }
+
+    .header-inner {
+        min-height: 58px !important;
+        padding: 7px 10px !important;
+        gap: 8px;
+    }
+
+    .brand {
+        min-width: 0;
+        gap: 8px !important;
+    }
+
+    .brand-logo {
+        width: 38px !important;
+        height: 38px !important;
+        border-radius: 12px !important;
+        flex: 0 0 38px;
+    }
+
+    .brand-cross {
+        font-size: 20px !important;
+    }
+
+    .brand-name {
+        font-size: 18px !important;
+        white-space: nowrap;
+    }
+
+    .kawaii-header-nav {
+        display: none !important;
+    }
+
+    .header-actions {
+        gap: 6px !important;
+        flex: 0 0 auto;
+    }
+
+    .private-badge {
+        padding: 7px 9px !important;
+        font-size: 9px !important;
+        max-width: 126px;
+        white-space: nowrap;
+    }
+
+    .fullscreen-btn {
+        width: 36px !important;
+        height: 36px !important;
+        border-radius: 11px !important;
+    }
+
+    /* KHUNG CHÍNH */
+    .container {
+        width: 100% !important;
+        max-width: 100% !important;
+        margin: 0 !important;
+        padding: 10px 10px 80px !important;
+    }
+
+    .page-section {
+        width: 100%;
+        min-width: 0;
+        padding-bottom: 88px !important;
+    }
+
+    /* Thanh điều hướng các trang */
+    .section-navigation {
+        min-height: 72px !important;
+        padding: 10px 12px !important;
+        border-radius: 20px !important;
+        gap: 8px !important;
+    }
+
+    .nav-back-btn {
+        padding: 8px 10px !important;
+        border-radius: 12px !important;
+        font-size: 11px !important;
+        white-space: nowrap;
+    }
+
+    .section-nav-center {
+        gap: 9px !important;
+        min-width: 0;
+    }
+
+    .section-navigation .nav-main-icon,
+    .nav-main-icon {
+        width: 42px !important;
+        height: 42px !important;
+        flex: 0 0 42px !important;
+        border-radius: 13px !important;
+        font-size: 21px !important;
+    }
+
+    .section-nav-center small {
+        font-size: 8px !important;
+        letter-spacing: .8px !important;
+    }
+
+    .section-nav-center strong,
+    .section-navigation .section-nav-center strong {
+        font-size: 17px !important;
+        line-height: 1.15 !important;
+    }
+
+    .nav-decoration {
+        display: none !important;
+    }
+
+    /* DANH SÁCH MÔN */
+    .subjects {
+        display: grid !important;
+        grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+        gap: 10px !important;
+        margin-top: 10px !important;
+    }
+
+    .subject-btn {
+        width: 100%;
+        min-width: 0;
+        min-height: 132px !important;
+        padding: 14px 12px 13px !important;
+        border-radius: 20px !important;
+        text-align: left;
+    }
+
+    .subject-icon {
+        width: 48px !important;
+        height: 48px !important;
+        border-radius: 15px !important;
+        font-size: 24px !important;
+    }
+
+    .subject-name {
+        max-width: calc(100% - 12px);
+        margin-top: 9px !important;
+        font-size: 14px !important;
+        line-height: 1.2 !important;
+        overflow-wrap: anywhere;
+    }
+
+    .subject-count {
+        margin-top: 5px !important;
+        padding: 5px 8px !important;
+        font-size: 9px !important;
+    }
+
+    .subject-btn::after {
+        width: 30px !important;
+        height: 30px !important;
+        right: 10px !important;
+        bottom: 10px !important;
+        border-radius: 10px !important;
+        font-size: 14px !important;
+    }
+
+    .english-new-badge {
+        top: 8px !important;
+        right: 8px !important;
+        font-size: 7px !important;
+        padding: 4px 6px !important;
+    }
+
+    /* CHỌN 10 BỘ */
+    .question-set-area {
+        margin-top: 12px !important;
+    }
+
+    .question-set-heading {
+        min-height: auto !important;
+        padding: 14px !important;
+        padding-right: 14px !important;
+        border-radius: 20px !important;
+        display: block !important;
+    }
+
+    .question-set-heading-main {
+        gap: 10px !important;
+    }
+
+    .question-set-heading-icon {
+        width: 50px !important;
+        height: 50px !important;
+        flex: 0 0 50px !important;
+        border-radius: 15px !important;
+        font-size: 24px !important;
+    }
+
+    .question-set-kicker {
+        font-size: 8px !important;
+        letter-spacing: 1px !important;
+    }
+
+    .question-set-heading h2 {
+        font-size: 21px !important;
+        line-height: 1.15 !important;
+    }
+
+    .question-set-heading p {
+        margin-top: 4px !important;
+        font-size: 11px !important;
+        line-height: 1.35 !important;
+    }
+
+    .question-set-heading-right {
+        width: 100%;
+        margin-top: 12px;
+        display: flex !important;
+        justify-content: stretch !important;
+    }
+
+    .test-all-sets-btn {
+        width: 100% !important;
+        min-width: 0 !important;
+        min-height: 58px !important;
+        padding: 10px 12px !important;
+        border-radius: 16px !important;
+    }
+
+    .test-all-icon {
+        width: 40px !important;
+        height: 40px !important;
+        font-size: 21px !important;
+    }
+
+    .test-all-content strong {
+        font-size: 13px !important;
+    }
+
+    .test-all-content small {
+        font-size: 9px !important;
+    }
+
+    .question-set-heading-stickers,
+    .question-set-header-mascot {
+        display: none !important;
+    }
+
+    .question-set-grid {
+        display: grid !important;
+        grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+        gap: 10px !important;
+        margin-top: 10px !important;
+    }
+
+    .question-set-card {
+        min-height: 154px !important;
+        padding: 12px 11px !important;
+        border-radius: 19px !important;
+    }
+
+    .kawaii-set-card-icon,
+    .set-card-icon {
+        width: 56px !important;
+        height: 56px !important;
+        border-radius: 16px !important;
+    }
+
+    .set-card-title {
+        max-width: calc(100% - 2px) !important;
+        margin-top: 8px !important;
+        font-size: 13px !important;
+        line-height: 1.25 !important;
+    }
+
+    .set-card-count {
+        margin-top: 5px !important;
+        padding: 4px 7px !important;
+        font-size: 9px !important;
+    }
+
+    .set-card-number {
+        top: 9px !important;
+        right: 10px !important;
+        font-size: 9px !important;
+    }
+
+    .set-card-arrow {
+        width: 29px !important;
+        height: 29px !important;
+        right: 9px !important;
+        bottom: 9px !important;
+        border-radius: 9px !important;
+        font-size: 13px !important;
+    }
+
+    /* TRANG CẤU HÌNH TEST */
+    .mode-area {
+        margin-top: 12px !important;
+    }
+
+    .selected-subject {
+        min-height: 72px !important;
+        padding: 13px 14px !important;
+        border-radius: 20px !important;
+        gap: 8px !important;
+    }
+
+    .selected-subject::before,
+    .selected-subject::after {
+        display: none !important;
+    }
+
+    .selected-subject-info {
+        min-width: 0;
+    }
+
+    .selected-subject-info small {
+        font-size: 8px !important;
+    }
+
+    .selected-subject h2 {
+        font-size: 17px !important;
+        line-height: 1.25 !important;
+        overflow-wrap: anywhere;
+    }
+
+    .selected-count {
+        flex: 0 0 auto;
+        padding: 7px 9px !important;
+        font-size: 9px !important;
+    }
+
+    .test-config {
+        display: grid !important;
+        grid-template-columns: 1fr !important;
+        gap: 10px !important;
+        margin-top: 10px !important;
+    }
+
+    .config-group {
+        min-height: 0 !important;
+        padding: 14px !important;
+        border-radius: 20px !important;
+    }
+
+    .config-header {
+        margin-bottom: 12px !important;
+        gap: 10px !important;
+    }
+
+    .config-icon {
+        width: 46px !important;
+        height: 46px !important;
+        flex: 0 0 46px;
+        border-radius: 14px !important;
+        font-size: 22px !important;
+    }
+
+    .config-header strong {
+        font-size: 16px !important;
+    }
+
+    .config-header small {
+        font-size: 10px !important;
+    }
+
+    .choice-row,
+    .time-choice-row {
+        display: grid !important;
+        grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+        gap: 7px !important;
+    }
+
+    .choice-btn {
+        width: 100% !important;
+        min-width: 0 !important;
+        min-height: 62px !important;
+        padding: 7px 4px !important;
+        border-radius: 13px !important;
+    }
+
+    .choice-btn strong {
+        font-size: 18px !important;
+    }
+
+    .choice-btn span {
+        font-size: 9px !important;
+    }
+
+    .mode-grid {
+        display: grid !important;
+        grid-template-columns: 1fr !important;
+        gap: 10px !important;
+        margin-top: 10px !important;
+    }
+
+    .mode-card {
+        min-height: 108px !important;
+        padding: 14px !important;
+        border-radius: 20px !important;
+        gap: 11px !important;
+    }
+
+    .mode-icon {
+        width: 48px !important;
+        height: 48px !important;
+        flex: 0 0 48px;
+        border-radius: 15px !important;
+        font-size: 23px !important;
+    }
+
+    .mode-content > span {
+        font-size: 8px !important;
+    }
+
+    .mode-content h3 {
+        font-size: 17px !important;
+        line-height: 1.2 !important;
+    }
+
+    .mode-content p {
+        margin-top: 3px !important;
+        font-size: 10px !important;
+        line-height: 1.35 !important;
+    }
+
+    .mode-arrow {
+        width: 35px !important;
+        height: 35px !important;
+        flex: 0 0 35px;
+        border-radius: 12px !important;
+    }
+
+    .mode-sticker {
+        display: none !important;
+    }
+
+    /* TRANG LÀM BÀI */
+    #quizPage {
+        padding-bottom: 88px !important;
+    }
+
+    .quiz-header {
+        min-height: 52px !important;
+        padding: 7px 8px !important;
+        margin-bottom: 8px !important;
+        border-radius: 17px !important;
+    }
+
+    .quiz-header-btn {
+        min-height: 36px !important;
+        padding: 7px 9px !important;
+        font-size: 10px !important;
+        border-radius: 11px !important;
+    }
+
+    .quiz-header-subject {
+        min-width: 0;
+        gap: 5px !important;
+    }
+
+    .quiz-header-subject span {
+        display: none;
+    }
+
+    .quiz-header-subject strong {
+        max-width: 145px;
+        font-size: 11px !important;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+    .quiz-layout {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 10px !important;
+    }
+
+    .quiz-main {
+        order: 1;
+        width: 100%;
+        min-width: 0;
+        padding: 15px 12px 14px !important;
+        border-radius: 21px !important;
+    }
+
+    .quiz-sidebar {
+        order: 2;
+        width: 100% !important;
+        max-width: none !important;
+        position: static !important;
+        top: auto !important;
+        padding: 14px 12px !important;
+        border-radius: 21px !important;
+    }
+
+    .quiz-top {
+        gap: 8px !important;
+        padding-bottom: 12px !important;
+    }
+
+    .quiz-live {
+        font-size: 8px !important;
+        letter-spacing: .8px !important;
+    }
+
+    .quiz-top h2 {
+        margin-top: 3px !important;
+        font-size: 18px !important;
+        line-height: 1.25 !important;
+    }
+
+    #quizInfoText {
+        margin-top: 2px !important;
+        font-size: 10px !important;
+    }
+
+    .timer {
+        flex: 0 0 auto;
+        padding: 9px 10px !important;
+        border-radius: 13px !important;
+        font-size: 11px !important;
+    }
+
+    .timer strong {
+        font-size: 14px !important;
+    }
+
+    .progress-box {
+        margin-top: 10px !important;
+    }
+
+    .progress-head,
+    .answered-status {
+        font-size: 10px !important;
+    }
+
+    .question-head {
+        margin-top: 15px !important;
+    }
+
+    .question-number {
+        padding: 6px 9px !important;
+        font-size: 9px !important;
+    }
+
+    .flag-btn {
+        padding: 7px 9px !important;
+        font-size: 9px !important;
+        border-radius: 11px !important;
+    }
+
+    .question-text {
+        margin-top: 9px !important;
+        padding: 12px 10px !important;
+        border-radius: 15px !important;
+        font-size: 17px !important;
+        line-height: 1.42 !important;
+        letter-spacing: 0 !important;
+        overflow-wrap: anywhere;
+    }
+
+    .answers {
+        margin-top: 9px !important;
+        gap: 8px !important;
+    }
+
+    .answer {
+        min-height: 56px !important;
+        padding: 10px 11px !important;
+        border-radius: 14px !important;
+        font-size: 13px !important;
+        line-height: 1.35 !important;
+        gap: 9px !important;
+        text-align: left;
+    }
+
+    .answer-letter {
+        width: 34px !important;
+        height: 34px !important;
+        flex: 0 0 34px !important;
+        border-radius: 10px !important;
+        font-size: 12px !important;
+    }
+
+    .answer-explanation {
+        padding: 13px !important;
+        border-radius: 16px !important;
+    }
+
+    .explanation-head strong {
+        font-size: 13px !important;
+    }
+
+    #explanationText,
+    .answer-detail-list {
+        font-size: 12px !important;
+        line-height: 1.5 !important;
+    }
+
+    .quiz-navigation {
+        margin-top: 14px !important;
+        gap: 8px !important;
+    }
+
+    .quiz-nav-btn {
+        min-height: 42px !important;
+        padding: 9px 11px !important;
+        border-radius: 12px !important;
+        font-size: 10px !important;
+    }
+
+    /* SIDEBAR mobile: danh sách câu đủ lớn để bấm */
+    .sidebar-title-row {
+        font-size: 13px !important;
+    }
+
+    .sidebar-title-row::after {
+        display: none !important;
+    }
+
+    .question-grid {
+        display: grid !important;
+        grid-template-columns: repeat(5, minmax(0, 1fr)) !important;
+        gap: 7px !important;
+        margin-top: 10px !important;
+    }
+
+    .question-grid button {
+        min-width: 0 !important;
+        min-height: 42px !important;
+        border-radius: 11px !important;
+        font-size: 11px !important;
+    }
+
+    .question-legend {
+        font-size: 9px !important;
+        gap: 7px 10px !important;
+    }
+
+    .sidebar-action {
+        width: 100%;
+        min-height: 43px !important;
+        margin-top: 8px !important;
+        border-radius: 12px !important;
+        font-size: 10px !important;
+    }
+
+    /* READ / TÀI LIỆU / FLASHCARD */
+    .read-page-header,
+    .read-search,
+    .resource-page-header,
+    .flashcard-header,
+    .word-practice-header {
+        border-radius: 18px !important;
+    }
+
+    .read-page-header {
+        padding: 12px !important;
+        gap: 8px !important;
+    }
+
+    .read-page-header h2 {
+        font-size: 17px !important;
+        line-height: 1.25 !important;
+    }
+
+    .read-search {
+        margin-top: 9px !important;
+        padding: 10px 11px !important;
+    }
+
+    .read-search input {
+        min-width: 0;
+        font-size: 12px !important;
+    }
+
+    .read-card {
+        padding: 13px !important;
+        border-radius: 17px !important;
+    }
+
+    .resource-grid,
+    .book-grid,
+    .flashcard-grid {
+        grid-template-columns: 1fr !important;
+    }
+
+    /* Không để sticker lớn che nội dung trên điện thoại */
+    .exercise-page-decor,
+    .quiz-page-decor,
+    .kawaii-floating-notes,
+    .global-stickers {
+        display: none !important;
+    }
+}
+
+/* Điện thoại rất nhỏ */
+@media (max-width: 420px) {
+    .container {
+        padding-left: 8px !important;
+        padding-right: 8px !important;
+    }
+
+    .private-text {
+        display: none;
+    }
+
+    .private-badge {
+        width: 30px;
+        height: 30px;
+        padding: 0 !important;
+        justify-content: center;
+    }
+
+    .subjects,
+    .question-set-grid {
+        gap: 8px !important;
+    }
+
+    .subject-btn {
+        min-height: 125px !important;
+    }
+
+    .question-set-card {
+        min-height: 148px !important;
+    }
+
+    .question-grid {
+        grid-template-columns: repeat(5, 1fr) !important;
+        gap: 5px !important;
+    }
+
+    .question-grid button {
+        min-height: 38px !important;
+    }
+
+    .question-text {
+        font-size: 16px !important;
+    }
+
+    .answer {
+        font-size: 12px !important;
+    }
+}

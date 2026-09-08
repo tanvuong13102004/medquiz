@@ -258,6 +258,15 @@ function showPage(page) {
         "show"
     );
 
+    /*
+       Ảnh nền đồng cỏ chỉ dùng cho các trang học tập.
+       Trang chủ giữ nguyên giao diện hiện tại.
+    */
+    document.body.classList.toggle(
+        "study-meadow-background",
+        page !== landingPage
+    );
+
     window.scrollTo({
         top: 0,
         behavior: "smooth"
