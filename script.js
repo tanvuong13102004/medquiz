@@ -69,6 +69,19 @@ const SUBJECT_SET_CONFIG = {
 
 
 const SUBJECT_SET_COUNT = 10;
+
+const KAWAII_SET_MASCOTS = [
+    "assets/stickers/capybara-doctor.svg",
+    "assets/stickers/dino-study.svg",
+    "assets/stickers/cat-chick.svg",
+    "assets/stickers/bunny-heart.svg",
+    "assets/stickers/bear-book.svg",
+    "assets/stickers/panda-note.svg",
+    "assets/stickers/dino-study.svg",
+    "assets/stickers/cat-chick.svg",
+    "assets/stickers/bunny-heart.svg",
+    "assets/stickers/bear-book.svg"
+];
 const subjectSetLoadState = {};
 
 let allSubjectSetsPreloaded = false;
@@ -122,6 +135,20 @@ let flashCurrentIndex = 0;
 let knownFlashcards = new Set();
 
 
+/* WORD PRACTICE */
+
+let wordPracticeCards = [];
+let wordPracticeQueue = [];
+let wordPracticeIndex = 0;
+let wordPracticeDirection = "mixed";
+let wordPracticeCorrectCount = 0;
+let wordPracticeWrongCount = 0;
+let wordPracticeAttemptCount = 0;
+let wordPracticeLocked = false;
+let wordPracticeHintLevel = 0;
+let wordPracticeCurrentDirection = "en-vi";
+
+
 /* =========================================================
    HELPER
 ========================================================= */
@@ -141,6 +168,7 @@ const resourceListPage = $("resourceListPage");
 const quizPage = $("quizPage");
 const readPage = $("readPage");
 const flashcardPage = $("flashcardPage");
+const wordPracticePage = $("wordPracticePage");
 const modeArea = $("modeArea");
 
 let questionSetArea = null;
@@ -176,6 +204,8 @@ async function init() {
 
     setupFlashcards();
 
+    setupWordPractice();
+
     setupFullscreen();
 
     setupRipple();
@@ -186,7 +216,13 @@ async function init() {
 
     updateResourceCounts();
 
+    updateHomeResourceTotal();
+
+    refreshHomeQuestionTotal();
+
     updateQuestionLegend();
+
+    setupKawaiiExperience();
 
 }
 
@@ -1562,8 +1598,8 @@ function renderQuestionSetArea(
                         </span>
 
 
-                        <span class="set-card-icon">
-                            ${SET_CARD_ICONS[index]}
+                        <span class="set-card-icon kawaii-set-card-icon">
+                            <img src="${KAWAII_SET_MASCOTS[index % KAWAII_SET_MASCOTS.length]}" alt="" aria-hidden="true">
                         </span>
 
 
@@ -1629,6 +1665,8 @@ function renderQuestionSetArea(
 
 
             <div class="question-set-heading-right">
+
+                <img class="question-set-header-mascot" src="assets/stickers/cat-chick.svg" alt="" aria-hidden="true">
 
                 <button
                     class="test-all-sets-btn ripple-target ${selectedQuestionSet === "__all__" ? "active" : ""}"
@@ -2099,6 +2137,10 @@ async function selectSubject(
         $("flashcardModeBtn");
 
 
+    const wordPracticeButton =
+        $("wordPracticeModeBtn");
+
+
     const modeGrid =
         $("modeGrid");
 
@@ -2113,6 +2155,11 @@ async function selectSubject(
         );
 
 
+        wordPracticeButton.classList.add(
+            "show"
+        );
+
+
         modeGrid.classList.add(
             "english-mode-grid"
         );
@@ -2122,6 +2169,11 @@ async function selectSubject(
     else {
 
         flashButton.classList.remove(
+            "show"
+        );
+
+
+        wordPracticeButton.classList.remove(
             "show"
         );
 
@@ -2781,6 +2833,138 @@ function updateSubjectCounts() {
 
             }
         );
+
+
+    updateHomeQuestionTotal();
+
+}
+
+
+/* =========================================================
+   TỔNG SỐ CÂU / TÀI LIỆU Ở TRANG CHỦ
+========================================================= */
+
+function getCurrentSubjectQuestionCount(subject) {
+
+    const hasLoadedSets =
+        subjectSetLoadState[subject] === true;
+
+    return (
+        isSetManagedSubject(subject)
+        &&
+        hasLoadedSets
+
+            ? getAllSubjectQuestions(subject).length
+
+            : getRawQuestions(subject).length
+    );
+
+}
+
+
+function getCurrentAllQuestionTotal() {
+
+    return Object.keys(SUBJECT_SET_CONFIG)
+        .reduce(
+            (total, subject) =>
+                total +
+                getCurrentSubjectQuestionCount(subject),
+            0
+        );
+
+}
+
+
+function updateHomeQuestionTotal() {
+
+    const element =
+        $("homeQuestionTotal");
+
+    if (!element) {
+        return;
+    }
+
+    const total =
+        getCurrentAllQuestionTotal();
+
+    element.textContent =
+        `${total.toLocaleString("vi-VN")} câu`;
+
+    element.classList.remove(
+        "is-loading"
+    );
+
+}
+
+
+async function refreshHomeQuestionTotal() {
+
+    const element =
+        $("homeQuestionTotal");
+
+    if (!element) {
+        return;
+    }
+
+    element.textContent =
+        "Đang tải...";
+
+    element.classList.add(
+        "is-loading"
+    );
+
+    try {
+
+        await preloadAllSubjectQuestionSets();
+
+        updateHomeQuestionTotal();
+
+    }
+
+    catch (error) {
+
+        console.error(
+            "Không thể tải đầy đủ tổng số câu hỏi:",
+            error
+        );
+
+        const total =
+            getCurrentAllQuestionTotal();
+
+        element.textContent =
+            total > 0
+                ? `${total.toLocaleString("vi-VN")} câu`
+                : "Chưa tải được";
+
+        element.classList.remove(
+            "is-loading"
+        );
+
+    }
+
+}
+
+
+function updateHomeResourceTotal() {
+
+    const element =
+        $("homeResourceTotal");
+
+    if (!element) {
+        return;
+    }
+
+    const books =
+        getResources("Sách Tham Khảo").length;
+
+    const slides =
+        getResources("Slide Tham Khảo").length;
+
+    const total =
+        books + slides;
+
+    element.textContent =
+        `${total.toLocaleString("vi-VN")} tài liệu`;
 
 }
 
@@ -6207,6 +6391,9 @@ function updateResourceCounts() {
         .textContent =
         `${slides} tài liệu`;
 
+
+    updateHomeResourceTotal();
+
 }
 
 
@@ -7411,6 +7598,896 @@ function updateFlashStats() {
 
 
 /* =========================================================
+   WORD PRACTICE - LUYỆN TỪ TIẾNG ANH
+========================================================= */
+
+function setupWordPractice() {
+
+    $("wordPracticeModeBtn")
+        .addEventListener(
+            "click",
+            openWordPractice
+        );
+
+
+    $("backFromWordPracticeBtn")
+        .addEventListener(
+            "click",
+            () =>
+                showPage(
+                    exerciseHub
+                )
+        );
+
+
+    $("wordPracticeHomeBtn")
+        .addEventListener(
+            "click",
+            goHome
+        );
+
+
+    $("wordPracticeForm")
+        .addEventListener(
+            "submit",
+            event => {
+
+                event.preventDefault();
+
+                checkWordPracticeAnswer();
+
+            }
+        );
+
+
+    $("wordPracticeHintBtn")
+        .addEventListener(
+            "click",
+            showWordPracticeHint
+        );
+
+
+    $("wordPracticeAnswerBtn")
+        .addEventListener(
+            "click",
+            revealWordPracticeAnswer
+        );
+
+
+    $("wordPracticeShuffleBtn")
+        .addEventListener(
+            "click",
+            resetWordPracticeQueue
+        );
+
+
+    document
+        .querySelectorAll(
+            "[data-word-direction]"
+        )
+        .forEach(
+            button => {
+
+                button.addEventListener(
+                    "click",
+                    () => {
+
+                        wordPracticeDirection =
+                            button.dataset.wordDirection;
+
+
+                        document
+                            .querySelectorAll(
+                                "[data-word-direction]"
+                            )
+                            .forEach(
+                                item =>
+                                    item.classList.toggle(
+                                        "active",
+                                        item === button
+                                    )
+                            );
+
+
+                        resetWordPracticeQueue();
+
+                    }
+                );
+
+            }
+        );
+
+}
+
+
+function getNormalizedEnglishFlashcards() {
+
+    const raw =
+        window.medQuizFlashcards[
+            "Tiếng Anh"
+        ];
+
+
+    return Array.isArray(
+        raw
+    )
+        ? raw
+            .map(
+                normalizeFlashcard
+            )
+            .filter(
+                Boolean
+            )
+        : [];
+
+}
+
+
+function openWordPractice() {
+
+    wordPracticeCards =
+        getNormalizedEnglishFlashcards();
+
+
+    wordPracticeDirection =
+        "mixed";
+
+
+    document
+        .querySelectorAll(
+            "[data-word-direction]"
+        )
+        .forEach(
+            button =>
+                button.classList.toggle(
+                    "active",
+                    button.dataset.wordDirection ===
+                    "mixed"
+                )
+        );
+
+
+    wordPracticeCorrectCount = 0;
+    wordPracticeWrongCount = 0;
+    wordPracticeAttemptCount = 0;
+
+
+    showPage(
+        wordPracticePage
+    );
+
+
+    resetWordPracticeQueue();
+
+}
+
+
+function resetWordPracticeQueue() {
+
+    wordPracticeQueue =
+        shuffleArray(
+            wordPracticeCards
+        );
+
+
+    wordPracticeIndex = 0;
+
+
+    renderWordPractice();
+
+
+    if (
+        wordPracticeCards.length
+    ) {
+
+        showToast(
+            "Đã xáo trộn bộ Luyện từ ✨",
+            "info"
+        );
+
+    }
+
+}
+
+
+function pickWordPracticeDirection() {
+
+    if (
+        wordPracticeDirection ===
+        "mixed"
+    ) {
+
+        return Math.random() < .5
+            ? "en-vi"
+            : "vi-en";
+
+    }
+
+
+    return wordPracticeDirection;
+
+}
+
+
+function renderWordPractice() {
+
+    const total =
+        wordPracticeQueue.length;
+
+
+    const input =
+        $("wordPracticeInput");
+
+
+    const card =
+        $("wordPracticeCard");
+
+
+    wordPracticeLocked = false;
+    wordPracticeHintLevel = 0;
+
+
+    card.classList.remove(
+        "is-correct",
+        "is-wrong",
+        "celebrate"
+    );
+
+
+    input.classList.remove(
+        "is-correct",
+        "is-wrong"
+    );
+
+
+    input.value = "";
+
+
+    $("wordPracticeFeedback")
+        .className =
+        "word-practice-feedback";
+
+
+    $("wordPracticeFeedback")
+        .textContent =
+        "Nhập đáp án rồi nhấn Enter hoặc nút Kiểm tra.";
+
+
+    $("wordPracticeHintBox")
+        .classList.remove(
+            "show",
+            "answer-revealed"
+        );
+
+
+    $("wordPracticeHintBox")
+        .textContent =
+        "";
+
+
+    if (
+        !total
+    ) {
+
+        $("wordPracticePrompt")
+            .textContent =
+            "Chưa có từ vựng";
+
+
+        $("wordPracticeDirectionLabel")
+            .textContent =
+            "Hãy thêm dữ liệu vào flashcards/tienganh.js";
+
+
+        $("wordPracticeQuestionLabel")
+            .textContent =
+            "VOCABULARY";
+
+
+        $("wordPracticePronunciation")
+            .textContent =
+            "";
+
+
+        $("wordPracticeExample")
+            .textContent =
+            "";
+
+
+        $("wordPracticeExample")
+            .style.display =
+            "none";
+
+
+        $("wordPracticePosition")
+            .textContent =
+            "Từ 0 / 0";
+
+
+        $("wordPracticeProgressValue")
+            .style.width =
+            "0%";
+
+
+        input.disabled = true;
+
+
+        updateWordPracticeStats();
+
+        return;
+
+    }
+
+
+    input.disabled = false;
+
+
+    if (
+        wordPracticeIndex >= total
+    ) {
+
+        wordPracticeQueue =
+            shuffleArray(
+                wordPracticeCards
+            );
+
+        wordPracticeIndex = 0;
+
+
+        showToast(
+            "Hoàn thành một vòng! Bắt đầu vòng mới 🎉",
+            "success"
+        );
+
+    }
+
+
+    const current =
+        wordPracticeQueue[
+            wordPracticeIndex
+        ];
+
+
+    wordPracticeCurrentDirection =
+        pickWordPracticeDirection();
+
+
+    const isEnglishToVietnamese =
+        wordPracticeCurrentDirection ===
+        "en-vi";
+
+
+    $("wordPracticeQuestionLabel")
+        .textContent =
+        isEnglishToVietnamese
+            ? "ENGLISH → VIETNAMESE"
+            : "VIETNAMESE → ENGLISH";
+
+
+    $("wordPracticePrompt")
+        .textContent =
+        isEnglishToVietnamese
+            ? current.front
+            : current.back;
+
+
+    $("wordPracticeDirectionLabel")
+        .textContent =
+        isEnglishToVietnamese
+            ? "Hãy nhập nghĩa tiếng Việt"
+            : "Hãy nhập từ / cụm từ tiếng Anh";
+
+
+    $("wordPracticeInputLabel")
+        .textContent =
+        isEnglishToVietnamese
+            ? "Nghĩa tiếng Việt của bạn"
+            : "Từ tiếng Anh của bạn";
+
+
+    input.placeholder =
+        isEnglishToVietnamese
+            ? "Nhập tiếng Việt tại đây..."
+            : "Type English here...";
+
+
+    $("wordPracticePronunciation")
+        .textContent =
+        isEnglishToVietnamese
+            ? current.pronunciation
+            : "";
+
+
+    $("wordPracticeExample")
+        .textContent =
+        current.example;
+
+
+    $("wordPracticeExample")
+        .style.display =
+        current.example
+            ? "block"
+            : "none";
+
+
+    $("wordPracticePosition")
+        .textContent =
+        `Từ ${wordPracticeIndex + 1} / ${total}`;
+
+
+    const percent =
+        Math.round(
+            wordPracticeIndex
+            /
+            total
+            *
+            100
+        );
+
+
+    $("wordPracticeProgressValue")
+        .style.width =
+        `${percent}%`;
+
+
+    updateWordPracticeStats();
+
+
+    setTimeout(
+        () =>
+            input.focus(),
+        90
+    );
+
+}
+
+
+function getCurrentWordPracticeCard() {
+
+    return wordPracticeQueue[
+        wordPracticeIndex
+    ] || null;
+
+}
+
+
+function getWordPracticeExpectedAnswer() {
+
+    const current =
+        getCurrentWordPracticeCard();
+
+
+    if (
+        !current
+    ) {
+
+        return "";
+
+    }
+
+
+    return wordPracticeCurrentDirection ===
+        "en-vi"
+            ? current.back
+            : current.front;
+
+}
+
+
+function normalizePracticeAnswer(
+    value
+) {
+
+    return String(
+        value || ""
+    )
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g, "")
+        .replace(/đ/g, "d")
+        .replace(/Đ/g, "d")
+        .toLowerCase()
+        .replace(/[’‘`]/g, "'")
+        .replace(/[^a-z0-9'\s]/g, " ")
+        .replace(/\s+/g, " ")
+        .trim();
+
+}
+
+
+function splitPracticeAnswers(
+    answer
+) {
+
+    const source =
+        String(
+            answer || ""
+        ).trim();
+
+
+    const options =
+        source
+            .split(/\s*(?:;|\||\/|\n|,\s*(?=[^,]{1,50}$))\s*/)
+            .map(
+                item => item.trim()
+            )
+            .filter(
+                Boolean
+            );
+
+
+    return [
+        source,
+        ...options
+    ];
+
+}
+
+
+function isWordPracticeAnswerCorrect(
+    value,
+    expected
+) {
+
+    const userValue =
+        normalizePracticeAnswer(
+            value
+        );
+
+
+    if (
+        !userValue
+    ) {
+
+        return false;
+
+    }
+
+
+    return splitPracticeAnswers(
+        expected
+    ).some(
+        option =>
+            normalizePracticeAnswer(
+                option
+            ) === userValue
+    );
+
+}
+
+
+function checkWordPracticeAnswer() {
+
+    if (
+        wordPracticeLocked
+        ||
+        !wordPracticeQueue.length
+    ) {
+
+        return;
+
+    }
+
+
+    const input =
+        $("wordPracticeInput");
+
+
+    const value =
+        input.value.trim();
+
+
+    if (
+        !value
+    ) {
+
+        input.classList.add(
+            "is-wrong"
+        );
+
+
+        $("wordPracticeFeedback")
+            .className =
+            "word-practice-feedback wrong";
+
+
+        $("wordPracticeFeedback")
+            .textContent =
+            "Bạn chưa nhập đáp án ✍️";
+
+
+        setTimeout(
+            () =>
+                input.classList.remove(
+                    "is-wrong"
+                ),
+            450
+        );
+
+        return;
+
+    }
+
+
+    const expected =
+        getWordPracticeExpectedAnswer();
+
+
+    wordPracticeAttemptCount++;
+
+
+    if (
+        isWordPracticeAnswerCorrect(
+            value,
+            expected
+        )
+    ) {
+
+        wordPracticeCorrectCount++;
+        wordPracticeLocked = true;
+
+
+        input.classList.remove(
+            "is-wrong"
+        );
+
+
+        input.classList.add(
+            "is-correct"
+        );
+
+
+        $("wordPracticeCard")
+            .classList.remove(
+                "is-wrong"
+            );
+
+
+        $("wordPracticeCard")
+            .classList.add(
+                "is-correct",
+                "celebrate"
+            );
+
+
+        $("wordPracticeFeedback")
+            .className =
+            "word-practice-feedback correct";
+
+
+        $("wordPracticeFeedback")
+            .textContent =
+            "Chính xác! 🌟 Đang chuyển sang từ tiếp theo...";
+
+
+        updateWordPracticeStats();
+
+
+        setTimeout(
+            () => {
+
+                wordPracticeIndex++;
+
+                renderWordPractice();
+
+            },
+            850
+        );
+
+    }
+
+    else {
+
+        wordPracticeWrongCount++;
+
+
+        input.classList.remove(
+            "is-correct"
+        );
+
+
+        input.classList.add(
+            "is-wrong"
+        );
+
+
+        $("wordPracticeCard")
+            .classList.remove(
+                "is-correct"
+            );
+
+
+        $("wordPracticeCard")
+            .classList.add(
+                "is-wrong"
+            );
+
+
+        $("wordPracticeFeedback")
+            .className =
+            "word-practice-feedback wrong";
+
+
+        $("wordPracticeFeedback")
+            .textContent =
+            "Chưa đúng rồi 💪 Hãy nhập lại đến khi chính xác nhé!";
+
+
+        updateWordPracticeStats();
+
+
+        setTimeout(
+            () => {
+
+                input.classList.remove(
+                    "is-wrong"
+                );
+
+
+                $("wordPracticeCard")
+                    .classList.remove(
+                        "is-wrong"
+                    );
+
+
+                input.select();
+
+            },
+            520
+        );
+
+    }
+
+}
+
+
+function showWordPracticeHint() {
+
+    const expected =
+        getWordPracticeExpectedAnswer();
+
+
+    if (
+        !expected
+    ) {
+
+        return;
+
+    }
+
+
+    wordPracticeHintLevel++;
+
+
+    const clean =
+        String(
+            expected
+        ).trim();
+
+
+    const visibleCount =
+        Math.min(
+            Math.max(
+                1,
+                wordPracticeHintLevel * 2
+            ),
+            clean.length
+        );
+
+
+    const hint =
+        Array.from(
+            clean
+        )
+            .map(
+                (char, index) => {
+
+                    if (
+                        /\s|[-_/(),.;:]/.test(
+                            char
+                        )
+                    ) {
+
+                        return char;
+
+                    }
+
+
+                    return index < visibleCount
+                        ? char
+                        : "•";
+
+                }
+            )
+            .join("");
+
+
+    const box =
+        $("wordPracticeHintBox");
+
+
+    box.classList.add(
+        "show"
+    );
+
+
+    box.classList.remove(
+        "answer-revealed"
+    );
+
+
+    box.innerHTML =
+        `<strong>💡 Gợi ý:</strong> ${escapeHtml(hint)}`;
+
+}
+
+
+function revealWordPracticeAnswer() {
+
+    const expected =
+        getWordPracticeExpectedAnswer();
+
+
+    if (
+        !expected
+    ) {
+
+        return;
+
+    }
+
+
+    const box =
+        $("wordPracticeHintBox");
+
+
+    box.classList.add(
+        "show",
+        "answer-revealed"
+    );
+
+
+    box.innerHTML =
+        `<strong>👀 Đáp án:</strong> ${escapeHtml(expected)}<span> — Bạn vẫn cần tự nhập đúng để qua từ tiếp theo.</span>`;
+
+
+    $("wordPracticeInput")
+        .focus();
+
+}
+
+
+function updateWordPracticeStats() {
+
+    $("wordPracticeCorrectCount")
+        .textContent =
+        wordPracticeCorrectCount;
+
+
+    $("wordPracticeWrongCount")
+        .textContent =
+        wordPracticeWrongCount;
+
+
+    const accuracy =
+        wordPracticeAttemptCount
+            ? Math.round(
+                wordPracticeCorrectCount
+                /
+                wordPracticeAttemptCount
+                *
+                100
+            )
+            : 100;
+
+
+    $("wordPracticeAccuracy")
+        .textContent =
+        `${accuracy}%`;
+
+}
+
+
+/* =========================================================
    FULLSCREEN
 ========================================================= */
 
@@ -8198,3 +9275,196 @@ function formatDuration(
     );
 
 }
+
+/* =========================================================
+   KAWAII EXPERIENCE 2026 — purely visual/interaction layer
+   Does not change quiz data, scoring, timers or storage.
+========================================================= */
+function setupKawaiiExperience() {
+    const navButtons = Array.from(document.querySelectorAll('.kawaii-nav-btn'));
+    const setActive = (name) => navButtons.forEach(btn => btn.classList.toggle('active', btn.dataset.kawaiiNav === name));
+
+    navButtons.forEach(btn => {
+        btn.addEventListener('click', async () => {
+            const target = btn.dataset.kawaiiNav;
+
+            const quizIsActive = quizPage.classList.contains('show') && quizQuestions.length && !isSubmitted;
+            if (quizIsActive) {
+                if (target === 'home') { requestExit('home'); return; }
+                if (target === 'exercise' || target === 'study') { requestExit('exercise'); return; }
+                showToast('Hãy thoát hoặc nộp bài trước khi mở Tài liệu.', 'warning');
+                return;
+            }
+
+            if (target === 'home') {
+                goHome();
+                setActive('home');
+                return;
+            }
+            if (target === 'exercise' || target === 'study') {
+                showLoading('Đang mở khu học tập', 'Chuẩn bị các bộ câu hỏi...');
+                try {
+                    await preloadAllSubjectQuestionSets();
+                    updateSubjectCounts();
+                    showPage(exerciseHub);
+                    setActive('exercise');
+                } finally { hideLoading(); }
+                return;
+            }
+            if (target === 'resource') {
+                updateResourceCounts();
+                showPage(resourceHub);
+                setActive('resource');
+                return;
+            }
+            if (target === 'flashcard') {
+                openFlashcards();
+                setActive('flashcard');
+                return;
+            }
+            if (target === 'word') {
+                openWordPractice();
+                setActive('word');
+                return;
+            }
+        });
+    });
+
+    const sparkle = (x, y) => {
+        const chars = ['✦','♡','✧','★'];
+        for (let i=0; i<5; i++) {
+            const s = document.createElement('span');
+            s.className = 'kawaii-click-spark';
+            s.textContent = chars[Math.floor(Math.random()*chars.length)];
+            s.style.left = `${x + (Math.random()*34-17)}px`;
+            s.style.top = `${y + (Math.random()*20-10)}px`;
+            s.style.setProperty('--dx', `${Math.random()*70-35}px`);
+            s.style.setProperty('--dy', `${-35-Math.random()*45}px`);
+            document.body.appendChild(s);
+            setTimeout(()=>s.remove(), 750);
+        }
+    };
+    document.addEventListener('pointerdown', (e) => {
+        if (e.target.closest('button,.subject-btn,.question-set-card,.portal-card,.mode-card,.answer')) sparkle(e.clientX, e.clientY);
+    }, {passive:true});
+
+    const tiltTargets = document.querySelectorAll('.subject-btn,.portal-card,.mode-card,.config-group');
+    tiltTargets.forEach(el => {
+        el.addEventListener('pointermove', e => {
+            if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+            const r = el.getBoundingClientRect();
+            const rx = ((e.clientY-r.top)/r.height-.5)*-2.4;
+            const ry = ((e.clientX-r.left)/r.width-.5)*2.8;
+            el.style.setProperty('--tilt-x', `${rx}deg`);
+            el.style.setProperty('--tilt-y', `${ry}deg`);
+        });
+        el.addEventListener('pointerleave', () => {
+            el.style.setProperty('--tilt-x','0deg');
+            el.style.setProperty('--tilt-y','0deg');
+        });
+    });
+
+    const observer = new MutationObserver(() => {
+        document.querySelectorAll('.question-set-card:not([data-kawaii-ready])').forEach((el, i) => {
+            el.dataset.kawaiiReady = '1';
+            el.style.animationDelay = `${Math.min(i,9)*45}ms`;
+        });
+    });
+    if (questionSetArea) observer.observe(questionSetArea, {childList:true, subtree:true});
+
+    const homeFlashcardBtn = document.getElementById('homeFlashcardBtn');
+    if (homeFlashcardBtn) {
+        homeFlashcardBtn.addEventListener('click', () => {
+            openFlashcards();
+            setActive('flashcard');
+        });
+    }
+
+    const homeWordPracticeBtn = document.getElementById('homeWordPracticeBtn');
+    if (homeWordPracticeBtn) {
+        homeWordPracticeBtn.addEventListener('click', () => {
+            openWordPractice();
+            setActive('word');
+        });
+    }
+
+    document.querySelectorAll('[data-home-subject]').forEach(tile => {
+        tile.addEventListener('click', async () => {
+            const subject = tile.dataset.homeSubject;
+            showLoading('Đang mở môn học', `Chuẩn bị ${subject}...`);
+            try {
+                await preloadAllSubjectQuestionSets();
+                updateSubjectCounts();
+                showPage(exerciseHub);
+                setActive('exercise');
+                const subjectButton = document.querySelector(`.subject-btn[data-subject="${subject}"]`);
+                if (subjectButton) {
+                    await selectSubject(subjectButton);
+                }
+            } finally {
+                hideLoading();
+            }
+        });
+    });
+}
+
+
+/* =========================================================
+   EXTRA KAWAII PAGE STATE SYNC + CARD MASCOTS
+========================================================= */
+(function(){
+    const originalShowPage = window.showPage;
+    if (typeof originalShowPage === 'function') {
+        window.showPage = function(page){
+            const result = originalShowPage.apply(this, arguments);
+            try {
+                const activeName = page && page.id === 'landingPage' ? 'home'
+                    : page && page.id === 'resourceHub' ? 'resource'
+                    : page && (page.id === 'exerciseHub' || page.id === 'quizPage' || page.id === 'readPage') ? 'exercise'
+                    : 'home';
+                document.querySelectorAll('.kawaii-nav-btn').forEach(btn => {
+                    btn.classList.toggle('active', btn.dataset.kawaiiNav === activeName || (activeName==='exercise' && btn.dataset.kawaiiNav==='study'));
+                });
+                if (activeName === 'exercise') {
+                    document.querySelectorAll('.kawaii-nav-btn').forEach(btn => {
+                        if (btn.dataset.kawaiiNav !== 'exercise' && btn.dataset.kawaiiNav !== 'study') btn.classList.remove('active');
+                    });
+                }
+            } catch (e) {}
+            return result;
+        }
+    }
+})();
+
+
+/* =========================================================
+   HOME V2 QUICK ACTIONS — preserves original learning logic
+========================================================= */
+function setupHomeV2Actions(){
+    const flash = document.getElementById('homeFlashcardBtn');
+    const word = document.getElementById('homeWordPracticeBtn');
+    if (flash && !flash.dataset.ready){
+        flash.dataset.ready='1';
+        flash.addEventListener('click', () => openFlashcards());
+    }
+    if (word && !word.dataset.ready){
+        word.dataset.ready='1';
+        word.addEventListener('click', () => openWordPractice());
+    }
+    document.querySelectorAll('[data-home-subject]').forEach(btn => {
+        if(btn.dataset.ready) return;
+        btn.dataset.ready='1';
+        btn.addEventListener('click', async () => {
+            const subject = btn.dataset.homeSubject;
+            showLoading('Đang mở môn học', `Chuẩn bị ${subject}...`);
+            try{
+                await preloadAllSubjectQuestionSets();
+                updateSubjectCounts();
+                showPage(exerciseHub);
+                const target = document.querySelector(`.subject-btn[data-subject="${subject}"]`);
+                if(target) await selectSubject(target);
+            } finally { hideLoading(); }
+        });
+    });
+}
+document.addEventListener('DOMContentLoaded', () => setTimeout(setupHomeV2Actions,0));
