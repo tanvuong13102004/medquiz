@@ -1,2902 +1,1397 @@
 <!DOCTYPE html>
+
 <html lang="vi">
-
 <head>
-    <meta charset="UTF-8">
-
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    >
-
-    <meta
-        name="theme-color"
-        content="#f28da8"
-    >
-
-    <title>Tấn Vương | Học Y Khoa Cùng Tôi</title>
-
-    <link rel="stylesheet" href="style.css">
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="#f28da8" name="theme-color"/>
+<title>Tấn Vương | Học Y Khoa Cùng Tôi</title>
+<link href="style.css" rel="stylesheet"/>
 </head>
-
-
 <body class="closer-kawaii-theme">
-
-<div class="kawaii-global-scene" aria-hidden="true">
-    <img src="assets/stickers/cloud-smile.svg" class="kg-cloud kg-cloud-1" alt="">
-    <img src="assets/stickers/cloud-smile.svg" class="kg-cloud kg-cloud-2" alt="">
-    <span class="kg-spark kg-s1">✦</span><span class="kg-spark kg-s2">♡</span><span class="kg-spark kg-s3">✧</span>
+<div aria-hidden="true" class="kawaii-global-scene">
+<img alt="" class="kg-cloud kg-cloud-1" src="assets/stickers/cloud-smile.svg"/>
+<img alt="" class="kg-cloud kg-cloud-2" src="assets/stickers/cloud-smile.svg"/>
+<span class="kg-spark kg-s1">✦</span><span class="kg-spark kg-s2">♡</span><span class="kg-spark kg-s3">✧</span>
 </div>
-
-
 <!-- =====================================================
      BACKGROUND
 ===================================================== -->
-
 <div class="background-orb orb-1"></div>
 <div class="background-orb orb-2"></div>
 <div class="background-orb orb-3"></div>
 <div class="background-orb orb-4"></div>
-
-
-<div
-    class="global-stickers"
-    aria-hidden="true"
->
-    <span class="global-sticker gs1">🩺</span>
-    <span class="global-sticker gs2">💊</span>
-    <span class="global-sticker gs3">🧬</span>
-    <span class="global-sticker gs4">🧠</span>
-    <span class="global-sticker gs5">🫀</span>
-    <span class="global-sticker gs6">🧪</span>
-    <span class="global-sticker gs7">🦴</span>
-    <span class="global-sticker gs8">💉</span>
-    <span class="global-sticker gs9">🔬</span>
-    <span class="global-sticker gs10">⚕️</span>
+<div aria-hidden="true" class="global-stickers">
+<span class="global-sticker gs1">🩺</span>
+<span class="global-sticker gs2">💊</span>
+<span class="global-sticker gs3">🧬</span>
+<span class="global-sticker gs4">🧠</span>
+<span class="global-sticker gs5">🫀</span>
+<span class="global-sticker gs6">🧪</span>
+<span class="global-sticker gs7">🦴</span>
+<span class="global-sticker gs8">💉</span>
+<span class="global-sticker gs9">🔬</span>
+<span class="global-sticker gs10">⚕️</span>
 </div>
-
-
-
 <!-- =====================================================
      HEADER
 ===================================================== -->
-
 <header class="header">
-
-    <div class="header-inner">
-
-        <button
-            class="brand ripple-target"
-            id="brandHomeBtn"
-            type="button"
-        >
-
-            <div class="brand-logo">
-
-                <span class="brand-pulse"></span>
-
-                <span class="brand-cross">
-                    ✚
-                </span>
-
-            </div>
-
-            <span class="brand-name">
+<div class="header-inner">
+<button class="brand ripple-target" id="brandHomeBtn" type="button">
+<div class="brand-logo">
+<span class="brand-pulse"></span>
+<span aria-hidden="true" class="brand-cross medical-snake-mark">
+<img alt="" src="assets/ui/asclepius.svg"/>
+</span>
+</div>
+<span class="brand-name">
                 Tấn Vương
             </span>
-
-        </button>
-
-
-        <nav class="kawaii-header-nav" aria-label="Điều hướng nhanh">
-            <button type="button" class="kawaii-nav-btn active" data-kawaii-nav="home">⌂ <span>Trang chủ</span></button>
-            <button type="button" class="kawaii-nav-btn" data-kawaii-nav="exercise">✎ <span>Làm bài</span></button>
-            <button type="button" class="kawaii-nav-btn" data-kawaii-nav="resource">▤ <span>Tài liệu</span></button>
-            <button type="button" class="kawaii-nav-btn" data-kawaii-nav="flashcard">▣ <span>Flashcard</span></button>
-            <button type="button" class="kawaii-nav-btn" data-kawaii-nav="word">⌨ <span>Luyện từ</span></button>
-        </nav>
-
-        <div class="header-actions">
-
-            <div class="private-badge">
-
-                <span class="private-dot"></span>
-
-                <span class="private-text">
-                    Trang học riêng tư
-                </span>
-
-            </div>
-
-
-            <button
-                class="fullscreen-btn ripple-target"
-                id="fullscreenBtn"
-                type="button"
-                title="Toàn màn hình"
-            >
-                <span id="fullscreenIcon">
+</button>
+<nav aria-label="Điều hướng nhanh" class="kawaii-header-nav">
+<button class="kawaii-nav-btn active" data-kawaii-nav="home" type="button">⌂ <span>Trang chủ</span></button>
+<button class="kawaii-nav-btn" data-kawaii-nav="exercise" type="button">✎ <span>Làm bài</span></button>
+<button class="kawaii-nav-btn" data-kawaii-nav="resource" type="button">▤ <span>Tài liệu</span></button>
+</nav>
+<div class="header-actions">
+<button class="fullscreen-btn ripple-target" id="fullscreenBtn" title="Toàn màn hình" type="button">
+<span id="fullscreenIcon">
                     ⛶
                 </span>
-            </button>
-
-        </div>
-
-    </div>
-
+</button>
+</div>
+</div>
 </header>
-
-
-
 <!-- =====================================================
      MAIN
 ===================================================== -->
-
 <main class="container">
-
-
-
 <!-- =====================================================
      TRANG CHỦ — KAWAII GARDEN V2 FIXED
 ===================================================== -->
-
 <section class="page-section show home-v2-page" id="landingPage">
-
-    <div class="home-v2-sky" aria-hidden="true">
-        <span class="home-v2-cloud cloud-a"></span>
-        <span class="home-v2-cloud cloud-b"></span>
-        <span class="home-v2-star star-a">✦</span>
-        <span class="home-v2-star star-b">♡</span>
-        <span class="home-v2-star star-c">✧</span>
-    </div>
-
-    <section class="home-hero-v2-fixed" aria-label="Chào mừng">
-        <img class="home-hero-transparent-art" src="assets/home/home-hero-transparent.png" alt="Chào bạn! Học mỗi ngày, tiến gần hơn đến ước mơ khoác áo blouse.">
-        <div class="home-hero-mascots" aria-hidden="true">
-            <img class="hero-capy-fixed" src="assets/stickers/capybara-doctor.svg" alt="">
-            <img class="hero-books-fixed" src="assets/stickers/books-plant.svg" alt="">
-            <img class="hero-cat-fixed" src="assets/stickers/cat-chick.svg" alt="">
-            <img class="hero-dino-fixed" src="assets/stickers/dino-study.svg" alt="">
-        </div>
-
-        <div class="hero-copy-fixed">
-            <div class="hero-kicker-fixed">💗 HỌC Y MỖI NGÀY</div>
-            <h1>Chào bạn!</h1>
-            <p>Học mỗi ngày, tiến gần hơn đến ước mơ khoác áo blouse.</p>
-            <div class="hero-books-labels" aria-hidden="true">
-                <span>Better Doctor</span>
-                <span>Brighter Future</span>
-                <span>You Can Do It!</span>
-            </div>
-        </div>
-
-        <div class="hero-quote-fixed" aria-hidden="true">
-            <span>Tri thức</span>
-            <strong>vì một thế hệ<br>khỏe mạnh hơn ♡</strong>
-        </div>
-
-        <div class="hero-doodle-left" aria-hidden="true">Good<br>Study... ♡</div>
-        <div class="hero-doodle-right" aria-hidden="true">Kiến thức hôm nay<br>tạo nên bác sĩ tương lai ✨</div>
-    </section>
-
-    <section class="home-actions-v2" aria-label="Chức năng chính">
-        <button class="home-action-card action-pink ripple-target" id="exercisePortalBtn" type="button">
-            <span class="home-action-icon">📝</span>
-            <span class="home-action-text">
-                <strong>Làm bài trắc nghiệm</strong>
-                <small>Luyện tập theo từng môn và từng bộ câu hỏi.</small>
-                <em>Tổng số câu hỏi: <b id="homeQuestionTotal">Đang tải...</b></em>
-            </span>
-            <span class="home-action-arrow">→</span>
-        </button>
-
-        <button class="home-action-card action-blue ripple-target" id="resourcePortalBtn" type="button">
-            <span class="home-action-icon">📖</span>
-            <span class="home-action-text">
-                <strong>Tài liệu &amp; Sách</strong>
-                <small>Tổng hợp giáo trình, sách và tài liệu y khoa.</small>
-                <em>Tổng tài liệu: <b id="homeResourceTotal">Đang tải...</b></em>
-            </span>
-            <span class="home-action-arrow">→</span>
-        </button>
-
-        <button class="home-action-card action-purple ripple-target" id="homeFlashcardBtn" type="button">
-            <span class="home-action-icon">🎴</span>
-            <span class="home-action-text">
-                <strong>Flashcard</strong>
-                <small>Ôn tập nhanh từ vựng Tiếng Anh bằng thẻ lật.</small>
-                <em>Ghi nhớ • Lặp lại • Ôn tập</em>
-            </span>
-            <span class="home-action-arrow">→</span>
-        </button>
-
-        <button class="home-action-card action-mint ripple-target" id="homeWordPracticeBtn" type="button">
-            <span class="home-action-icon">🔤</span>
-            <span class="home-action-text">
-                <strong>Luyện từ vựng</strong>
-                <small>Luyện Anh ↔ Việt và nhập lại đến khi đúng.</small>
-                <em>Việt ↔ Anh • Anh ↔ Việt</em>
-            </span>
-            <span class="home-action-arrow">→</span>
-        </button>
-    </section>
-
-    <section class="home-subjects-v2" aria-label="Khám phá các môn học">
-        <div class="home-subjects-head">
-            <div>
-                <span>♡</span>
-                <strong>Khám phá các môn học</strong>
-            </div>
-            <small>Chọn môn để bắt đầu →</small>
-        </div>
-
-        <div class="home-subjects-row">
-            <button class="home-subject-tile" type="button" data-home-subject="Nội Khoa"><span>🫀</span><b>Nội Khoa</b></button>
-            <button class="home-subject-tile" type="button" data-home-subject="Ngoại Khoa"><span>🩺</span><b>Ngoại Khoa</b></button>
-            <button class="home-subject-tile" type="button" data-home-subject="Nhi Khoa"><span>👶</span><b>Nhi Khoa</b></button>
-            <button class="home-subject-tile" type="button" data-home-subject="Sản Phụ Khoa"><span>🤰</span><b>Sản Phụ Khoa</b></button>
-            <button class="home-subject-tile" type="button" data-home-subject="Giải Phẫu"><span>🦴</span><b>Giải Phẫu</b></button>
-            <button class="home-subject-tile" type="button" data-home-subject="Sinh Lý"><span>🧠</span><b>Sinh Lý</b></button>
-            <button class="home-subject-tile subject-en" type="button" data-home-subject="Tiếng Anh"><span>🔤</span><b>Tiếng Anh</b></button>
-        </div>
-    </section>
-
-    <div class="home-bottom-garden" aria-hidden="true">
-        <img class="garden-capy" src="assets/stickers/capy-laptop.svg" alt="">
-        <img class="garden-fox" src="assets/stickers/fox-book.svg" alt="">
-        <img class="garden-rainbow" src="assets/stickers/rainbow-cloud.svg" alt="">
-        <img class="garden-sleep" src="assets/stickers/sleep-cat.svg" alt="">
-        <img class="garden-penguin" src="assets/stickers/penguin-laptop.svg" alt="">
-        <span class="garden-message msg-left">Kiến thức hôm nay<br>là sức khỏe ngày mai ♡</span>
-        <span class="garden-message msg-right">Học đều mỗi ngày<br>một chút nhé! ✨</span>
-    </div>
-
+<div aria-hidden="true" class="home-v2-sky">
+<span class="home-v2-cloud cloud-a"></span>
+<span class="home-v2-cloud cloud-b"></span>
+<span class="home-v2-star star-a">✦</span>
+<span class="home-v2-star star-b">♡</span>
+<span class="home-v2-star star-c">✧</span>
+</div>
+<section aria-label="Chào mừng" class="home-hero-v2-fixed">
+<img alt="Chào bạn! Học mỗi ngày, tiến gần hơn đến ước mơ khoác áo blouse." class="home-hero-transparent-art" src="assets/home/home-hero-transparent.png"/>
+<div aria-hidden="true" class="home-hero-mascots">
+<img alt="" class="hero-capy-fixed" src="assets/stickers/capybara-doctor.svg"/>
+<img alt="" class="hero-books-fixed" src="assets/stickers/books-plant.svg"/>
+<img alt="" class="hero-cat-fixed" src="assets/stickers/cat-chick.svg"/>
+<img alt="" class="hero-dino-fixed" src="assets/stickers/dino-study.svg"/>
+</div>
+<div class="hero-copy-fixed">
+<div class="hero-kicker-fixed">💗 HỌC Y MỖI NGÀY</div>
+<h1>Chào bạn!</h1>
+<p>Học mỗi ngày, tiến gần hơn đến ước mơ khoác áo blouse.</p>
+<div aria-hidden="true" class="hero-books-labels">
+<span>Better Doctor</span>
+<span>Brighter Future</span>
+<span>You Can Do It!</span>
+</div>
+</div>
+<div aria-hidden="true" class="hero-quote-fixed">
+<span>Tri thức</span>
+<strong>vì một thế hệ<br/>khỏe mạnh hơn ♡</strong>
+</div>
+<div aria-hidden="true" class="hero-doodle-left">Good<br/>Study... ♡</div>
+<div aria-hidden="true" class="hero-doodle-right">Kiến thức hôm nay<br/>tạo nên bác sĩ tương lai ✨</div>
 </section>
-
-
+<section aria-label="Chức năng chính" class="home-actions-v2 home-actions-three home-image-actions">
+<button aria-label="Bài học — mở khu luyện tập" class="home-action-card home-image-card home-image-card--lesson ripple-target" id="exercisePortalBtn" type="button">
+<span class="home-card-live-count home-card-live-count--lesson" id="homeQuestionTotal">...</span>
+<span aria-hidden="true" class="home-card-code-arrow">→</span>
+</button>
+<button aria-label="Tài liệu tham khảo — mở thư viện tài liệu" class="home-action-card home-image-card home-image-card--resource ripple-target" id="resourcePortalBtn" type="button">
+<span class="home-card-live-count home-card-live-count--resource" data-home-resource-total="" id="homeResourceTotal">...</span>
+<span aria-hidden="true" class="home-card-code-arrow">→</span>
+</button>
+<button aria-label="Sổ tay — mở ghi chú cá nhân" class="home-action-card home-image-card home-image-card--notebook ripple-target" id="notebookPortalBtn" type="button">
+<span class="home-card-live-count home-card-live-count--notebook" data-home-resource-total="" id="homeNotebookResourceTotal">...</span>
+<span aria-hidden="true" class="home-card-code-arrow">→</span>
+</button>
+</section>
+<div aria-hidden="true" class="home-bottom-garden">
+<img alt="" class="garden-capy" src="assets/stickers/capy-laptop.svg"/>
+<img alt="" class="garden-fox" src="assets/stickers/fox-book.svg"/>
+<img alt="" class="garden-rainbow" src="assets/stickers/rainbow-cloud.svg"/>
+<img alt="" class="garden-sleep" src="assets/stickers/sleep-cat.svg"/>
+<img alt="" class="garden-penguin" src="assets/stickers/penguin-laptop.svg"/>
+<span class="garden-message msg-left">Kiến thức hôm nay<br/>là sức khỏe ngày mai ♡</span>
+<span class="garden-message msg-right">Học đều mỗi ngày<br/>một chút nhé! ✨</span>
+</div>
+</section>
+<!-- =====================================================
+     SỔ TAY
+===================================================== -->
+<section class="page-section notebook-page" id="notebookPage">
+<div class="section-navigation glass-card notebook-navigation">
+<button class="nav-back-btn ripple-target" id="notebookHomeBtn" type="button">🏠 Trang chủ</button>
+<div class="section-nav-center">
+<span class="nav-main-icon">📓</span>
+<div><small>GHI CHÚ CÁ NHÂN</small><strong>Sổ tay</strong></div>
+</div>
+<span class="nav-decoration">✦</span>
+</div>
+<div class="notebook-shell glass-card">
+<div class="notebook-heading">
+<div>
+<span class="notebook-kicker">✎ SỔ TAY HỌC TẬP</span>
+<h2>Ghi lại điều quan trọng</h2>
+<p>Nội dung được tự động lưu trên trình duyệt của thiết bị này.</p>
+</div>
+<span class="notebook-save-status" id="notebookSaveStatus">Đã lưu ✓</span>
+</div>
+<div class="notebook-paper-wrap">
+<textarea class="notebook-textarea" id="notebookTextarea" placeholder="Ví dụ:
+• Tiêu chuẩn chẩn đoán cần nhớ...
+• Công thức / dấu hiệu quan trọng...
+• Những câu mình thường làm sai..." spellcheck="false"></textarea>
+</div>
+<div class="notebook-footer">
+<span id="notebookStats">0 ký tự</span>
+<button class="notebook-clear-btn ripple-target" id="notebookClearBtn" type="button">🧹 Xóa nội dung</button>
+</div>
+</div>
+</section>
 <!-- =====================================================
      BÀI TẬP
 ===================================================== -->
-
-<section
-    class="page-section"
-    id="exerciseHub"
->
-    <div class="kawaii-page-decor exercise-page-decor" aria-hidden="true">
-        <img src="assets/stickers/capybara-doctor.svg" class="decor-capy" alt="">
-        <img src="assets/stickers/dino-study.svg" class="decor-dino" alt="">
-        <img src="assets/stickers/bunny-heart.svg" class="decor-bunny" alt="">
-        <img src="assets/stickers/rainbow-cloud.svg" class="decor-rainbow" alt="">
-    </div>
-    <div class="kawaii-floating-notes" aria-hidden="true">
-        <div class="kawaii-paper-note exercise-note-right"><img src="assets/stickers/paper-note.svg" alt=""><span>Kiến thức là hành trang cả đời! ♡</span></div>
-    </div>
-
-
-    <div class="section-navigation glass-card">
-
-
-        <button
-            class="nav-back-btn ripple-target"
-            id="exerciseHomeBtn"
-            type="button"
-        >
+<section class="page-section" id="exerciseHub">
+<div aria-hidden="true" class="kawaii-page-decor exercise-page-decor">
+<img alt="" class="decor-capy" src="assets/stickers/capybara-doctor.svg"/>
+<img alt="" class="decor-dino" src="assets/stickers/dino-study.svg"/>
+<img alt="" class="decor-bunny" src="assets/stickers/bunny-heart.svg"/>
+<img alt="" class="decor-rainbow" src="assets/stickers/rainbow-cloud.svg"/>
+</div>
+<div aria-hidden="true" class="kawaii-floating-notes">
+<div class="kawaii-paper-note exercise-note-right"><img alt="" src="assets/stickers/paper-note.svg"/><span>Kiến thức là hành trang cả đời! ♡</span></div>
+</div>
+<div class="section-navigation glass-card">
+<button class="nav-back-btn ripple-target" id="exerciseHomeBtn" type="button">
             🏠 Trang chủ
         </button>
-
-
-        <div class="section-nav-center">
-
-            <span class="nav-main-icon">
+<div class="section-nav-center">
+<span class="nav-main-icon">
                 📝
             </span>
-
-            <div>
-
-                <small>
+<div>
+<small>
                     KHU VỰC HỌC TẬP
                 </small>
-
-                <strong>
+<strong>
                     Bài Tập
                 </strong>
-
-            </div>
-
-        </div>
-
-
-        <span class="nav-decoration">
+</div>
+</div>
+<span class="nav-decoration">
             ✦
         </span>
-
-
-    </div>
-
-
-
-    <!-- =================================================
+</div>
+<!-- =================================================
          MÔN HỌC
     ================================================= -->
-
-    <div class="subjects">
-
-
-        <button
-            class="subject-btn ripple-target"
-            data-subject="Nội Khoa"
-            type="button"
-        >
-
-            <span class="subject-icon">
+<div class="subjects">
+<button class="subject-btn ripple-target" data-subject="Nội Khoa" type="button">
+<span class="subject-icon">
                 🫀
             </span>
-
-            <span class="subject-name">
+<span class="subject-name">
                 Nội Khoa
             </span>
-
-            <span
-                class="subject-count"
-                data-subject-count="Nội Khoa"
-            >
-                0 câu
+<span class="subject-count" data-subject-count="Nội Khoa">
+                0 Câu
             </span>
-
-        </button>
-
-
-
-        <button
-            class="subject-btn ripple-target"
-            data-subject="Ngoại Khoa"
-            type="button"
-        >
-
-            <span class="subject-icon">
+</button>
+<button class="subject-btn ripple-target" data-subject="Ngoại Khoa" type="button">
+<span class="subject-icon">
                 🩺
             </span>
-
-            <span class="subject-name">
+<span class="subject-name">
                 Ngoại Khoa
             </span>
-
-            <span
-                class="subject-count"
-                data-subject-count="Ngoại Khoa"
-            >
-                0 câu
+<span class="subject-count" data-subject-count="Ngoại Khoa">
+                0 Câu
             </span>
-
-        </button>
-
-
-
-        <button
-            class="subject-btn ripple-target"
-            data-subject="Nhi Khoa"
-            type="button"
-        >
-
-            <span class="subject-icon">
+</button>
+<button class="subject-btn ripple-target" data-subject="Nhi Khoa" type="button">
+<span class="subject-icon">
                 👶
             </span>
-
-            <span class="subject-name">
+<span class="subject-name">
                 Nhi Khoa
             </span>
-
-            <span
-                class="subject-count"
-                data-subject-count="Nhi Khoa"
-            >
-                0 câu
+<span class="subject-count" data-subject-count="Nhi Khoa">
+                0 Câu
             </span>
-
-        </button>
-
-
-
-        <button
-            class="subject-btn ripple-target"
-            data-subject="Sản Phụ Khoa"
-            type="button"
-        >
-
-            <span class="subject-icon">
+</button>
+<button class="subject-btn ripple-target" data-subject="Sản Phụ Khoa" type="button">
+<span class="subject-icon">
                 🤰
             </span>
-
-            <span class="subject-name">
+<span class="subject-name">
                 Sản Phụ Khoa
             </span>
-
-            <span
-                class="subject-count"
-                data-subject-count="Sản Phụ Khoa"
-            >
-                0 câu
+<span class="subject-count" data-subject-count="Sản Phụ Khoa">
+                0 Câu
             </span>
-
-        </button>
-
-
-
-        <button
-            class="subject-btn ripple-target"
-            data-subject="Giải Phẫu"
-            type="button"
-        >
-
-            <span class="subject-icon">
+</button>
+<button class="subject-btn ripple-target" data-subject="Giải Phẫu" type="button">
+<span class="subject-icon">
                 🦴
             </span>
-
-            <span class="subject-name">
+<span class="subject-name">
                 Giải Phẫu
             </span>
-
-            <span
-                class="subject-count"
-                data-subject-count="Giải Phẫu"
-            >
-                0 câu
+<span class="subject-count" data-subject-count="Giải Phẫu">
+                0 Câu
             </span>
-
-        </button>
-
-
-
-        <button
-            class="subject-btn ripple-target"
-            data-subject="Sinh Lý"
-            type="button"
-        >
-
-            <span class="subject-icon">
+</button>
+<button class="subject-btn ripple-target" data-subject="Sinh Lý" type="button">
+<span class="subject-icon">
                 🧠
             </span>
-
-            <span class="subject-name">
+<span class="subject-name">
                 Sinh Lý
             </span>
-
-            <span
-                class="subject-count"
-                data-subject-count="Sinh Lý"
-            >
-                0 câu
+<span class="subject-count" data-subject-count="Sinh Lý">
+                0 Câu
             </span>
-
-        </button>
-
-
-
-        <!-- TIẾNG ANH -->
-
-        <button
-            class="subject-btn english-subject ripple-target"
-            data-subject="Tiếng Anh"
-            type="button"
-        >
-
-            <span class="english-new-badge">
+</button>
+<!-- HÓA SINH -->
+<button class="subject-btn ripple-target" data-subject="Hóa Sinh" type="button">
+<span class="subject-icon">
+                🧪
+            </span>
+<span class="subject-name">
+                Hóa Sinh
+            </span>
+<span class="subject-count" data-subject-count="Hóa Sinh">
+                0 Câu
+            </span>
+</button>
+<!-- CÁC MÔN KHÁC -->
+<button class="subject-btn ripple-target" data-subject="Các môn khác" type="button">
+<span class="subject-icon">
+                📚
+            </span>
+<span class="subject-name">
+                Các môn khác
+            </span>
+<span class="subject-count" data-subject-count="Các môn khác">
+                0 Câu
+            </span>
+</button>
+<!-- TIẾNG ANH -->
+<button class="subject-btn english-subject ripple-target" data-subject="Tiếng Anh" type="button">
+<span class="english-new-badge">
                 FLASHCARD
             </span>
-
-            <!-- ĐÃ ĐỔI CỜ 🇬🇧 THÀNH STICKER 🔤 -->
-
-            <span class="subject-icon english-subject-icon">
+<!-- ĐÃ ĐỔI CỜ 🇬🇧 THÀNH STICKER 🔤 -->
+<span class="subject-icon english-subject-icon">
                 🔤
             </span>
-
-            <span class="subject-name">
+<span class="subject-name">
                 Tiếng Anh
             </span>
-
-            <span
-                class="subject-count english-count"
-                data-subject-count="Tiếng Anh"
-            >
-                0 câu
+<span class="subject-count english-count" data-subject-count="Tiếng Anh">
+                0 Câu
             </span>
-
-        </button>
-
-
-    </div>
-
-
-
-    <!-- =================================================
+</button>
+</div>
+<!-- =================================================
          CẤU HÌNH
     ================================================= -->
-
-    <div
-        class="mode-area"
-        id="modeArea"
-    >
-
-
-        <div class="selected-subject glass-card">
-
-
-            <div class="selected-subject-info">
-
-                <span class="selected-dot"></span>
-
-                <div>
-
-                    <small>
+</section><section class="page-section subject-detail-page" id="subjectPage"><div aria-hidden="true" class="subject-page-decor">
+<span class="subject-page-spark sp-s1">✦</span>
+<span class="subject-page-spark sp-s2">♡</span>
+<span class="subject-page-spark sp-s3">✧</span>
+</div><div class="subject-page-navigation glass-card">
+<button class="subject-page-back ripple-target" id="subjectBackBtn" type="button">← Danh sách môn</button>
+<div class="subject-page-heading">
+<span class="subject-page-icon" id="subjectPageIcon">📚</span>
+<div>
+<small>MÔN HỌC ĐANG CHỌN</small>
+<strong id="subjectPageTitle">Môn học</strong>
+</div>
+</div>
+<button class="subject-page-home ripple-target" id="subjectPageHomeBtn" title="Trang chủ" type="button">⌂</button>
+</div><div class="subject-page-intro">
+<span>✦</span>
+<p>Chọn một bộ trắc nghiệm bên dưới để bắt đầu học.</p>
+<span>♡</span>
+</div></section><section class="page-section quiz-config-page" id="quizConfigPage">
+<div class="quiz-config-navigation glass-card">
+<button class="quiz-config-back ripple-target" id="quizConfigBackBtn" type="button">← Chọn bộ</button>
+<div class="quiz-config-heading">
+<span aria-hidden="true" class="quiz-config-icon">📝</span>
+<div>
+<small>CẤU HÌNH BÀI LÀM</small>
+<strong id="quizConfigTitle">Bộ trắc nghiệm</strong>
+</div>
+</div>
+<button class="quiz-config-home ripple-target" id="quizConfigHomeBtn" title="Trang chủ" type="button">⌂</button>
+</div>
+<div aria-hidden="true" class="quiz-config-intro">
+<span>✦</span><p>Chọn số câu, thời gian và hình thức học.</p><span>♡</span>
+</div>
+<div class="mode-area" id="modeArea">
+<div class="selected-subject glass-card">
+<div class="selected-subject-info">
+<span class="selected-dot"></span>
+<div>
+<small>
                         ĐANG CHỌN
                     </small>
-
-                    <h2 id="selectedSubjectName"></h2>
-
-                </div>
-
-            </div>
-
-
-            <span
-                class="selected-count"
-                id="subjectCountText"
-            >
+<h2 id="selectedSubjectName"></h2>
+</div>
+</div>
+<span class="selected-count" id="subjectCountText">
                 0 câu hỏi
             </span>
-
-
-        </div>
-
-
-
-        <div class="test-config">
-
-
-            <!-- SỐ CÂU -->
-
-            <div class="config-group glass-card">
-
-
-                <div class="config-header">
-
-                    <div class="config-icon">
+</div>
+<div class="test-config">
+<!-- SỐ CÂU -->
+<div class="config-group glass-card">
+<div class="config-header">
+<div class="config-icon">
                         📝
                     </div>
-
-                    <div>
-
-                        <strong>
+<div>
+<strong>
                             Số câu
                         </strong>
-
-                        <small>
+<small>
                             Chọn số câu kiểm tra
                         </small>
-
-                    </div>
-
-                </div>
-
-
-                <div
-                    class="choice-row"
-                    id="questionCountChoices"
-                >
-
-                    <button
-                        class="choice-btn ripple-target"
-                        data-count="10"
-                        type="button"
-                    >
-                        <strong>10</strong>
-                        <span>câu</span>
-                    </button>
-
-
-                    <button
-                        class="choice-btn active ripple-target"
-                        data-count="15"
-                        type="button"
-                    >
-                        <strong>15</strong>
-                        <span>câu</span>
-                    </button>
-
-
-                    <button
-                        class="choice-btn ripple-target"
-                        data-count="20"
-                        type="button"
-                    >
-                        <strong>20</strong>
-                        <span>câu</span>
-                    </button>
-
-
-                    <button
-                        class="choice-btn ripple-target"
-                        data-count="30"
-                        type="button"
-                    >
-                        <strong>30</strong>
-                        <span>câu</span>
-                    </button>
-
-
-                    <button
-                        class="choice-btn ripple-target"
-                        data-count="50"
-                        type="button"
-                    >
-                        <strong>50</strong>
-                        <span>câu</span>
-                    </button>
-
-
-                    <button
-                        class="choice-btn ripple-target"
-                        data-count="all"
-                        type="button"
-                    >
-                        <strong>∞</strong>
-                        <span>tất cả</span>
-                    </button>
-
-                </div>
-
-
-            </div>
-
-
-
-            <!-- THỜI GIAN -->
-
-            <div class="config-group glass-card">
-
-
-                <div class="config-header">
-
-                    <div class="config-icon timer-config-icon">
+</div>
+</div>
+<div class="choice-row" id="questionCountChoices">
+<button class="choice-btn ripple-target" data-count="10" type="button">
+<strong>10</strong>
+<span>câu</span>
+</button>
+<button class="choice-btn active ripple-target" data-count="15" type="button">
+<strong>15</strong>
+<span>câu</span>
+</button>
+<button class="choice-btn ripple-target" data-count="20" type="button">
+<strong>20</strong>
+<span>câu</span>
+</button>
+<button class="choice-btn ripple-target" data-count="30" type="button">
+<strong>30</strong>
+<span>câu</span>
+</button>
+<button class="choice-btn ripple-target" data-count="50" type="button">
+<strong>50</strong>
+<span>câu</span>
+</button>
+<button class="choice-btn ripple-target" data-count="all" type="button">
+<strong>∞</strong>
+<span>tất cả</span>
+</button>
+</div>
+</div>
+<!-- THỜI GIAN -->
+<div class="config-group glass-card">
+<div class="config-header">
+<div class="config-icon timer-config-icon">
                         ⏱
                     </div>
-
-                    <div>
-
-                        <strong>
+<div>
+<strong>
                             Thời gian
                         </strong>
-
-                        <small>
+<small>
                             Thời gian làm bài
                         </small>
-
-                    </div>
-
-                </div>
-
-
-                <div
-                    class="choice-row time-choice-row"
-                    id="timeChoices"
-                >
-
-                    <button
-                        class="choice-btn ripple-target"
-                        data-time="0"
-                        type="button"
-                    >
-                        <strong>∞</strong>
-                        <span>Tự do</span>
-                    </button>
-
-
-                    <button
-                        class="choice-btn active ripple-target"
-                        data-time="15"
-                        type="button"
-                    >
-                        <strong>15</strong>
-                        <span>phút</span>
-                    </button>
-
-
-                    <button
-                        class="choice-btn ripple-target"
-                        data-time="30"
-                        type="button"
-                    >
-                        <strong>30</strong>
-                        <span>phút</span>
-                    </button>
-
-
-                    <button
-                        class="choice-btn ripple-target"
-                        data-time="45"
-                        type="button"
-                    >
-                        <strong>45</strong>
-                        <span>phút</span>
-                    </button>
-
-
-                    <button
-                        class="choice-btn ripple-target"
-                        data-time="60"
-                        type="button"
-                    >
-                        <strong>60</strong>
-                        <span>phút</span>
-                    </button>
-
-                </div>
-
-
-            </div>
-
-
-        </div>
-
-
-
-        <!-- =================================================
+</div>
+</div>
+<div class="choice-row time-choice-row" id="timeChoices">
+<button class="choice-btn ripple-target" data-time="0" type="button">
+<strong>∞</strong>
+<span>Tự do</span>
+</button>
+<button class="choice-btn active ripple-target" data-time="15" type="button">
+<strong>15</strong>
+<span>phút</span>
+</button>
+<button class="choice-btn ripple-target" data-time="30" type="button">
+<strong>30</strong>
+<span>phút</span>
+</button>
+<button class="choice-btn ripple-target" data-time="45" type="button">
+<strong>45</strong>
+<span>phút</span>
+</button>
+<button class="choice-btn ripple-target" data-time="60" type="button">
+<strong>60</strong>
+<span>phút</span>
+</button>
+</div>
+</div>
+</div>
+<!-- =================================================
              CHẾ ĐỘ
         ================================================= -->
-
-        <div
-            class="mode-grid"
-            id="modeGrid"
-        >
-
-
-            <button
-                class="mode-card test-mode ripple-target"
-                id="startTestBtn"
-                type="button"
-            >
-
-                <span class="mode-sticker">
+<div class="mode-grid" id="modeGrid">
+<button class="mode-card test-mode ripple-target" id="startTestBtn" type="button">
+<span class="mode-sticker">
                     🧪
                 </span>
-
-
-                <div class="mode-icon">
+<div class="mode-icon">
                     📝
                 </div>
-
-
-                <div class="mode-content">
-
-                    <span>
+<div class="mode-content">
+<span>
                         KIỂM TRA
                     </span>
-
-                    <h3>
+<h3>
                         Bắt đầu TEST
                     </h3>
-
-                    <p>
+<p>
                         Random câu hỏi và đáp án.
                     </p>
-
-                </div>
-
-
-                <div class="mode-arrow">
+</div>
+<div class="mode-arrow">
                     →
                 </div>
-
-            </button>
-
-
-
-            <button
-                class="mode-card read-mode ripple-target"
-                id="readQuestionsBtn"
-                type="button"
-            >
-
-                <span class="mode-sticker">
+</button>
+<button class="mode-card read-mode ripple-target" id="readQuestionsBtn" type="button">
+<span class="mode-sticker">
                     🩺
                 </span>
-
-
-                <div class="mode-icon">
+<div class="mode-icon">
                     📖
                 </div>
-
-
-                <div class="mode-content">
-
-                    <span>
+<div class="mode-content">
+<span>
                         ÔN TẬP
                     </span>
-
-                    <h3>
+<h3>
                         Đọc câu hỏi
                     </h3>
-
-                    <p>
+<p>
                         Xem đáp án và giải thích.
                     </p>
-
-                </div>
-
-
-                <div class="mode-arrow">
+</div>
+<div class="mode-arrow">
                     →
                 </div>
-
-            </button>
-
-
-
-            <!-- FLASHCARD -->
-
-            <button
-                class="mode-card flashcard-mode ripple-target"
-                id="flashcardModeBtn"
-                type="button"
-            >
-
-                <span class="mode-sticker flash-mode-sticker">
+</button>
+<!-- FLASHCARD -->
+<button class="mode-card flashcard-mode ripple-target" id="flashcardModeBtn" type="button">
+<span class="mode-sticker flash-mode-sticker">
                     💬
                 </span>
-
-
-                <div class="mode-icon flashcard-mode-icon">
+<div class="mode-icon flashcard-mode-icon">
                     🎴
                 </div>
-
-
-                <div class="mode-content">
-
-                    <span>
+<div class="mode-content">
+<span>
                         ENGLISH
                     </span>
-
-                    <h3>
+<h3>
                         Học bằng Flashcard
                     </h3>
-
-                    <p>
+<p>
                         Lật thẻ, ghi nhớ và luyện từ vựng.
                     </p>
-
-                </div>
-
-
-                <div class="mode-arrow flashcard-arrow">
+</div>
+<div class="mode-arrow flashcard-arrow">
                     →
                 </div>
-
-            </button>
-
-
-            <!-- LUYỆN TỪ -->
-
-            <button
-                class="mode-card word-practice-mode ripple-target"
-                id="wordPracticeModeBtn"
-                type="button"
-            >
-
-                <span class="mode-sticker word-practice-mode-sticker">
+</button>
+<!-- LUYỆN TỪ -->
+<button class="mode-card word-practice-mode ripple-target" id="wordPracticeModeBtn" type="button">
+<span class="mode-sticker word-practice-mode-sticker">
                     ✨
                 </span>
-
-
-                <div class="mode-icon word-practice-mode-icon">
+<div class="mode-icon word-practice-mode-icon">
                     ⌨️
                 </div>
-
-
-                <div class="mode-content">
-
-                    <span>
+<div class="mode-content">
+<span>
                         ENGLISH
                     </span>
-
-                    <h3>
+<h3>
                         Luyện từ
                     </h3>
-
-                    <p>
+<p>
                         Điền Anh ↔ Việt, sai nhập lại đến khi đúng.
                     </p>
-
-                </div>
-
-
-                <div class="mode-arrow word-practice-arrow">
+</div>
+<div class="mode-arrow word-practice-arrow">
                     →
                 </div>
-
-            </button>
-
-
-        </div>
-
-
-    </div>
-
-
-</section>
-
-
-
+</button>
+</div>
+</div></section>
 <!-- =====================================================
      TÀI LIỆU
 ===================================================== -->
-
-<section
-    class="page-section"
-    id="resourceHub"
->
-
-
-    <div class="section-navigation glass-card">
-
-
-        <button
-            class="nav-back-btn ripple-target"
-            id="resourceHomeBtn"
-            type="button"
-        >
+<section class="page-section" id="resourceHub">
+<div class="section-navigation glass-card">
+<button class="nav-back-btn ripple-target" id="resourceHomeBtn" type="button">
             🏠 Trang chủ
         </button>
-
-
-        <div class="section-nav-center">
-
-            <span class="nav-main-icon">
+<div class="section-nav-center">
+<span class="nav-main-icon">
                 📚
             </span>
-
-            <div>
-
-                <small>
+<div>
+<small>
                     THƯ VIỆN
                 </small>
-
-                <strong>
+<strong>
                     Tài Liệu
                 </strong>
-
-            </div>
-
-        </div>
-
-
-        <span class="nav-decoration">
+</div>
+</div>
+<span class="nav-decoration">
             ✦
         </span>
-
-
-    </div>
-
-
-
-    <div class="library-banner glass-card">
-
-
-        <div class="library-banner-icon">
+</div>
+<div class="library-banner glass-card">
+<div class="library-banner-icon">
             📚
         </div>
-
-
-        <div class="library-banner-content">
-
-            <span>
+<div class="library-banner-content">
+<span>
                 THƯ VIỆN Y KHOA
             </span>
-
-            <h2>
+<h2>
                 Tài liệu học tập
             </h2>
-
-            <p>
+<p>
                 Sách và slide lưu trên Google Drive,
                 không chiếm dung lượng hosting.
             </p>
-
-        </div>
-
-
-        <div class="drive-status">
-
-            <span class="drive-status-dot"></span>
+</div>
+<div class="drive-status">
+<span class="drive-status-dot"></span>
 
             Google Drive
 
         </div>
-
-
-    </div>
-
-
-
-    <div class="resource-category-grid">
-
-
-        <button
-            class="resource-category-card book-category ripple-target"
-            id="bookResourceBtn"
-            type="button"
-        >
-
-            <div class="resource-category-icon">
+</div>
+<div class="resource-category-grid">
+<button class="resource-category-card book-category ripple-target" id="bookResourceBtn" type="button">
+<div class="resource-category-icon">
                 📘
             </div>
-
-
-            <span class="resource-category-label">
+<span class="resource-category-label">
                 E-BOOK
             </span>
-
-
-            <h2>
+<h2>
                 Sách Tham Khảo
             </h2>
-
-
-            <p>
+<p>
                 Giáo trình và sách Y khoa.
             </p>
-
-
-            <div class="resource-category-footer">
-
-                <span id="bookCount">
+<div class="resource-category-footer">
+<span id="bookCount">
                     0 sách
                 </span>
-
-                <strong>
+<strong>
                     →
                 </strong>
-
-            </div>
-
-        </button>
-
-
-
-        <button
-            class="resource-category-card slide-category ripple-target"
-            id="slideResourceBtn"
-            type="button"
-        >
-
-            <div class="resource-category-icon">
+</div>
+</button>
+<button class="resource-category-card slide-category ripple-target" id="slideResourceBtn" type="button">
+<div class="resource-category-icon">
                 🖥️
             </div>
-
-
-            <span class="resource-category-label">
+<span class="resource-category-label">
                 SLIDE
             </span>
-
-
-            <h2>
+<h2>
                 Slide Tham Khảo
             </h2>
-
-
-            <p>
+<p>
                 Slide bài giảng phục vụ ôn tập.
             </p>
-
-
-            <div class="resource-category-footer">
-
-                <span id="slideCount">
+<div class="resource-category-footer">
+<span id="slideCount">
                     0 tài liệu
                 </span>
-
-                <strong>
+<strong>
                     →
                 </strong>
-
-            </div>
-
-        </button>
-
-
-    </div>
-
-
+</div>
+</button>
+</div>
 </section>
-
-
-
 <!-- =====================================================
      DANH SÁCH SÁCH
 ===================================================== -->
-
-<section
-    class="page-section"
-    id="resourceListPage"
->
-
-
-    <div class="section-navigation glass-card">
-
-
-        <button
-            class="nav-back-btn ripple-target"
-            id="backToResourcesBtn"
-            type="button"
-        >
+<section class="page-section" id="resourceListPage">
+<div class="section-navigation glass-card">
+<button class="nav-back-btn ripple-target" id="backToResourcesBtn" type="button">
             ← Tài liệu
         </button>
-
-
-        <div class="section-nav-center">
-
-            <span
-                class="nav-main-icon"
-                id="resourceListIcon"
-            >
+<div class="section-nav-center">
+<span class="nav-main-icon" id="resourceListIcon">
                 📘
             </span>
-
-            <div>
-
-                <small>
+<div>
+<small>
                     THƯ VIỆN
                 </small>
-
-                <strong id="resourceListTitle">
+<strong id="resourceListTitle">
                     Sách Tham Khảo
                 </strong>
-
-            </div>
-
-        </div>
-
-
-        <button
-            class="small-home-btn ripple-target"
-            id="resourceListHomeBtn"
-            type="button"
-        >
+</div>
+</div>
+<button class="small-home-btn ripple-target" id="resourceListHomeBtn" type="button">
             🏠
         </button>
-
-
-    </div>
-
-
-
-    <div class="resource-search glass-card">
-
-
-        <span class="resource-search-icon">
+</div>
+<div class="resource-search glass-card">
+<span class="resource-search-icon">
             🔎
         </span>
-
-
-        <div>
-
-            <label for="resourceSearchInput">
+<div>
+<label for="resourceSearchInput">
                 Tìm trong thư viện
             </label>
-
-            <input
-                id="resourceSearchInput"
-                type="search"
-                autocomplete="off"
-                placeholder="Nhập tên sách..."
-            >
-
-        </div>
-
-
-        <span
-            class="resource-result-count"
-            id="resourceResultCount"
-        >
+<input autocomplete="off" id="resourceSearchInput" placeholder="Nhập tên sách..." type="search"/>
+</div>
+<span class="resource-result-count" id="resourceResultCount">
             0 sách
         </span>
-
-
-        <button
-            class="resource-clear-btn ripple-target"
-            id="resourceClearSearchBtn"
-            type="button"
-        >
+<button class="resource-clear-btn ripple-target" id="resourceClearSearchBtn" type="button">
             ✕
         </button>
-
-
-    </div>
-
-
-    <div
-        class="book-list"
-        id="resourceList"
-    ></div>
-
-
+</div>
+<div class="book-list" id="resourceList"></div>
 </section>
-
-
-
 <!-- =====================================================
      QUIZ
 ===================================================== -->
-
-<section
-    class="page-section"
-    id="quizPage"
->
-    <div class="kawaii-page-decor quiz-page-decor" aria-hidden="true">
-        <img src="assets/stickers/bear-study-desk.svg" class="quiz-decor-study" alt="">
-        <img src="assets/stickers/bunny-heart.svg" class="quiz-decor-bunny" alt="">
-        <img src="assets/stickers/cloud-smile.svg" class="quiz-decor-cloud" alt="">
-    </div>
-    <div class="kawaii-floating-notes" aria-hidden="true">
-        <div class="kawaii-paper-note quiz-note-left"><img src="assets/stickers/paper-note.svg" alt=""><span>Mỗi câu hỏi là một bước tiến ♡</span></div>
-    </div>
-
-
-    <div class="quiz-header glass-card">
-
-
-        <button
-            class="quiz-header-btn ripple-target"
-            id="quizHomeBtn"
-            type="button"
-        >
+<section class="page-section" id="quizPage">
+<div aria-hidden="true" class="kawaii-page-decor quiz-page-decor">
+<img alt="" class="quiz-decor-study" src="assets/stickers/bear-study-desk.svg"/>
+<img alt="" class="quiz-decor-bunny" src="assets/stickers/bunny-heart.svg"/>
+<img alt="" class="quiz-decor-cloud" src="assets/stickers/cloud-smile.svg"/>
+</div>
+<div aria-hidden="true" class="kawaii-floating-notes">
+<div class="kawaii-paper-note quiz-note-left"><img alt="" src="assets/stickers/paper-note.svg"/><span>Mỗi câu hỏi là một bước tiến ♡</span></div>
+</div>
+<div class="quiz-header glass-card">
+<button class="quiz-header-btn ripple-target" id="quizHomeBtn" type="button">
             🏠 Trang chủ
         </button>
-
-
-        <div class="quiz-header-subject">
-
-            <span>🧠</span>
-
-            <strong id="quizTopSubject"></strong>
-
-        </div>
-
-
-        <button
-            class="quiz-header-btn ripple-target"
-            id="quizFullscreenBtn"
-            type="button"
-        >
+<div class="quiz-header-subject">
+<span>🧠</span>
+<strong id="quizTopSubject"></strong>
+</div>
+<button class="quiz-header-btn ripple-target" id="quizFullscreenBtn" type="button">
             ⛶
         </button>
-
-
-    </div>
-
-
-
-    <div class="quiz-layout">
-
-
-        <!-- MAIN -->
-
-        <div class="quiz-main glass-card">
-
-
-            <div class="quiz-top">
-
-
-                <div>
-
-                    <div class="quiz-live">
-
-                        <span></span>
+</div>
+<div class="quiz-layout">
+<!-- MAIN -->
+<div class="quiz-main glass-card">
+<div class="quiz-top">
+<div>
+<div class="quiz-live">
+<span></span>
 
                         ĐANG LÀM BÀI
 
                     </div>
-
-
-                    <h2 id="quizSubject"></h2>
-
-                    <p id="quizInfoText"></p>
-
-                </div>
-
-
-                <div
-                    class="timer"
-                    id="timer"
-                >
+<h2 id="quizSubject"></h2>
+<p id="quizInfoText"></p>
+</div>
+<div class="timer" id="timer">
 
                     ⏱
 
                     <strong id="timerText">
                         15:00
                     </strong>
-
-                </div>
-
-
-            </div>
-
-
-
-            <div class="progress-box">
-
-
-                <div class="progress-head">
-
-                    <span id="progressText"></span>
-
-                    <span id="progressPercent">
+</div>
+</div>
+<div class="progress-box">
+<div class="progress-head">
+<span id="progressText"></span>
+<span id="progressPercent">
                         0%
                     </span>
-
-                </div>
-
-
-                <div class="progress-track">
-
-                    <div
-                        class="progress-value"
-                        id="progressValue"
-                    ></div>
-
-                </div>
-
-
-                <div
-                    class="answered-status"
-                    id="answeredStatus"
-                ></div>
-
-
-            </div>
-
-
-
-            <div class="question-head">
-
-                <span
-                    class="question-number"
-                    id="questionNumber"
-                >
+</div>
+<div class="progress-track">
+<div class="progress-value" id="progressValue"></div>
+</div>
+<div class="answered-status" id="answeredStatus"></div>
+</div>
+<div class="question-head">
+<span class="question-number" id="questionNumber">
                     CÂU 1
                 </span>
-
-
-                <button
-                    class="flag-btn ripple-target"
-                    id="flagBtn"
-                    type="button"
-                >
+<button class="flag-btn ripple-target" id="flagBtn" type="button">
                     ⭐ Đánh dấu
                 </button>
-
-            </div>
-
-
-
-            <div
-                class="question-text"
-                id="questionText"
-            ></div>
-
-
-            <div
-                class="answers"
-                id="answersArea"
-            ></div>
-
-
-
-            <div
-                class="answer-explanation"
-                id="answerExplanation"
-            >
-
-
-                <div class="explanation-head">
-
-                    <span>
+</div>
+<div class="question-text" id="questionText"></div>
+<div class="answers" id="answersArea"></div>
+<div class="answer-explanation" id="answerExplanation">
+<div class="explanation-head">
+<span>
                         💡
                     </span>
-
-                    <div>
-
-                        <small>
+<div>
+<small>
                             GIẢI THÍCH
                         </small>
-
-                        <strong id="correctAnswerText"></strong>
-
-                    </div>
-
-                </div>
-
-
-                <p id="explanationText"></p>
-
-
-                <div
-                    class="answer-detail-list"
-                    id="answerDetailList"
-                ></div>
-
-
-            </div>
-
-
-
-            <div class="quiz-navigation">
-
-
-                <button
-                    class="quiz-nav-btn previous-btn ripple-target"
-                    id="prevBtn"
-                    type="button"
-                >
+<strong id="correctAnswerText"></strong>
+</div>
+</div>
+<p id="explanationText"></p>
+<div class="answer-detail-list" id="answerDetailList"></div>
+</div>
+<div class="quiz-navigation">
+<button class="quiz-nav-btn previous-btn ripple-target" id="prevBtn" type="button">
                     🩺 ← Câu trước
                 </button>
-
-
-                <button
-                    class="quiz-nav-btn next-btn ripple-target"
-                    id="nextBtn"
-                    type="button"
-                >
+<button class="quiz-nav-btn next-btn ripple-target" id="nextBtn" type="button">
                     Câu tiếp → 💊
                 </button>
-
-
-            </div>
-
-
-        </div>
-
-
-
-        <!-- SIDEBAR -->
-
-        <aside class="quiz-sidebar glass-card">
-
-
-            <div
-                class="sidebar-score"
-                id="sidebarScore"
-            >
-
-
-                <span class="score-label">
+</div>
+</div>
+<!-- SIDEBAR -->
+<aside class="quiz-sidebar glass-card">
+<div class="sidebar-score" id="sidebarScore">
+<span class="score-label">
                     KẾT QUẢ
                 </span>
-
-
-                <div
-                    class="score-circle"
-                    id="scoreCircle"
-                >
-
-                    <div>
-
-                        <strong id="circlePercent">
+<div class="score-circle" id="scoreCircle">
+<div>
+<strong id="circlePercent">
                             0%
                         </strong>
-
-                        <span id="circleScore">
+<span id="circleScore">
                             0 điểm
                         </span>
-
-                    </div>
-
-                </div>
-
-
-                <strong
-                    class="score-fraction"
-                    id="sidebarFraction"
-                ></strong>
-
-
-                <span
-                    class="score-tier"
-                    id="sidebarTier"
-                ></span>
-
-
-                <div class="score-stats">
-
-
-                    <div class="score-correct">
-
-                        <strong id="correctCount">
+</div>
+</div>
+<strong class="score-fraction" id="sidebarFraction"></strong>
+<span class="score-tier" id="sidebarTier"></span>
+<div class="score-stats">
+<div class="score-correct">
+<strong id="correctCount">
                             0
                         </strong>
-
-                        <span>
+<span>
                             Đúng
                         </span>
-
-                    </div>
-
-
-                    <div class="score-wrong">
-
-                        <strong id="wrongCount">
+</div>
+<div class="score-wrong">
+<strong id="wrongCount">
                             0
                         </strong>
-
-                        <span>
+<span>
                             Sai
                         </span>
-
-                    </div>
-
-
-                    <div class="score-blank">
-
-                        <strong id="blankCount">
+</div>
+<div class="score-blank">
+<strong id="blankCount">
                             0
                         </strong>
-
-                        <span>
+<span>
                             Trống
                         </span>
-
-                    </div>
-
-
-                </div>
-
-
-                <div
-                    class="result-time"
-                    id="resultTime"
-                ></div>
-
-
-            </div>
-
-
-
-            <div
-                class="review-tools"
-                id="reviewTools"
-            >
-
-                <strong>
+</div>
+</div>
+<div class="result-time" id="resultTime"></div>
+</div>
+<div class="review-tools" id="reviewTools">
+<strong>
                     Xem lại
                 </strong>
-
-
-                <div class="review-buttons">
-
-                    <button
-                        class="review-btn active ripple-target"
-                        data-review="all"
-                        type="button"
-                    >
+<div class="review-buttons">
+<button class="review-btn active ripple-target" data-review="all" type="button">
                         Tất cả
                     </button>
-
-                    <button
-                        class="review-btn ripple-target"
-                        data-review="wrong"
-                        type="button"
-                    >
+<button class="review-btn ripple-target" data-review="wrong" type="button">
                         Câu sai
                     </button>
-
-                    <button
-                        class="review-btn ripple-target"
-                        data-review="flagged"
-                        type="button"
-                    >
+<button class="review-btn ripple-target" data-review="flagged" type="button">
                         ⭐
                     </button>
-
-                </div>
-
-
-            </div>
-
-
-
-            <div class="sidebar-title-row">
-
-                <strong>
+</div>
+</div>
+<div class="sidebar-title-row">
+<strong>
                     Danh sách câu
                 </strong>
-
-                <span>
+<span>
                     🧬
                 </span>
-
-            </div>
-
-
-            <div
-                class="question-grid"
-                id="questionGrid"
-            ></div>
-
-
-            <div
-                class="question-legend"
-                id="questionLegend"
-            ></div>
-
-
-            <button
-                class="sidebar-action jump-action ripple-target"
-                id="jumpUnansweredBtn"
-                type="button"
-            >
+</div>
+<div class="question-grid" id="questionGrid"></div>
+<div class="question-legend" id="questionLegend"></div>
+<button class="sidebar-action jump-action ripple-target" id="jumpUnansweredBtn" type="button">
                 🔎 Tới câu chưa làm
             </button>
-
-
-            <button
-                class="sidebar-action submit-action ripple-target"
-                id="submitBtn"
-                type="button"
-            >
+<button class="sidebar-action submit-action ripple-target" id="submitBtn" type="button">
                 🧪 NỘP BÀI ✓
             </button>
-
-
-            <button
-                class="sidebar-action new-action ripple-target"
-                id="sidebarNewQuizBtn"
-                type="button"
-            >
+<button class="sidebar-action new-action ripple-target" id="sidebarNewQuizBtn" type="button">
                 🎲 Làm bài mới
             </button>
-
-
-            <button
-                class="sidebar-action retry-action ripple-target"
-                id="retryWrongBtn"
-                type="button"
-            >
+<button class="sidebar-action retry-action ripple-target" id="retryWrongBtn" type="button">
                 🔁 Luyện lại câu sai
             </button>
-
-
-            <button
-                class="sidebar-action exit-action ripple-target"
-                id="exitQuizBtn"
-                type="button"
-            >
+<button class="sidebar-action exit-action ripple-target" id="exitQuizBtn" type="button">
                 🚪 Thoát bài
             </button>
-
-
-        </aside>
-
-
-    </div>
-
-
+</aside>
+</div>
 </section>
-
-
-
 <!-- =====================================================
      ĐỌC CÂU HỎI
 ===================================================== -->
-
-<section
-    class="page-section"
-    id="readPage"
->
-
-
-    <div class="read-page-header glass-card">
-
-
-        <div>
-
-            <span>
+<section class="page-section" id="readPage">
+<div class="read-page-header glass-card">
+<div>
+<span>
                 📖 ÔN TẬP
             </span>
-
-            <h2 id="readSubject"></h2>
-
-        </div>
-
-
-        <div>
-
-            <button
-                class="nav-back-btn ripple-target"
-                id="backFromReadBtn"
-                type="button"
-            >
+<h2 id="readSubject"></h2>
+</div>
+<div>
+<button class="nav-back-btn ripple-target" id="backFromReadBtn" type="button">
                 ← Bài tập
             </button>
-
-
-            <button
-                class="small-home-btn ripple-target"
-                id="readHomeBtn"
-                type="button"
-            >
+<button class="small-home-btn ripple-target" id="readHomeBtn" type="button">
                 🏠
             </button>
-
-        </div>
-
-
-    </div>
-
-
-
-    <div class="read-search glass-card">
-
-        <span>
+</div>
+</div>
+<div class="read-search glass-card">
+<span>
             🔎
         </span>
-
-        <input
-            id="readSearchInput"
-            type="search"
-            autocomplete="off"
-            placeholder="Tìm kiếm câu hỏi..."
-        >
-
-        <strong id="readResultCount">
+<input autocomplete="off" id="readSearchInput" placeholder="Tìm kiếm câu hỏi..." type="search"/>
+<strong id="readResultCount">
             0 câu
         </strong>
-
-    </div>
-
-
-    <div
-        class="read-list"
-        id="readList"
-    ></div>
-
-
-    <div
-        class="pagination glass-card"
-        id="readPagination"
-    >
-
-        <button
-            class="pagination-btn ripple-target"
-            id="readPrevPageBtn"
-            type="button"
-        >
+</div>
+<div class="read-list" id="readList"></div>
+<div class="pagination glass-card" id="readPagination">
+<button class="pagination-btn ripple-target" id="readPrevPageBtn" type="button">
             ← Trang trước
         </button>
-
-
-        <div>
-
-            <small>
+<div>
+<small>
                 TRANG
             </small>
-
-            <strong id="readPageIndicator">
+<strong id="readPageIndicator">
                 1 / 1
             </strong>
-
-        </div>
-
-
-        <button
-            class="pagination-btn ripple-target"
-            id="readNextPageBtn"
-            type="button"
-        >
+</div>
+<button class="pagination-btn ripple-target" id="readNextPageBtn" type="button">
             Trang sau →
         </button>
-
-    </div>
-
-
+</div>
 </section>
-
-
-
 <!-- =====================================================
      FLASHCARD
 ===================================================== -->
-
-<section
-    class="page-section"
-    id="flashcardPage"
->
-
-
-    <div class="flashcard-page-bg">
-
-
-        <span class="flash-decor fd1">
+<section class="page-section" id="flashcardPage">
+<div class="flashcard-page-bg">
+<span class="flash-decor fd1">
             🔤
         </span>
-
-        <span class="flash-decor fd2">
+<span class="flash-decor fd2">
             💬
         </span>
-
-        <span class="flash-decor fd3">
+<span class="flash-decor fd3">
             ✏️
         </span>
-
-        <span class="flash-decor fd4">
+<span class="flash-decor fd4">
             🎧
         </span>
-
-        <span class="flash-decor fd5">
+<span class="flash-decor fd5">
             ABC
         </span>
-
-
-
-        <div class="flashcard-header blue-glass">
-
-
-            <button
-                class="flash-header-btn ripple-target"
-                id="backFromFlashcardBtn"
-                type="button"
-            >
+<div class="flashcard-header blue-glass">
+<button class="flash-header-btn ripple-target" id="backFromFlashcardBtn" type="button">
                 ← Tiếng Anh
             </button>
-
-
-            <div class="flash-header-center">
-
-                <span>
+<div class="flash-header-center">
+<span>
                     🎴
                 </span>
-
-                <div>
-
-                    <small>
+<div>
+<small>
                         ENGLISH STUDY
                     </small>
-
-                    <strong>
+<strong>
                         Flashcard
                     </strong>
-
-                </div>
-
-            </div>
-
-
-            <button
-                class="flash-header-btn home-flash-btn ripple-target"
-                id="flashcardHomeBtn"
-                type="button"
-            >
+</div>
+</div>
+<button class="flash-header-btn home-flash-btn ripple-target" id="flashcardHomeBtn" type="button">
                 🏠
             </button>
-
-
-        </div>
-
-
-
-        <div class="flash-dashboard blue-glass">
-
-
-            <div class="flash-dashboard-title">
-
-                <span class="flash-main-icon">
+</div>
+<div class="flash-dashboard blue-glass">
+<div class="flash-dashboard-title">
+<span class="flash-main-icon">
                     🔤
                 </span>
-
-
-                <div>
-
-                    <span>
+<div>
+<span>
                         HỌC TỪ VỰNG
                     </span>
-
-                    <h2>
+<h2>
                         English Flashcards
                     </h2>
-
-                    <p>
+<p>
                         Nhấn vào thẻ hoặc phím Space để lật.
                     </p>
-
-                </div>
-
-            </div>
-
-
-
-            <div class="flash-stats">
-
-
-                <div>
-
-                    <small>
+</div>
+</div>
+<div class="flash-stats">
+<div>
+<small>
                         THẺ
                     </small>
-
-                    <strong id="flashTotalCount">
+<strong id="flashTotalCount">
                         0
                     </strong>
-
-                </div>
-
-
-                <div>
-
-                    <small>
+</div>
+<div>
+<small>
                         ĐÃ NHỚ
                     </small>
-
-                    <strong id="flashKnownCount">
+<strong id="flashKnownCount">
                         0
                     </strong>
-
-                </div>
-
-
-                <div>
-
-                    <small>
+</div>
+<div>
+<small>
                         CÒN LẠI
                     </small>
-
-                    <strong id="flashRemainingCount">
+<strong id="flashRemainingCount">
                         0
                     </strong>
-
-                </div>
-
-
-            </div>
-
-
-        </div>
-
-
-
-        <div class="flash-search-row blue-glass">
-
-            <span>
+</div>
+</div>
+</div>
+<div class="flash-search-row blue-glass">
+<span>
                 🔎
             </span>
-
-
-            <input
-                id="flashSearchInput"
-                type="search"
-                autocomplete="off"
-                placeholder="Tìm từ vựng..."
-            >
-
-
-            <button
-                class="flash-small-btn ripple-target"
-                id="flashShuffleBtn"
-                type="button"
-            >
+<input autocomplete="off" id="flashSearchInput" placeholder="Tìm từ vựng..." type="search"/>
+<button class="flash-small-btn ripple-target" id="flashShuffleBtn" type="button">
                 🔀 Random
             </button>
-
-
-            <button
-                class="flash-small-btn ripple-target"
-                id="flashResetBtn"
-                type="button"
-            >
+<button class="flash-small-btn ripple-target" id="flashResetBtn" type="button">
                 ↻ Reset
             </button>
-
-        </div>
-
-
-
-        <div class="flash-progress-section">
-
-
-            <div class="flash-progress-info">
-
-                <strong id="flashPosition">
+</div>
+<div class="flash-progress-section">
+<div class="flash-progress-info">
+<strong id="flashPosition">
                     Thẻ 0 / 0
                 </strong>
-
-                <span id="flashProgressPercent">
+<span id="flashProgressPercent">
                     0%
                 </span>
-
-            </div>
-
-
-            <div class="flash-progress-track">
-
-                <div
-                    class="flash-progress-value"
-                    id="flashProgressValue"
-                ></div>
-
-            </div>
-
-
-        </div>
-
-
-
-        <div class="flashcard-stage">
-
-
-            <div
-                class="flashcard"
-                id="flashcard"
-                tabindex="0"
-            >
-
-
-                <div class="flashcard-inner">
-
-
-                    <div class="flashcard-face flashcard-front">
-
-                        <span class="flash-face-label">
+</div>
+<div class="flash-progress-track">
+<div class="flash-progress-value" id="flashProgressValue"></div>
+</div>
+</div>
+<div class="flashcard-stage">
+<div class="flashcard" id="flashcard" tabindex="0">
+<div class="flashcard-inner">
+<div class="flashcard-face flashcard-front">
+<span class="flash-face-label">
                             ENGLISH
                         </span>
-
-                        <span class="flash-word-icon">
+<span class="flash-word-icon">
                             🔤
                         </span>
-
-                        <h2 id="flashFrontText">
+<h2 id="flashFrontText">
                             Chưa có flashcard
                         </h2>
-
-                        <p id="flashFrontHint">
+<p id="flashFrontHint">
                             Nhấn để xem nghĩa
                         </p>
-
-                        <div class="flash-click-hint">
+<div class="flash-click-hint">
                             ↻ Lật thẻ
                         </div>
-
-                    </div>
-
-
-
-                    <div class="flashcard-face flashcard-back">
-
-                        <span class="flash-face-label">
+</div>
+<div class="flashcard-face flashcard-back">
+<span class="flash-face-label">
                             VIETNAMESE
                         </span>
-
-                        <span class="flash-word-icon">
+<span class="flash-word-icon">
                             💬
                         </span>
-
-                        <h2 id="flashBackText"></h2>
-
-                        <p
-                            class="flash-pronunciation"
-                            id="flashPronunciation"
-                        ></p>
-
-                        <div
-                            class="flash-example"
-                            id="flashExample"
-                        ></div>
-
-                        <div class="flash-click-hint">
+<h2 id="flashBackText"></h2>
+<p class="flash-pronunciation" id="flashPronunciation"></p>
+<div class="flash-example" id="flashExample"></div>
+<div class="flash-click-hint">
                             ↻ Lật lại
                         </div>
-
-                    </div>
-
-
-                </div>
-
-
-            </div>
-
-
-        </div>
-
-
-
-        <div class="flashcard-actions">
-
-
-            <button
-                class="flash-nav-btn ripple-target"
-                id="flashPrevBtn"
-                type="button"
-            >
+</div>
+</div>
+</div>
+</div>
+<div class="flashcard-actions">
+<button class="flash-nav-btn ripple-target" id="flashPrevBtn" type="button">
                 ← Thẻ trước
             </button>
-
-
-            <button
-                class="flash-known-btn ripple-target"
-                id="flashKnownBtn"
-                type="button"
-            >
+<button class="flash-known-btn ripple-target" id="flashKnownBtn" type="button">
                 ○ Đánh dấu đã nhớ
             </button>
-
-
-            <button
-                class="flash-nav-btn next-flash-btn ripple-target"
-                id="flashNextBtn"
-                type="button"
-            >
+<button class="flash-nav-btn next-flash-btn ripple-target" id="flashNextBtn" type="button">
                 Thẻ tiếp →
             </button>
-
-
-        </div>
-
-
-    </div>
-
-
+</div>
+</div>
 </section>
-
-
-
 <!-- =====================================================
      LUYỆN TỪ TIẾNG ANH
 ===================================================== -->
-
-<section
-    class="page-section"
-    id="wordPracticePage"
->
-
-    <div class="word-practice-page-bg">
-
-        <span class="word-decor wd1" aria-hidden="true">A</span>
-        <span class="word-decor wd2" aria-hidden="true">あ</span>
-        <span class="word-decor wd3" aria-hidden="true">💬</span>
-        <span class="word-decor wd4" aria-hidden="true">✍️</span>
-        <span class="word-decor wd5" aria-hidden="true">✨</span>
-
-
-        <div class="word-practice-header word-glass">
-
-            <button
-                class="word-header-btn ripple-target"
-                id="backFromWordPracticeBtn"
-                type="button"
-            >
+<section class="page-section" id="wordPracticePage">
+<div class="word-practice-page-bg">
+<span aria-hidden="true" class="word-decor wd1">A</span>
+<span aria-hidden="true" class="word-decor wd2">あ</span>
+<span aria-hidden="true" class="word-decor wd3">💬</span>
+<span aria-hidden="true" class="word-decor wd4">✍️</span>
+<span aria-hidden="true" class="word-decor wd5">✨</span>
+<div class="word-practice-header word-glass">
+<button class="word-header-btn ripple-target" id="backFromWordPracticeBtn" type="button">
                 ← Tiếng Anh
             </button>
-
-
-            <div class="word-header-center">
-
-                <span>🧩</span>
-
-                <div>
-                    <small>VOCABULARY TRAINER</small>
-                    <strong>Luyện từ</strong>
-                </div>
-
-            </div>
-
-
-            <button
-                class="word-header-btn word-home-btn ripple-target"
-                id="wordPracticeHomeBtn"
-                type="button"
-                title="Trang chủ"
-            >
+<div class="word-header-center">
+<span>🧩</span>
+<div>
+<small>VOCABULARY TRAINER</small>
+<strong>Luyện từ</strong>
+</div>
+</div>
+<button class="word-header-btn word-home-btn ripple-target" id="wordPracticeHomeBtn" title="Trang chủ" type="button">
                 🏠
             </button>
-
-        </div>
-
-
-        <div class="word-practice-dashboard">
-
-            <div class="word-practice-intro word-glass">
-
-                <div class="word-intro-icon">
+</div>
+<div class="word-practice-dashboard">
+<div class="word-practice-intro word-glass">
+<div class="word-intro-icon">
                     🔤
                 </div>
-
-                <div>
-                    <small>LUYỆN PHẢN XẠ TỪ VỰNG</small>
-                    <h2>Anh ↔ Việt</h2>
-                    <p>Trả lời đúng mới được chuyển sang từ tiếp theo.</p>
-                </div>
-
-            </div>
-
-
-            <div class="word-practice-stats">
-
-                <div>
-                    <small>ĐÚNG</small>
-                    <strong id="wordPracticeCorrectCount">0</strong>
-                </div>
-
-                <div>
-                    <small>SAI</small>
-                    <strong id="wordPracticeWrongCount">0</strong>
-                </div>
-
-                <div>
-                    <small>CHÍNH XÁC</small>
-                    <strong id="wordPracticeAccuracy">100%</strong>
-                </div>
-
-            </div>
-
-        </div>
-
-
-        <div class="word-direction-panel word-glass">
-
-            <div class="word-direction-copy">
-                <span>🎯</span>
-                <div>
-                    <strong>Chọn chiều luyện</strong>
-                    <small>Có thể đổi bất cứ lúc nào</small>
-                </div>
-            </div>
-
-
-            <div class="word-direction-buttons">
-
-                <button
-                    class="word-direction-btn ripple-target"
-                    data-word-direction="en-vi"
-                    type="button"
-                >
+<div>
+<small>LUYỆN PHẢN XẠ TỪ VỰNG</small>
+<h2>Anh ↔ Việt</h2>
+<p>Trả lời đúng mới được chuyển sang từ tiếp theo.</p>
+</div>
+</div>
+<div class="word-practice-stats">
+<div>
+<small>ĐÚNG</small>
+<strong id="wordPracticeCorrectCount">0</strong>
+</div>
+<div>
+<small>SAI</small>
+<strong id="wordPracticeWrongCount">0</strong>
+</div>
+<div>
+<small>CHÍNH XÁC</small>
+<strong id="wordPracticeAccuracy">100%</strong>
+</div>
+</div>
+</div>
+<div class="word-direction-panel word-glass">
+<div class="word-direction-copy">
+<span>🎯</span>
+<div>
+<strong>Chọn chiều luyện</strong>
+<small>Có thể đổi bất cứ lúc nào</small>
+</div>
+</div>
+<div class="word-direction-buttons">
+<button class="word-direction-btn ripple-target" data-word-direction="en-vi" type="button">
                     🇬🇧 Anh → Việt
                 </button>
-
-                <button
-                    class="word-direction-btn ripple-target"
-                    data-word-direction="vi-en"
-                    type="button"
-                >
+<button class="word-direction-btn ripple-target" data-word-direction="vi-en" type="button">
                     🇻🇳 Việt → Anh
                 </button>
-
-                <button
-                    class="word-direction-btn active ripple-target"
-                    data-word-direction="mixed"
-                    type="button"
-                >
+<button class="word-direction-btn active ripple-target" data-word-direction="mixed" type="button">
                     🔀 Trộn 2 chiều
                 </button>
-
-            </div>
-
-        </div>
-
-
-        <div class="word-progress-section">
-
-            <div class="word-progress-info">
-                <strong id="wordPracticePosition">Từ 0 / 0</strong>
-                <button
-                    class="word-shuffle-btn ripple-target"
-                    id="wordPracticeShuffleBtn"
-                    type="button"
-                >
+</div>
+</div>
+<div class="word-progress-section">
+<div class="word-progress-info">
+<strong id="wordPracticePosition">Từ 0 / 0</strong>
+<button class="word-shuffle-btn ripple-target" id="wordPracticeShuffleBtn" type="button">
                     🔀 Đổi thứ tự
                 </button>
-            </div>
-
-            <div class="word-progress-track">
-                <div
-                    class="word-progress-value"
-                    id="wordPracticeProgressValue"
-                ></div>
-            </div>
-
-        </div>
-
-
-        <div
-            class="word-practice-card"
-            id="wordPracticeCard"
-        >
-
-            <span class="word-card-spark ws1" aria-hidden="true">✦</span>
-            <span class="word-card-spark ws2" aria-hidden="true">✧</span>
-            <span class="word-card-spark ws3" aria-hidden="true">✦</span>
-
-
-            <div class="word-question-area">
-
-                <span
-                    class="word-question-label"
-                    id="wordPracticeQuestionLabel"
-                >
+</div>
+<div class="word-progress-track">
+<div class="word-progress-value" id="wordPracticeProgressValue"></div>
+</div>
+</div>
+<div class="word-practice-card" id="wordPracticeCard">
+<span aria-hidden="true" class="word-card-spark ws1">✦</span>
+<span aria-hidden="true" class="word-card-spark ws2">✧</span>
+<span aria-hidden="true" class="word-card-spark ws3">✦</span>
+<div class="word-question-area">
+<span class="word-question-label" id="wordPracticeQuestionLabel">
                     ENGLISH → VIETNAMESE
                 </span>
-
-                <div class="word-question-icon">
+<div class="word-question-icon">
                     💭
                 </div>
-
-                <h2 id="wordPracticePrompt">
+<h2 id="wordPracticePrompt">
                     Chưa có từ vựng
                 </h2>
-
-                <p
-                    class="word-direction-label"
-                    id="wordPracticeDirectionLabel"
-                >
+<p class="word-direction-label" id="wordPracticeDirectionLabel">
                     Hãy nhập nghĩa tiếng Việt
                 </p>
-
-                <p
-                    class="word-pronunciation"
-                    id="wordPracticePronunciation"
-                ></p>
-
-                <div
-                    class="word-example"
-                    id="wordPracticeExample"
-                ></div>
-
-            </div>
-
-
-            <form
-                class="word-answer-form"
-                id="wordPracticeForm"
-                autocomplete="off"
-            >
-
-                <label
-                    class="word-input-label"
-                    id="wordPracticeInputLabel"
-                    for="wordPracticeInput"
-                >
+<p class="word-pronunciation" id="wordPracticePronunciation"></p>
+<div class="word-example" id="wordPracticeExample"></div>
+</div>
+<form autocomplete="off" class="word-answer-form" id="wordPracticeForm">
+<label class="word-input-label" for="wordPracticeInput" id="wordPracticeInputLabel">
                     Nghĩa tiếng Việt của bạn
                 </label>
-
-                <div class="word-input-wrap">
-
-                    <span class="word-input-icon">✍️</span>
-
-                    <input
-                        id="wordPracticeInput"
-                        type="text"
-                        autocomplete="off"
-                        autocapitalize="off"
-                        spellcheck="false"
-                        placeholder="Nhập đáp án tại đây..."
-                    >
-
-                    <span class="word-input-status" aria-hidden="true"></span>
-
-                </div>
-
-
-                <div
-                    class="word-practice-feedback"
-                    id="wordPracticeFeedback"
-                    aria-live="polite"
-                >
+<div class="word-input-wrap">
+<span class="word-input-icon">✍️</span>
+<input autocapitalize="off" autocomplete="off" id="wordPracticeInput" placeholder="Nhập đáp án tại đây..." spellcheck="false" type="text"/>
+<span aria-hidden="true" class="word-input-status"></span>
+</div>
+<div aria-live="polite" class="word-practice-feedback" id="wordPracticeFeedback">
                     Nhập đáp án rồi nhấn Enter hoặc nút Kiểm tra.
                 </div>
-
-
-                <div
-                    class="word-hint-box"
-                    id="wordPracticeHintBox"
-                    aria-live="polite"
-                ></div>
-
-
-                <div class="word-action-grid">
-
-                    <button
-                        class="word-action-btn hint-word-btn ripple-target"
-                        id="wordPracticeHintBtn"
-                        type="button"
-                    >
+<div aria-live="polite" class="word-hint-box" id="wordPracticeHintBox"></div>
+<div class="word-action-grid">
+<button class="word-action-btn hint-word-btn ripple-target" id="wordPracticeHintBtn" type="button">
                         💡 Gợi ý
                     </button>
-
-                    <button
-                        class="word-action-btn answer-word-btn ripple-target"
-                        id="wordPracticeAnswerBtn"
-                        type="button"
-                    >
+<button class="word-action-btn answer-word-btn ripple-target" id="wordPracticeAnswerBtn" type="button">
                         👀 Hiện đáp án
                     </button>
-
-                    <button
-                        class="word-action-btn check-word-btn ripple-target"
-                        type="submit"
-                    >
+<button class="word-action-btn check-word-btn ripple-target" type="submit">
                         ✓ Kiểm tra
                     </button>
-
-                </div>
-
-            </form>
-
-        </div>
-
-
-        <div class="word-rule-note word-glass">
-            <span>🌈</span>
-            <p><strong>Luật luyện:</strong> Sai sẽ sáng đỏ và giữ nguyên từ. Đúng sẽ sáng xanh rồi tự chuyển sang từ kế tiếp.</p>
-        </div>
-
-    </div>
-
+</div>
+</form>
+</div>
+<div class="word-rule-note word-glass">
+<span>🌈</span>
+<p><strong>Luật luyện:</strong> Sai sẽ sáng đỏ và giữ nguyên từ. Đúng sẽ sáng xanh rồi tự chuyển sang từ kế tiếp.</p>
+</div>
+</div>
 </section>
-
-
 </main>
-
-
-
 <!-- =====================================================
      GOOGLE DRIVE VIEWER
 ===================================================== -->
-
-<div
-    class="resource-viewer-modal"
-    id="resourceViewerModal"
->
-
-
-    <div
-        class="resource-viewer-box"
-        id="resourceViewerBox"
-    >
-
-
-        <div class="viewer-header">
-
-
-            <div class="viewer-title-group">
-
-                <span class="viewer-book-icon">
+<div class="resource-viewer-modal" id="resourceViewerModal">
+<div class="resource-viewer-box" id="resourceViewerBox">
+<div class="viewer-header">
+<div class="viewer-title-group">
+<span class="viewer-book-icon">
                     📘
                 </span>
-
-                <div>
-
-                    <small>
+<div>
+<small>
                         GOOGLE DRIVE
                     </small>
-
-                    <strong id="viewerTitle">
+<strong id="viewerTitle">
                         Tài liệu
                     </strong>
-
-                </div>
-
-            </div>
-
-
-
-            <div class="viewer-actions">
-
-
-                <a
-                    class="viewer-action download-viewer-btn"
-                    id="viewerDownloadBtn"
-                    href="#"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                >
+</div>
+</div>
+<div class="viewer-actions">
+<a class="viewer-action download-viewer-btn" href="#" id="viewerDownloadBtn" rel="noopener noreferrer" target="_blank">
                     ⬇ Tải sách
                 </a>
-
-
-                <a
-                    class="viewer-action drive-viewer-btn"
-                    id="viewerOpenSourceBtn"
-                    href="#"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                >
+<a class="viewer-action drive-viewer-btn" href="#" id="viewerOpenSourceBtn" rel="noopener noreferrer" target="_blank">
                     ↗ Google Drive
                 </a>
-
-
-                <button
-                    class="viewer-action ripple-target"
-                    id="viewerFullBtn"
-                    type="button"
-                >
+<button class="viewer-action ripple-target" id="viewerFullBtn" type="button">
                     ⛶ Toàn màn hình
                 </button>
-
-
-                <button
-                    class="viewer-action close-viewer-btn ripple-target"
-                    id="viewerCloseBtn"
-                    type="button"
-                >
+<button class="viewer-action close-viewer-btn ripple-target" id="viewerCloseBtn" type="button">
                     ✕ Đóng
                 </button>
-
-
-            </div>
-
-
-        </div>
-
-
-
-        <div class="viewer-status-bar">
-
-            <span class="viewer-online-dot"></span>
-
-            <span>
+</div>
+</div>
+<div class="viewer-status-bar">
+<span class="viewer-online-dot"></span>
+<span>
                 Google Drive Preview
             </span>
-
-            <small>
+<small>
                 Điều hướng trang và zoom bằng Google Drive
             </small>
-
-        </div>
-
-
-
-        <div class="viewer-stage">
-
-
-            <div
-                class="viewer-loading"
-                id="viewerLoading"
-            >
-
-                <div class="viewer-spinner"></div>
-
-                <strong>
+</div>
+<div class="viewer-stage">
+<div class="viewer-loading" id="viewerLoading">
+<div class="viewer-spinner"></div>
+<strong>
                     Đang mở tài liệu...
                 </strong>
-
-            </div>
-
-
-            <iframe
-                id="resourceIframe"
-                src=""
-                frameborder="0"
-                allow="autoplay; fullscreen"
-                allowfullscreen
-            ></iframe>
-
-
-        </div>
-
-
-    </div>
-
-
 </div>
-
-
-
+<iframe allow="autoplay; fullscreen" allowfullscreen="" frameborder="0" id="resourceIframe" src=""></iframe>
+</div>
+</div>
+</div>
 <!-- =====================================================
      NỘP BÀI
 ===================================================== -->
-
-<div
-    class="modal"
-    id="submitConfirmModal"
->
-
-    <div class="modal-card">
-
-        <span class="modal-icon">
+<div class="modal" id="submitConfirmModal">
+<div class="modal-card">
+<span class="modal-icon">
             📝
         </span>
-
-        <h2>
+<h2>
             Nộp bài?
         </h2>
-
-        <p id="submitConfirmMessage"></p>
-
-
-        <div class="modal-actions">
-
-            <button
-                class="modal-secondary ripple-target"
-                id="cancelSubmitBtn"
-                type="button"
-            >
+<p id="submitConfirmMessage"></p>
+<div class="modal-actions">
+<button class="modal-secondary ripple-target" id="cancelSubmitBtn" type="button">
                 🩺 Làm tiếp
             </button>
-
-            <button
-                class="modal-primary ripple-target"
-                id="confirmSubmitBtn"
-                type="button"
-            >
+<button class="modal-primary ripple-target" id="confirmSubmitBtn" type="button">
                 🧪 Nộp bài
             </button>
-
-        </div>
-
-    </div>
-
 </div>
-
-
-
+</div>
+</div>
 <!-- =====================================================
      THOÁT BÀI
 ===================================================== -->
-
-<div
-    class="modal"
-    id="exitConfirmModal"
->
-
-    <div class="modal-card">
-
-        <span class="modal-icon">
+<div class="modal" id="exitConfirmModal">
+<div class="modal-card">
+<span class="modal-icon">
             🚪
         </span>
-
-        <h2>
+<h2>
             Thoát bài thi?
         </h2>
-
-        <p>
+<p>
             Bài làm hiện tại sẽ bị mất.
         </p>
-
-
-        <div class="modal-actions">
-
-            <button
-                class="modal-secondary ripple-target"
-                id="cancelExitBtn"
-                type="button"
-            >
+<div class="modal-actions">
+<button class="modal-secondary ripple-target" id="cancelExitBtn" type="button">
                 Ở lại
             </button>
-
-            <button
-                class="modal-danger ripple-target"
-                id="confirmExitBtn"
-                type="button"
-            >
+<button class="modal-danger ripple-target" id="confirmExitBtn" type="button">
                 Thoát
             </button>
-
-        </div>
-
-    </div>
-
 </div>
-
-
-
+</div>
+</div>
 <!-- =====================================================
      KẾT QUẢ
 ===================================================== -->
-
-<div
-    class="modal"
-    id="resultModal"
->
-
-    <div class="modal-card result-modal-card">
-
-
-        <span class="result-trophy">
+<div class="modal" id="resultModal">
+<div class="modal-card result-modal-card">
+<span class="result-trophy">
             🏆
         </span>
-
-
-        <small class="result-kicker">
+<small class="result-kicker">
             HOÀN THÀNH
         </small>
-
-
-        <h2>
+<h2>
             Kết quả của bạn
         </h2>
-
-
-        <div
-            class="big-score-circle"
-            id="bigScoreCircle"
-        >
-
-            <div>
-
-                <strong id="modalPercent">
+<div class="big-score-circle" id="bigScoreCircle">
+<div>
+<strong id="modalPercent">
                     0%
                 </strong>
-
-                <span>
+<span>
                     chính xác
                 </span>
-
-            </div>
-
-        </div>
-
-
-        <strong
-            class="result-score"
-            id="scoreText"
-        >
+</div>
+</div>
+<strong class="result-score" id="scoreText">
             0 điểm
         </strong>
-
-
-        <div
-            class="result-fraction"
-            id="modalScoreFraction"
-        ></div>
-
-
-        <div
-            class="result-tier"
-            id="modalTier"
-        ></div>
-
-
-        <p id="resultMessage"></p>
-
-
-        <div class="result-stat-grid">
-
-
-            <div class="result-correct">
-
-                <strong id="modalCorrect">
+<div class="result-fraction" id="modalScoreFraction"></div>
+<div class="result-tier" id="modalTier"></div>
+<p id="resultMessage"></p>
+<div class="result-stat-grid">
+<div class="result-correct">
+<strong id="modalCorrect">
                     0
                 </strong>
-
-                <span>
+<span>
                     Đúng
                 </span>
-
-            </div>
-
-
-            <div class="result-wrong">
-
-                <strong id="modalWrong">
+</div>
+<div class="result-wrong">
+<strong id="modalWrong">
                     0
                 </strong>
-
-                <span>
+<span>
                     Sai
                 </span>
-
-            </div>
-
-
-            <div class="result-blank">
-
-                <strong id="modalBlank">
+</div>
+<div class="result-blank">
+<strong id="modalBlank">
                     0
                 </strong>
-
-                <span>
+<span>
                     Trống
                 </span>
-
-            </div>
-
-
-        </div>
-
-
-        <div class="result-buttons">
-
-
-            <button
-                class="result-main-btn ripple-target"
-                id="closeResultBtn"
-                type="button"
-            >
+</div>
+</div>
+<div class="result-buttons">
+<button class="result-main-btn ripple-target" id="closeResultBtn" type="button">
                 👀 Xem lại
             </button>
-
-
-            <button
-                class="result-secondary-btn ripple-target"
-                id="newQuizBtn"
-                type="button"
-            >
+<button class="result-secondary-btn ripple-target" id="newQuizBtn" type="button">
                 🎲 Làm bài mới
             </button>
-
-
-            <button
-                class="result-home-btn ripple-target"
-                id="resultHomeBtn"
-                type="button"
-            >
+<button class="result-home-btn ripple-target" id="resultHomeBtn" type="button">
                 🏠 Trang chủ
             </button>
-
-
-        </div>
-
-
-    </div>
-
 </div>
-
-
-
+</div>
+</div>
 <!-- =====================================================
      LOADING
 ===================================================== -->
-
-<div
-    class="loading-overlay"
-    id="loadingOverlay"
->
-
-    <div class="loading-card">
-
-        <div class="loading-stickers">
-
-            <span>🧬</span>
-            <span>🩺</span>
-            <span>💊</span>
-
-        </div>
-
-        <div class="main-spinner"></div>
-
-        <strong id="loadingTitle">
+<div class="loading-overlay" id="loadingOverlay">
+<div class="loading-card">
+<div class="loading-stickers">
+<span>🧬</span>
+<span>🩺</span>
+<span>💊</span>
+</div>
+<div class="main-spinner"></div>
+<strong id="loadingTitle">
             Đang chuẩn bị...
         </strong>
-
-        <p id="loadingText"></p>
-
-    </div>
-
+<p id="loadingText"></p>
 </div>
-
-
-
-<button
-    class="scroll-top-btn ripple-target"
-    id="scrollTopBtn"
-    type="button"
->
+</div>
+<button class="scroll-top-btn ripple-target" id="scrollTopBtn" type="button">
     ↑
 </button>
-
-
-<div
-    class="toast-container"
-    id="toastContainer"
-></div>
-
-
-<div
-    class="confetti-container"
-    id="confettiContainer"
-></div>
-
-
-
+<div class="toast-container" id="toastContainer"></div>
+<div class="confetti-container" id="confettiContainer"></div>
 <!-- =====================================================
      QUESTION FILES
 ===================================================== -->
-
 <script src="questions/noikhoa.js"></script>
 <script src="questions/ngoaikhoa.js"></script>
 <script src="questions/nhikhoa.js"></script>
@@ -2904,23 +1399,12 @@
 <script src="questions/giaiphau.js"></script>
 <script src="questions/sinhly.js"></script>
 <script src="questions/tienganh.js"></script>
-
-
 <!-- FLASHCARD -->
-
 <script src="flashcards/tienganh.js"></script>
-
-
 <!-- RESOURCE -->
-
 <script src="resources/sachthamkhao.js"></script>
 <script src="resources/slidethamkhao.js"></script>
-
-
 <!-- MAIN -->
-
 <script src="script.js"></script>
-
-
 </body>
 </html>

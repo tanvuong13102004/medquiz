@@ -58,6 +58,20 @@ const SUBJECT_SET_CONFIG = {
         stickers: ["⚡", "🫀", "🧬"]
     },
 
+    "Hóa Sinh": {
+        prefix: "hoasinh",
+        icon: "🧪",
+        kicker: "HÓA SINH",
+        stickers: ["🧪", "🧬", "🔬"]
+    },
+
+    "Các môn khác": {
+        prefix: "cacmonkhac",
+        icon: "📚",
+        kicker: "CÁC MÔN KHÁC",
+        stickers: ["📚", "📝", "✨"]
+    },
+
     "Tiếng Anh": {
         prefix: "tienganh",
         icon: "🔤",
@@ -163,6 +177,9 @@ const $ = id =>
 
 const landingPage = $("landingPage");
 const exerciseHub = $("exerciseHub");
+const subjectPage = $("subjectPage");
+const quizConfigPage = $("quizConfigPage");
+const notebookPage = $("notebookPage");
 const resourceHub = $("resourceHub");
 const resourceListPage = $("resourceListPage");
 const quizPage = $("quizPage");
@@ -188,6 +205,8 @@ async function init() {
 
     ensureQuestionSetUI();
 
+    setupHistoryNavigation();
+
     setupPortal();
 
     setupSubjects();
@@ -205,6 +224,8 @@ async function init() {
     setupFlashcards();
 
     setupWordPractice();
+
+    setupNotebook();
 
     setupFullscreen();
 
@@ -250,18 +271,72 @@ function hidePages() {
 }
 
 
-function showPage(page) {
+/* =========================================================
+   APP HISTORY / BROWSER BACK
+   - Mỗi màn hình là một history state riêng.
+   - Nút Back/Forward của trình duyệt hoạt động trên toàn web.
+   - Dùng hash route nên chạy an toàn trên GitHub Pages/hosting tĩnh.
+========================================================= */
+let appHistoryReady = false;
+let allowQuizHistoryExit = false;
+
+function getVisiblePage() {
+    return document.querySelector(".page-section.show") || landingPage;
+}
+
+function getPageState(page, depth) {
+    return {
+        medquiz: true,
+        pageId: page?.id || "landingPage",
+        depth: Number.isFinite(depth) ? depth : 0,
+        subject: selectedSubject || "",
+        questionSet: selectedQuestionSet || "",
+        questionSetNumber: selectedQuestionSetNumber || 0,
+        resourceType: currentResourceType || ""
+    };
+}
+
+function pageHash(page, state = {}) {
+    const id = page?.id || "landingPage";
+    const subject = encodeURIComponent(state.subject || selectedSubject || "");
+    const set = encodeURIComponent(state.questionSet || selectedQuestionSet || "");
+    const resourceType = encodeURIComponent(state.resourceType || currentResourceType || "");
+
+    if (id === "landingPage") return "#home";
+    if (id === "exerciseHub") return "#bai-hoc";
+    if (id === "subjectPage") return `#mon/${subject}`;
+    if (id === "quizConfigPage") return `#chon-bai/${subject}/${set || "bo"}`;
+    if (id === "quizPage") return `#lam-bai/${subject}/${set || "bo"}`;
+    if (id === "readPage") return `#doc-cau-hoi/${subject}/${set || "bo"}`;
+    if (id === "resourceHub") return "#tai-lieu";
+    if (id === "resourceListPage") return `#tai-lieu/${resourceType || "danh-sach"}`;
+    if (id === "notebookPage") return "#so-tay";
+    if (id === "flashcardPage") return "#flashcard";
+    if (id === "wordPracticePage") return "#luyen-tu";
+    return `#${id}`;
+}
+
+function historyUrl(page, state) {
+    return `${window.location.pathname}${window.location.search}${pageHash(page, state)}`;
+}
+
+function sameHistoryState(a, b) {
+    return Boolean(
+        a && b &&
+        a.medquiz && b.medquiz &&
+        a.pageId === b.pageId &&
+        (a.subject || "") === (b.subject || "") &&
+        (a.questionSet || "") === (b.questionSet || "") &&
+        (a.resourceType || "") === (b.resourceType || "")
+    );
+}
+
+function renderPageOnly(page) {
+    if (!page) return;
 
     hidePages();
+    page.classList.add("show");
 
-    page.classList.add(
-        "show"
-    );
-
-    /*
-       Ảnh nền đồng cỏ chỉ dùng cho các trang học tập.
-       Trang chủ giữ nguyên giao diện hiện tại.
-    */
     document.body.classList.toggle(
         "study-meadow-background",
         page !== landingPage
@@ -269,9 +344,147 @@ function showPage(page) {
 
     window.scrollTo({
         top: 0,
-        behavior: "smooth"
+        behavior: "auto"
     });
+}
 
+function showPage(page, options = {}) {
+    if (!page) return;
+
+    renderPageOnly(page);
+
+    if (!appHistoryReady || options.fromHistory) {
+        return;
+    }
+
+    const current = window.history.state;
+    const currentDepth = current?.medquiz ? Number(current.depth || 0) : 0;
+    const nextState = getPageState(page, options.replace ? currentDepth : currentDepth + 1);
+
+    if (options.replace) {
+        window.history.replaceState(nextState, "", historyUrl(page, nextState));
+        return;
+    }
+
+    if (sameHistoryState(current, nextState)) {
+        window.history.replaceState(
+            { ...nextState, depth: currentDepth },
+            "",
+            historyUrl(page, nextState)
+        );
+        return;
+    }
+
+    window.history.pushState(nextState, "", historyUrl(page, nextState));
+}
+
+function updateQuizConfigHeader() {
+    const title = $("quizConfigTitle");
+    if (!title) return;
+
+    if (selectedQuestionSet === "__all__") {
+        title.textContent = `${selectedSubject} • Test tất cả 10 bộ`;
+    }
+    else if (selectedQuestionSetNumber) {
+        title.textContent = `${selectedSubject} • Bộ trắc nghiệm ${selectedQuestionSetNumber}`;
+    }
+    else {
+        title.textContent = selectedSubject || "Bộ trắc nghiệm";
+    }
+}
+
+function appBack(fallbackPage = landingPage) {
+    const state = window.history.state;
+
+    if (state?.medquiz && Number(state.depth || 0) > 0) {
+        window.history.back();
+        return;
+    }
+
+    showPage(fallbackPage);
+}
+
+function syncStateSelection(state) {
+    if (!state?.medquiz) return;
+
+    if (state.subject) {
+        selectedSubject = state.subject;
+
+        const config = SUBJECT_SET_CONFIG[selectedSubject] || {};
+        const title = $("subjectPageTitle");
+        const icon = $("subjectPageIcon");
+        if (title) title.textContent = selectedSubject;
+        if (icon) icon.textContent = config.icon || "📚";
+    }
+
+    if (Object.prototype.hasOwnProperty.call(state, "questionSet")) {
+        selectedQuestionSet = state.questionSet || "";
+        selectedQuestionSetNumber = Number(state.questionSetNumber || 0);
+    }
+
+    if (state.resourceType) {
+        currentResourceType = state.resourceType;
+    }
+
+    if (state.pageId === "quizConfigPage") {
+        if (modeArea) modeArea.classList.add("show");
+        if ($("selectedSubjectName")) $("selectedSubjectName").textContent = getCurrentSelectionLabel();
+        const count = getQuestions().length;
+        if ($("subjectCountText")) $("subjectCountText").textContent = `${count} câu hỏi`;
+        updateQuizConfigHeader();
+    }
+}
+
+function setupHistoryNavigation() {
+    if (appHistoryReady) return;
+
+    const initialPage = getVisiblePage();
+    const initialState = getPageState(initialPage, 0);
+    window.history.replaceState(initialState, "", historyUrl(initialPage, initialState));
+    appHistoryReady = true;
+
+    window.addEventListener("popstate", event => {
+        const state = event.state;
+        if (!state?.medquiz) return;
+
+        const targetPage = $(state.pageId) || landingPage;
+        const leavingActiveQuiz =
+            quizPage.classList.contains("show") &&
+            quizQuestions.length &&
+            !isSubmitted &&
+            state.pageId !== "quizPage";
+
+        if (leavingActiveQuiz && !allowQuizHistoryExit) {
+            /*
+               Popstate đã lùi một bước. Đi tới lại trang làm bài,
+               sau đó dùng hộp xác nhận có sẵn để tránh mất bài ngoài ý muốn.
+            */
+            window.history.forward();
+            setTimeout(() => requestExit("history"), 70);
+            return;
+        }
+
+        allowQuizHistoryExit = false;
+        closeExitConfirm();
+        $("submitConfirmModal")?.classList.remove("show");
+        $("resultModal")?.classList.remove("show");
+
+        syncStateSelection(state);
+        renderPageOnly(targetPage);
+
+        if (targetPage === resourceListPage) {
+            renderResourceList();
+        }
+        else if (targetPage === readPage) {
+            renderReadQuestions();
+        }
+        else if (targetPage === flashcardPage) {
+            renderFlashcard();
+        }
+        else if (targetPage === wordPracticePage) {
+            renderWordPractice();
+        }
+    });
 }
 
 
@@ -339,11 +552,59 @@ function setupPortal() {
         );
 
 
+    const notebookPortalBtn = $("notebookPortalBtn");
+    if (notebookPortalBtn) {
+        notebookPortalBtn.addEventListener("click", () => {
+            showPage(notebookPage);
+            syncNotebookFromStorage();
+        });
+    }
+
+    const notebookHomeBtn = $("notebookHomeBtn");
+    if (notebookHomeBtn) {
+        notebookHomeBtn.addEventListener("click", goHome);
+    }
+
+
     $("exerciseHomeBtn")
         .addEventListener(
             "click",
             goHome
         );
+
+
+    const subjectBackBtn = $("subjectBackBtn");
+    if (subjectBackBtn) {
+        subjectBackBtn.addEventListener(
+            "click",
+            () => appBack(exerciseHub)
+        );
+    }
+
+    const quizConfigBackBtn = $("quizConfigBackBtn");
+    if (quizConfigBackBtn) {
+        quizConfigBackBtn.addEventListener(
+            "click",
+            () => appBack(subjectPage)
+        );
+    }
+
+    const quizConfigHomeBtn = $("quizConfigHomeBtn");
+    if (quizConfigHomeBtn) {
+        quizConfigHomeBtn.addEventListener(
+            "click",
+            goHome
+        );
+    }
+
+
+    const subjectPageHomeBtn = $("subjectPageHomeBtn");
+    if (subjectPageHomeBtn) {
+        subjectPageHomeBtn.addEventListener(
+            "click",
+            goHome
+        );
+    }
 
 
     $("resourceHomeBtn")
@@ -398,6 +659,69 @@ function goHome() {
 
 }
 
+
+/* =========================================================
+   SỔ TAY — LOCAL STORAGE
+========================================================= */
+const NOTEBOOK_STORAGE_KEY = "medquiz_notebook_v1";
+let notebookSaveTimer = null;
+
+function setupNotebook() {
+    const textarea = $("notebookTextarea");
+    const clearBtn = $("notebookClearBtn");
+
+    if (!textarea) return;
+
+    syncNotebookFromStorage();
+
+    textarea.addEventListener("input", () => {
+        updateNotebookStats();
+        const status = $("notebookSaveStatus");
+        if (status) status.textContent = "Đang lưu...";
+
+        clearTimeout(notebookSaveTimer);
+        notebookSaveTimer = setTimeout(() => {
+            try {
+                localStorage.setItem(NOTEBOOK_STORAGE_KEY, textarea.value);
+                if (status) status.textContent = "Đã lưu ✓";
+            } catch (e) {
+                if (status) status.textContent = "Không thể lưu";
+            }
+        }, 350);
+    });
+
+    if (clearBtn) {
+        clearBtn.addEventListener("click", () => {
+            if (!textarea.value.trim()) return;
+            const ok = window.confirm("Bạn có chắc muốn xóa toàn bộ nội dung Sổ tay không?");
+            if (!ok) return;
+            textarea.value = "";
+            try { localStorage.removeItem(NOTEBOOK_STORAGE_KEY); } catch (e) {}
+            updateNotebookStats();
+            const status = $("notebookSaveStatus");
+            if (status) status.textContent = "Đã xóa ✓";
+            textarea.focus();
+        });
+    }
+}
+
+function syncNotebookFromStorage() {
+    const textarea = $("notebookTextarea");
+    if (!textarea) return;
+    try {
+        textarea.value = localStorage.getItem(NOTEBOOK_STORAGE_KEY) || "";
+    } catch (e) {}
+    updateNotebookStats();
+}
+
+function updateNotebookStats() {
+    const textarea = $("notebookTextarea");
+    const stats = $("notebookStats");
+    if (!textarea || !stats) return;
+    const chars = textarea.value.length;
+    const words = textarea.value.trim() ? textarea.value.trim().split(/\s+/).length : 0;
+    stats.textContent = `${chars.toLocaleString("vi-VN")} ký tự • ${words.toLocaleString("vi-VN")} từ`;
+}
 
 /* =========================================================
    CSS 10 BỘ + TEST TẤT CẢ
@@ -1459,19 +1783,16 @@ function ensureQuestionSetUI() {
             "questionSetArea";
 
 
-        if (
-            modeArea
-            &&
-            modeArea.parentNode
-        ) {
+        const subjectContainer = $("subjectPage");
+        const subjectIntro = subjectContainer?.querySelector(".subject-page-intro");
 
-            modeArea
-                .parentNode
-                .insertBefore(
-                    area,
-                    modeArea
-                );
-
+        if (subjectContainer) {
+            if (subjectIntro) {
+                subjectIntro.insertAdjacentElement("afterend", area);
+            }
+            else {
+                subjectContainer.appendChild(area);
+            }
         }
 
     }
@@ -1588,13 +1909,22 @@ function renderQuestionSetArea(
                     index
                 ) => {
 
+                    const cardNumber =
+                        String(index + 1)
+                            .padStart(2, "0");
+
+                    const cardImage =
+                        `assets/question-sets/set-${cardNumber}.png`;
+
                     return `
 
                     <button
-                        class="question-set-card set-theme-${index + 1} ripple-target"
+                        class="question-set-pro-card pro-set-${index + 1} ripple-target"
                         data-question-set="${key}"
                         data-set-number="${index + 1}"
                         type="button"
+                        aria-label="Bộ trắc nghiệm ${index + 1}"
+                        style="--pro-card-image:url('${cardImage}')"
                         ${
                             loaded
                                 ? ""
@@ -1602,24 +1932,10 @@ function renderQuestionSetArea(
                         }
                     >
 
-                        <span class="set-card-number">
-                            ${String(index + 1).padStart(2,"0")}
-                        </span>
-
-
-                        <span class="set-card-icon kawaii-set-card-icon">
-                            <img src="${KAWAII_SET_MASCOTS[index % KAWAII_SET_MASCOTS.length]}" alt="" aria-hidden="true">
-                        </span>
-
-
-                        <span class="set-card-title">
-                            Bộ trắc nghiệm ${index + 1}
-                        </span>
-
-
                         <span
-                            class="set-card-count"
+                            class="question-set-pro-count"
                             data-question-set-count="${key}"
+                            aria-live="polite"
                         >
                             ${
                                 loaded
@@ -1628,10 +1944,10 @@ function renderQuestionSetArea(
                             }
                         </span>
 
-
-                        <span class="set-card-arrow">
-                            →
-                        </span>
+                        <span
+                            class="question-set-pro-active-indicator"
+                            aria-hidden="true"
+                        >✓</span>
 
                     </button>
 
@@ -1991,7 +2307,7 @@ async function preloadAllSubjectQuestionSets() {
 
     /*
         Nếu đã tải xong trước đó thì chỉ cập nhật lại
-        số câu và không tải 70 file lần thứ hai.
+        số câu và không tải 90 file lần thứ hai.
     */
 
     if (
@@ -2050,7 +2366,7 @@ async function preloadAllSubjectQuestionSets() {
 
         /*
             Sau khi tất cả môn đã tải xong,
-            cập nhật số câu trên 7 ô môn học.
+            cập nhật số câu trên 9 ô môn học.
         */
 
         updateSubjectCounts();
@@ -2125,6 +2441,39 @@ async function selectSubject(
         button.dataset.subject;
 
 
+    const subjectConfig =
+        SUBJECT_SET_CONFIG[
+            selectedSubject
+        ] || {};
+
+
+    const subjectPageTitle =
+        $("subjectPageTitle");
+
+
+    const subjectPageIcon =
+        $("subjectPageIcon");
+
+
+    if (subjectPageTitle) {
+        subjectPageTitle.textContent =
+            selectedSubject;
+    }
+
+
+    if (subjectPageIcon) {
+        subjectPageIcon.textContent =
+            subjectConfig.icon || "📚";
+    }
+
+
+    if (subjectPage) {
+        showPage(
+            subjectPage
+        );
+    }
+
+
     const subjectAtClick =
         selectedSubject;
 
@@ -2154,44 +2503,36 @@ async function selectSubject(
         $("modeGrid");
 
 
-    if (
+    const isEnglishSubject =
         selectedSubject ===
-        "Tiếng Anh"
-    ) {
-
-        flashButton.classList.add(
-            "show"
-        );
+        "Tiếng Anh";
 
 
-        wordPracticeButton.classList.add(
-            "show"
-        );
+    /*
+        Flashcard và Luyện từ CHỈ dành cho môn Tiếng Anh.
+        Dùng đồng thời hidden + class show để không bị các rule CSS
+        chung của .mode-card ép hiển thị ở những môn khác.
+    */
+    flashButton.hidden =
+        !isEnglishSubject;
 
+    wordPracticeButton.hidden =
+        !isEnglishSubject;
 
-        modeGrid.classList.add(
-            "english-mode-grid"
-        );
+    flashButton.classList.toggle(
+        "show",
+        isEnglishSubject
+    );
 
-    }
+    wordPracticeButton.classList.toggle(
+        "show",
+        isEnglishSubject
+    );
 
-    else {
-
-        flashButton.classList.remove(
-            "show"
-        );
-
-
-        wordPracticeButton.classList.remove(
-            "show"
-        );
-
-
-        modeGrid.classList.remove(
-            "english-mode-grid"
-        );
-
-    }
+    modeGrid.classList.toggle(
+        "english-mode-grid",
+        isEnglishSubject
+    );
 
 
     if (
@@ -2231,24 +2572,8 @@ async function selectSubject(
             "show"
         );
 
-
-        setTimeout(
-            () => {
-
-                modeArea.scrollIntoView({
-
-                    behavior:
-                        "smooth",
-
-                    block:
-                        "start"
-
-                });
-
-            },
-            80
-        );
-
+        updateQuizConfigHeader();
+        showPage(quizConfigPage);
 
         return;
 
@@ -2262,24 +2587,6 @@ async function selectSubject(
 
     questionSetArea.classList.add(
         "show"
-    );
-
-
-    setTimeout(
-        () => {
-
-            questionSetArea.scrollIntoView({
-
-                behavior:
-                    "smooth",
-
-                block:
-                    "start"
-
-            });
-
-        },
-        80
     );
 
 
@@ -2351,7 +2658,7 @@ function setupQuestionSets() {
 
             const button =
                 event.target.closest(
-                    ".question-set-card"
+                    ".question-set-pro-card"
                 );
 
 
@@ -2395,7 +2702,7 @@ function selectQuestionSet(
 
     questionSetArea
         .querySelectorAll(
-            ".question-set-card"
+            ".question-set-pro-card"
         )
         .forEach(
             item => {
@@ -2460,23 +2767,8 @@ function selectQuestionSet(
         "show"
     );
 
-
-    setTimeout(
-        () => {
-
-            modeArea.scrollIntoView({
-
-                behavior:
-                    "smooth",
-
-                block:
-                    "start"
-
-            });
-
-        },
-        120
-    );
+    updateQuizConfigHeader();
+    showPage(quizConfigPage);
 
 }
 
@@ -2544,7 +2836,7 @@ function selectAllQuestionSets() {
 
     questionSetArea
         .querySelectorAll(
-            ".question-set-card"
+            ".question-set-pro-card"
         )
         .forEach(
             card => {
@@ -2588,23 +2880,8 @@ function selectAllQuestionSets() {
         "show"
     );
 
-
-    setTimeout(
-        () => {
-
-            modeArea.scrollIntoView({
-
-                behavior:
-                    "smooth",
-
-                block:
-                    "start"
-
-            });
-
-        },
-        120
-    );
+    updateQuizConfigHeader();
+    showPage(quizConfigPage);
 
 }
 
@@ -2743,8 +3020,10 @@ function updateQuestionSetCounts() {
                     ).length;
 
 
-                element.textContent =
-                    `${count} câu`;
+                setSubjectTotalCount(
+                    element,
+                    count
+                );
 
             }
         );
@@ -2790,8 +3069,35 @@ function updateSubjectCountFor(
             ).length;
 
 
+    setSubjectTotalCount(
+        element,
+        count
+    );
+
+}
+
+
+function setSubjectTotalCount(element, count) {
+
+    if (!element) return;
+
     element.textContent =
-        `${count} câu`;
+        `${count} Câu`;
+
+    element.classList.remove(
+        "count-pop"
+    );
+
+    void element.offsetWidth;
+
+    element.classList.add(
+        "count-pop"
+    );
+
+    window.setTimeout(
+        () => element.classList.remove("count-pop"),
+        650
+    );
 
 }
 
@@ -2884,6 +3190,19 @@ function getCurrentAllQuestionTotal() {
 }
 
 
+function pulseHomeCount(element) {
+
+    if (!element) {
+        return;
+    }
+
+    element.classList.remove("count-pop");
+    void element.offsetWidth;
+    element.classList.add("count-pop");
+
+}
+
+
 function updateHomeQuestionTotal() {
 
     const element =
@@ -2897,11 +3216,13 @@ function updateHomeQuestionTotal() {
         getCurrentAllQuestionTotal();
 
     element.textContent =
-        `${total.toLocaleString("vi-VN")} câu`;
+        `${total.toLocaleString("vi-VN")}`;
 
     element.classList.remove(
         "is-loading"
     );
+
+    pulseHomeCount(element);
 
 }
 
@@ -2916,7 +3237,7 @@ async function refreshHomeQuestionTotal() {
     }
 
     element.textContent =
-        "Đang tải...";
+        "...";
 
     element.classList.add(
         "is-loading"
@@ -2942,7 +3263,7 @@ async function refreshHomeQuestionTotal() {
 
         element.textContent =
             total > 0
-                ? `${total.toLocaleString("vi-VN")} câu`
+                ? `${total.toLocaleString("vi-VN")}`
                 : "Chưa tải được";
 
         element.classList.remove(
@@ -2956,10 +3277,19 @@ async function refreshHomeQuestionTotal() {
 
 function updateHomeResourceTotal() {
 
-    const element =
-        $("homeResourceTotal");
+    const elements =
+        Array.from(
+            document.querySelectorAll("[data-home-resource-total]")
+        );
 
-    if (!element) {
+    if (!elements.length) {
+        const fallback = $("homeResourceTotal");
+        if (fallback) {
+            elements.push(fallback);
+        }
+    }
+
+    if (!elements.length) {
         return;
     }
 
@@ -2972,8 +3302,14 @@ function updateHomeResourceTotal() {
     const total =
         books + slides;
 
-    element.textContent =
-        `${total.toLocaleString("vi-VN")} tài liệu`;
+    elements.forEach(
+        element => {
+            element.textContent =
+                `${total.toLocaleString("vi-VN")}`;
+            element.classList.remove("is-loading");
+            pulseHomeCount(element);
+        }
+    );
 
 }
 
@@ -5651,6 +5987,24 @@ function executeExit() {
 
     if (
         exitTarget ===
+        "history"
+    ) {
+
+        allowQuizHistoryExit = true;
+
+        if (window.history.state?.medquiz && Number(window.history.state.depth || 0) > 0) {
+            window.history.back();
+        }
+        else {
+            showPage(quizConfigPage || exerciseHub);
+        }
+
+        return;
+
+    }
+
+    if (
+        exitTarget ===
         "home"
     ) {
 
@@ -5685,10 +6039,7 @@ function setupRead() {
     $("backFromReadBtn")
         .addEventListener(
             "click",
-            () =>
-                showPage(
-                    exerciseHub
-                )
+            () => appBack(quizConfigPage || exerciseHub)
         );
 
 
@@ -6435,10 +6786,7 @@ function setupResources() {
     $("backToResourcesBtn")
         .addEventListener(
             "click",
-            () =>
-                showPage(
-                    resourceHub
-                )
+            () => appBack(resourceHub)
         );
 
 
@@ -6997,10 +7345,7 @@ function setupFlashcards() {
     $("backFromFlashcardBtn")
         .addEventListener(
             "click",
-            () =>
-                showPage(
-                    exerciseHub
-                )
+            () => appBack(quizConfigPage || exerciseHub)
         );
 
 
@@ -7622,10 +7967,7 @@ function setupWordPractice() {
     $("backFromWordPracticeBtn")
         .addEventListener(
             "click",
-            () =>
-                showPage(
-                    exerciseHub
-                )
+            () => appBack(quizConfigPage || exerciseHub)
         );
 
 
@@ -9354,7 +9696,7 @@ function setupKawaiiExperience() {
         }
     };
     document.addEventListener('pointerdown', (e) => {
-        if (e.target.closest('button,.subject-btn,.question-set-card,.portal-card,.mode-card,.answer')) sparkle(e.clientX, e.clientY);
+        if (e.target.closest('button,.subject-btn,.question-set-pro-card,.portal-card,.mode-card,.answer')) sparkle(e.clientX, e.clientY);
     }, {passive:true});
 
     const tiltTargets = document.querySelectorAll('.subject-btn,.portal-card,.mode-card,.config-group');
@@ -9374,7 +9716,7 @@ function setupKawaiiExperience() {
     });
 
     const observer = new MutationObserver(() => {
-        document.querySelectorAll('.question-set-card:not([data-kawaii-ready])').forEach((el, i) => {
+        document.querySelectorAll('.question-set-pro-card:not([data-kawaii-ready])').forEach((el, i) => {
             el.dataset.kawaiiReady = '1';
             el.style.animationDelay = `${Math.min(i,9)*45}ms`;
         });
@@ -9429,7 +9771,8 @@ function setupKawaiiExperience() {
             try {
                 const activeName = page && page.id === 'landingPage' ? 'home'
                     : page && page.id === 'resourceHub' ? 'resource'
-                    : page && (page.id === 'exerciseHub' || page.id === 'quizPage' || page.id === 'readPage') ? 'exercise'
+                    : page && page.id === 'notebookPage' ? 'home'
+                    : page && (page.id === 'exerciseHub' || page.id === 'subjectPage' || page.id === 'quizConfigPage' || page.id === 'quizPage' || page.id === 'readPage') ? 'exercise'
                     : 'home';
                 document.querySelectorAll('.kawaii-nav-btn').forEach(btn => {
                     btn.classList.toggle('active', btn.dataset.kawaiiNav === activeName || (activeName==='exercise' && btn.dataset.kawaiiNav==='study'));
@@ -9477,3 +9820,26 @@ function setupHomeV2Actions(){
     });
 }
 document.addEventListener('DOMContentLoaded', () => setTimeout(setupHomeV2Actions,0));
+
+
+/* =========================================================
+   ENGLISH-ONLY MODES GUARD
+   Flashcard + Luyện từ chỉ hiện khi môn đang chọn là Tiếng Anh.
+========================================================= */
+(function(){
+    function syncEnglishOnlyModes(){
+        const isEnglish = selectedSubject === 'Tiếng Anh';
+        const flash = document.getElementById('flashcardModeBtn');
+        const word = document.getElementById('wordPracticeModeBtn');
+        const grid = document.getElementById('modeGrid');
+        if (flash) flash.classList.toggle('show', isEnglish);
+        if (word) word.classList.toggle('show', isEnglish);
+        if (grid) grid.classList.toggle('english-mode-grid', isEnglish);
+    }
+    document.addEventListener('click', function(e){
+        if (e.target.closest('.subject-btn')) {
+            setTimeout(syncEnglishOnlyModes, 0);
+        }
+    });
+    document.addEventListener('DOMContentLoaded', syncEnglishOnlyModes);
+})();
