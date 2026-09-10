@@ -14321,3 +14321,355 @@ body:not(.study-meadow-background) {
     .quiz-config-heading strong { font-size: 15px; max-width: 48vw; }
     .quiz-config-intro { font-size: 13px; padding: 0 8px; }
 }
+
+/* =========================================================
+   2026-09-10 — BỎ TIÊU ĐỀ "KHU VỰC HỌC TẬP / BÀI TẬP"
+   + TEST TẤT CẢ CANH PHẢI
+   + RESPONSIVE ĐIỆN THOẠI (desktop giữ nguyên)
+========================================================= */
+
+/* Giữ nguyên kích thước thanh trên desktop nhưng bỏ cụm icon + chữ ở giữa. */
+#exerciseHub > .section-navigation .section-nav-center{
+    visibility:hidden !important;
+    pointer-events:none !important;
+}
+
+/* TEST TẤT CẢ luôn nằm ở đầu phải của khung chọn bộ trên máy tính. */
+#subjectPage .question-set-heading{
+    display:flex !important;
+    align-items:center !important;
+    justify-content:space-between !important;
+    gap:22px !important;
+    padding-right:26px !important;
+}
+
+#subjectPage .question-set-heading-main{
+    flex:1 1 auto !important;
+    min-width:0 !important;
+}
+
+#subjectPage .question-set-heading-right{
+    flex:0 0 auto !important;
+    width:auto !important;
+    margin-left:auto !important;
+    margin-right:0 !important;
+    display:flex !important;
+    align-items:center !important;
+    justify-content:flex-end !important;
+    gap:10px !important;
+}
+
+/* Sticker đứng trước; nút TEST TẤT CẢ là phần tử ngoài cùng bên phải. */
+#subjectPage .question-set-heading-stickers{
+    order:1 !important;
+}
+#subjectPage .test-all-sets-btn{
+    order:2 !important;
+    margin-left:0 !important;
+    margin-right:0 !important;
+}
+#subjectPage .question-set-header-mascot{
+    right:calc(100% + 10px) !important;
+}
+
+/* Chỉ áp dụng cho tablet/điện thoại — không đổi bố cục desktop. */
+@media (max-width: 768px){
+    html,body{
+        width:100% !important;
+        max-width:100% !important;
+        overflow-x:hidden !important;
+        -webkit-text-size-adjust:100%;
+    }
+
+    *{box-sizing:border-box}
+    img,svg,video,canvas{max-width:100%}
+    button,a{touch-action:manipulation}
+
+    .container{
+        width:100% !important;
+        max-width:100% !important;
+        margin:0 !important;
+        padding:9px 9px 76px !important;
+    }
+
+    .page-section{
+        width:100% !important;
+        max-width:100% !important;
+        min-width:0 !important;
+        overflow-x:hidden !important;
+    }
+
+    /* Header gọn hơn trên điện thoại */
+    .header-inner{
+        width:100% !important;
+        min-height:58px !important;
+        padding:7px 9px !important;
+        gap:7px !important;
+    }
+    .brand{min-width:0 !important}
+    .brand-logo{
+        width:38px !important;
+        height:38px !important;
+        flex:0 0 38px !important;
+    }
+    .brand-name{
+        max-width:44vw !important;
+        overflow:hidden !important;
+        text-overflow:ellipsis !important;
+        white-space:nowrap !important;
+        font-size:17px !important;
+    }
+    .kawaii-header-nav{display:none !important}
+    .header-actions{margin-left:auto !important;gap:5px !important}
+
+    /* Trang Bài tập: chỉ còn nút Trang chủ, bỏ cụm tiêu đề đã yêu cầu. */
+    #exerciseHub > .section-navigation{
+        min-height:58px !important;
+        display:flex !important;
+        align-items:center !important;
+        justify-content:flex-start !important;
+        padding:8px 10px !important;
+        margin-bottom:10px !important;
+        border-radius:18px !important;
+    }
+    #exerciseHub > .section-navigation .section-nav-center,
+    #exerciseHub > .section-navigation .nav-decoration{
+        display:none !important;
+    }
+    #exerciseHub > .section-navigation .nav-back-btn{
+        min-height:40px !important;
+        padding:0 12px !important;
+        font-size:11px !important;
+    }
+
+    /* Danh sách môn */
+    #exerciseHub .subjects{
+        display:grid !important;
+        grid-template-columns:repeat(2,minmax(0,1fr)) !important;
+        gap:9px !important;
+        margin-top:10px !important;
+    }
+    #exerciseHub .subject-btn{
+        min-width:0 !important;
+        min-height:126px !important;
+        padding:13px 11px !important;
+        border-radius:20px !important;
+    }
+    #exerciseHub .subject-name{
+        font-size:14px !important;
+        overflow-wrap:anywhere !important;
+    }
+
+    /* Trang môn */
+    .subject-page-navigation{
+        grid-template-columns:auto minmax(0,1fr) auto !important;
+        gap:7px !important;
+        min-height:68px !important;
+        padding:8px !important;
+        border-radius:19px !important;
+    }
+    .subject-page-heading{
+        min-width:0 !important;
+        justify-content:flex-start !important;
+    }
+    .subject-page-heading strong{
+        max-width:42vw !important;
+        overflow:hidden !important;
+        text-overflow:ellipsis !important;
+        white-space:nowrap !important;
+    }
+    .subject-page-intro{
+        margin-top:8px !important;
+        padding:0 8px !important;
+        text-align:center !important;
+    }
+
+    /* Khung chọn 10 bộ: nội dung xếp dọc gọn, TEST TẤT CẢ vẫn canh phải. */
+    #subjectPage .question-set-heading{
+        min-height:0 !important;
+        display:flex !important;
+        flex-direction:column !important;
+        align-items:stretch !important;
+        justify-content:flex-start !important;
+        gap:10px !important;
+        padding:13px !important;
+        padding-right:13px !important;
+        border-radius:20px !important;
+    }
+    #subjectPage .question-set-heading-main{
+        width:100% !important;
+        gap:10px !important;
+    }
+    #subjectPage .question-set-heading-icon{
+        width:48px !important;
+        height:48px !important;
+        flex:0 0 48px !important;
+        border-radius:15px !important;
+        font-size:23px !important;
+    }
+    #subjectPage .question-set-heading h2{
+        font-size:19px !important;
+    }
+    #subjectPage .question-set-heading p{
+        font-size:11px !important;
+        line-height:1.35 !important;
+    }
+    #subjectPage .question-set-heading-right{
+        width:100% !important;
+        margin:0 !important;
+        display:flex !important;
+        justify-content:flex-end !important;
+        align-items:center !important;
+    }
+    #subjectPage .question-set-heading-stickers,
+    #subjectPage .question-set-header-mascot{
+        display:none !important;
+    }
+    #subjectPage .test-all-sets-btn{
+        width:min(100%,280px) !important;
+        min-width:0 !important;
+        min-height:58px !important;
+        margin-left:auto !important;
+        padding:9px 12px !important;
+        border-radius:16px !important;
+    }
+
+    /* 10 bộ giữ 2 cột để không phải cuộn quá dài */
+    #subjectPage .question-set-grid{
+        width:100% !important;
+        grid-template-columns:repeat(2,minmax(0,1fr)) !important;
+        gap:9px !important;
+        margin-top:10px !important;
+    }
+    #subjectPage .question-set-pro-card{
+        width:100% !important;
+        min-width:0 !important;
+        border-radius:20px !important;
+    }
+    #subjectPage .question-set-pro-count{
+        left:10px !important;
+        bottom:10px !important;
+        height:23px !important;
+        min-width:48px !important;
+        max-width:calc(100% - 70px) !important;
+        padding:0 7px !important;
+        font-size:9px !important;
+    }
+
+    /* Trang cấu hình */
+    .quiz-config-page{
+        width:100% !important;
+        max-width:100% !important;
+        padding:8px 0 44px !important;
+    }
+    .quiz-config-navigation{
+        grid-template-columns:auto minmax(0,1fr) auto !important;
+        gap:7px !important;
+        padding:8px !important;
+        border-radius:18px !important;
+    }
+    .quiz-config-heading strong{
+        max-width:46vw !important;
+        overflow:hidden !important;
+        text-overflow:ellipsis !important;
+        white-space:nowrap !important;
+    }
+    .quiz-config-page .test-config,
+    .quiz-config-page .mode-grid{
+        grid-template-columns:1fr !important;
+        gap:9px !important;
+    }
+
+    /* Trang làm bài */
+    #quizPage .quiz-layout{
+        display:flex !important;
+        flex-direction:column !important;
+        gap:9px !important;
+    }
+    #quizPage .quiz-main,
+    #quizPage .quiz-sidebar{
+        width:100% !important;
+        max-width:100% !important;
+        min-width:0 !important;
+    }
+    #quizPage .quiz-sidebar{
+        position:static !important;
+        top:auto !important;
+    }
+    #quizPage .question-text{
+        overflow-wrap:anywhere !important;
+    }
+
+    /* Tài liệu / đọc bài / flashcard / luyện từ / sổ tay */
+    .resource-category-grid,
+    .resource-grid,
+    .book-grid,
+    .flashcard-grid,
+    .word-direction-grid{
+        grid-template-columns:1fr !important;
+    }
+    .resource-search,
+    .read-search,
+    .flash-search-row{
+        width:100% !important;
+        min-width:0 !important;
+    }
+    .resource-search input,
+    .read-search input,
+    .flash-search-row input{
+        width:100% !important;
+        min-width:0 !important;
+    }
+    .notebook-shell{
+        width:100% !important;
+        max-width:100% !important;
+    }
+    .notebook-textarea{
+        width:100% !important;
+        min-width:0 !important;
+    }
+
+    /* Trang chủ: 3 card ảnh xếp dọc đúng chiều rộng điện thoại. */
+    #landingPage .home-actions-v2.home-actions-three.home-image-actions{
+        width:calc(100% - 8px) !important;
+        grid-template-columns:1fr !important;
+        gap:8px !important;
+        margin-left:auto !important;
+        margin-right:auto !important;
+    }
+    #landingPage .home-image-card{
+        width:100% !important;
+        max-width:100% !important;
+        border-radius:28px !important;
+    }
+}
+
+@media (max-width: 420px){
+    .brand-name{font-size:16px !important;max-width:40vw !important}
+    .private-text{display:none !important}
+
+    #exerciseHub .subjects,
+    #subjectPage .question-set-grid{
+        grid-template-columns:repeat(2,minmax(0,1fr)) !important;
+        gap:7px !important;
+    }
+
+    #subjectPage .test-all-sets-btn{
+        width:100% !important;
+    }
+
+    .subject-page-heading small,
+    .quiz-config-heading small{
+        display:none !important;
+    }
+
+    .quiz-config-heading strong{
+        max-width:43vw !important;
+        font-size:14px !important;
+    }
+
+    #quizPage .question-grid{
+        grid-template-columns:repeat(5,minmax(0,1fr)) !important;
+        gap:5px !important;
+    }
+}
