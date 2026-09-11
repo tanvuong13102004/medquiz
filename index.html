@@ -165,13 +165,35 @@ body{
   .sticker{opacity:.80}
   .option::before{inset:5% 3% 3%}
 }
-/* V8 — thu nhỏ toàn bộ hộp chọn giao diện còn 50% */
+/* V9 — giữ hộp chọn 50% và khóa đúng giữa viewport ở mọi thiết bị */
+html,body{
+  width:100%;
+  height:100%;
+  min-height:100%;
+  overflow:hidden;
+}
+body{
+  min-height:100vh;
+}
+@supports (height:100dvh){
+  body{height:100dvh;min-height:100dvh}
+}
 .chooser{
-  transform:scale(.5);
-  transform-origin:center center;
+  position:fixed!important;
+  left:50%!important;
+  top:50%!important;
+  margin:0!important;
+  transform:translate(-50%,-50%) scale(.5)!important;
+  transform-origin:center center!important;
 }
 @media(max-width:720px){
-  .chooser{transform-origin:top center}
+  body{place-items:center!important;padding:0!important}
+  .chooser{
+    left:50%!important;
+    top:50%!important;
+    transform:translate(-50%,-50%) scale(.5)!important;
+    transform-origin:center center!important;
+  }
 }
 
 @media(prefers-reduced-motion:reduce){
