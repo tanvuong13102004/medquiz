@@ -387,11 +387,21 @@ function sameHistoryState(a, b) {
     );
 }
 
+function syncDevicePageBackground(page) {
+    const isMobileHome =
+        document.documentElement.dataset.device === "mobile" &&
+        page === landingPage;
+
+    document.body.classList.toggle("mobile-home-white", isMobileHome);
+}
+
+
 function renderPageOnly(page) {
     if (!page) return;
 
     hidePages();
     page.classList.add("show");
+    syncDevicePageBackground(page);
 
     document.body.classList.toggle(
         "study-meadow-background",
@@ -495,6 +505,7 @@ function setupHistoryNavigation() {
     if (appHistoryReady) return;
 
     const initialPage = getVisiblePage();
+    syncDevicePageBackground(initialPage);
     const initialState = getPageState(initialPage, 0);
     window.history.replaceState(initialState, "", historyUrl(initialPage, initialState));
     appHistoryReady = true;

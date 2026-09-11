@@ -13555,3 +13555,64 @@ html#mobilePreview[data-device="pc"] .question-set-pro-card::after{z-index:1!imp
 html#mobilePreview[data-device="pc"] .question-set-pro-card::before{z-index:2!important;}
 html#mobilePreview[data-device="pc"] .question-set-pro-count{z-index:5!important;}
 html#mobilePreview[data-device="pc"] .question-set-pro-active-indicator{z-index:6!important;}
+
+
+/* =========================================================
+   FINAL PC HEADER — BLACK BAR + RED TẤN VƯƠNG
+   2026-09-11
+   Edit this block for desktop header changes.
+========================================================= */
+html#mobilePreview[data-device="pc"] .header{
+    background:#050505!important;
+    background-image:none!important;
+    border-bottom:1px solid #191919!important;
+    box-shadow:0 8px 24px rgba(0,0,0,.24)!important;
+    backdrop-filter:none!important;
+    -webkit-backdrop-filter:none!important;
+}
+html#mobilePreview[data-device="pc"] .header::before,
+html#mobilePreview[data-device="pc"] .header::after{
+    display:none!important;
+    content:none!important;
+}
+html#mobilePreview[data-device="pc"] .header .brand-name{
+    font-size:34px!important;
+    line-height:1!important;
+    font-weight:1000!important;
+    letter-spacing:-.8px!important;
+    color:#ff2d2d!important;
+    background:none!important;
+    -webkit-background-clip:border-box!important;
+    background-clip:border-box!important;
+    -webkit-text-fill-color:#ff2d2d!important;
+    text-shadow:0 0 1px rgba(255,255,255,.30),0 3px 12px rgba(255,45,45,.35)!important;
+    white-space:nowrap!important;
+}
+html#mobilePreview[data-device="pc"] .header .kawaii-header-nav{
+    background:#111!important;
+    border:1px solid #282828!important;
+    box-shadow:none!important;
+    backdrop-filter:none!important;
+    -webkit-backdrop-filter:none!important;
+}
+html#mobilePreview[data-device="pc"] .header .kawaii-nav-btn{
+    color:#f4f4f4!important;
+    text-shadow:none!important;
+}
+html#mobilePreview[data-device="pc"] .header .kawaii-nav-btn:hover{
+    color:#fff!important;
+    background:#202020!important;
+}
+html#mobilePreview[data-device="pc"] .header .kawaii-nav-btn.active{
+    color:#ff4b4b!important;
+    background:#1b1b1b!important;
+    box-shadow:inset 0 0 0 1px rgba(255,65,65,.20)!important;
+}
+html#mobilePreview[data-device="pc"] .header .fullscreen-btn{
+    color:#fff!important;
+    background:#151515!important;
+    border-color:#303030!important;
+    box-shadow:none!important;
+    backdrop-filter:none!important;
+    -webkit-backdrop-filter:none!important;
+}

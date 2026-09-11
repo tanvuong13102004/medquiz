@@ -15132,3 +15132,171 @@ html#mobilePreview[data-device="mobile"] .question-set-pro-active-indicator{z-in
         top:83.7%!important;
     }
 }
+
+
+/* =========================================================
+   FINAL MOBILE HEADER — BLACK BAR + RED TẤN VƯƠNG
+   2026-09-11
+   Edit this block for mobile header changes.
+========================================================= */
+html#mobilePreview[data-device="mobile"] .header{
+    background:#050505!important;
+    background-image:none!important;
+    border-bottom:1px solid #191919!important;
+    box-shadow:0 7px 20px rgba(0,0,0,.22)!important;
+    backdrop-filter:none!important;
+    -webkit-backdrop-filter:none!important;
+}
+html#mobilePreview[data-device="mobile"] .header::before,
+html#mobilePreview[data-device="mobile"] .header::after{
+    display:none!important;
+    content:none!important;
+}
+html#mobilePreview[data-device="mobile"] .header .brand-name{
+    font-size:28px!important;
+    line-height:1!important;
+    font-weight:1000!important;
+    letter-spacing:-.65px!important;
+    color:#ff2d2d!important;
+    background:none!important;
+    -webkit-background-clip:border-box!important;
+    background-clip:border-box!important;
+    -webkit-text-fill-color:#ff2d2d!important;
+    text-shadow:0 0 1px rgba(255,255,255,.28),0 3px 10px rgba(255,45,45,.32)!important;
+    white-space:nowrap!important;
+    max-width:none!important;
+}
+html#mobilePreview[data-device="mobile"] .header .kawaii-header-nav{
+    background:#111!important;
+    border:1px solid #282828!important;
+    box-shadow:none!important;
+    backdrop-filter:none!important;
+    -webkit-backdrop-filter:none!important;
+}
+html#mobilePreview[data-device="mobile"] .header .kawaii-nav-btn{
+    color:#f4f4f4!important;
+    text-shadow:none!important;
+}
+html#mobilePreview[data-device="mobile"] .header .kawaii-nav-btn:hover{
+    color:#fff!important;
+    background:#202020!important;
+}
+html#mobilePreview[data-device="mobile"] .header .kawaii-nav-btn.active{
+    color:#ff4b4b!important;
+    background:#1b1b1b!important;
+    box-shadow:inset 0 0 0 1px rgba(255,65,65,.20)!important;
+}
+html#mobilePreview[data-device="mobile"] .header .fullscreen-btn{
+    color:#fff!important;
+    background:#151515!important;
+    border-color:#303030!important;
+    box-shadow:none!important;
+    backdrop-filter:none!important;
+    -webkit-backdrop-filter:none!important;
+}
+
+/* =========================================================
+   MOBILE HOME ONLY — FULL WHITE BACKGROUND
+   2026-09-11
+   Other mobile pages keep their existing backgrounds.
+========================================================= */
+html#mobilePreview[data-device="mobile"] body.mobile-home-white{
+    background:#fff!important;
+    background-image:none!important;
+    background-color:#fff!important;
+}
+html#mobilePreview[data-device="mobile"] body.mobile-home-white > .kawaii-global-scene,
+html#mobilePreview[data-device="mobile"] body.mobile-home-white > .background-orb,
+html#mobilePreview[data-device="mobile"] body.mobile-home-white > .global-stickers{
+    display:none!important;
+}
+html#mobilePreview[data-device="mobile"] body.mobile-home-white #landingPage.home-v2-page{
+    background:#fff!important;
+    background-image:none!important;
+}
+html#mobilePreview[data-device="mobile"] body.mobile-home-white #landingPage.home-v2-page::before,
+html#mobilePreview[data-device="mobile"] body.mobile-home-white #landingPage.home-v2-page::after,
+html#mobilePreview[data-device="mobile"] body.mobile-home-white #landingPage .home-v2-sky,
+html#mobilePreview[data-device="mobile"] body.mobile-home-white #landingPage .home-bottom-garden{
+    display:none!important;
+    content:none!important;
+    background:none!important;
+}
+
+/* =========================================================
+   FINAL MOBILE GLOBAL PAGE BACKGROUND — PURE WHITE EVERYWHERE
+   2026-09-11 V6
+   Page canvas/background is always white on Mobile.
+   Content-card images (subject cards, home cards, quiz-set cards)
+   are intentionally preserved.
+========================================================= */
+html#mobilePreview[data-device="mobile"],
+html#mobilePreview[data-device="mobile"] body,
+html#mobilePreview[data-device="mobile"] body.closer-kawaii-theme,
+html#mobilePreview[data-device="mobile"] main.container{
+    background:#fff!important;
+    background-color:#fff!important;
+    background-image:none!important;
+}
+
+/* Every navigable page uses a plain white canvas. */
+html#mobilePreview[data-device="mobile"] .page-section,
+html#mobilePreview[data-device="mobile"] .page-section.show,
+html#mobilePreview[data-device="mobile"] #landingPage,
+html#mobilePreview[data-device="mobile"] #notebookPage,
+html#mobilePreview[data-device="mobile"] #exerciseHub,
+html#mobilePreview[data-device="mobile"] #subjectPage,
+html#mobilePreview[data-device="mobile"] #quizConfigPage,
+html#mobilePreview[data-device="mobile"] #resourceHub,
+html#mobilePreview[data-device="mobile"] #resourceListPage,
+html#mobilePreview[data-device="mobile"] #quizPage,
+html#mobilePreview[data-device="mobile"] #readPage,
+html#mobilePreview[data-device="mobile"] #flashcardPage,
+html#mobilePreview[data-device="mobile"] #wordPracticePage{
+    background:#fff!important;
+    background-color:#fff!important;
+    background-image:none!important;
+}
+
+/* Remove full-page decorative scenery/gradient layers on all Mobile pages. */
+html#mobilePreview[data-device="mobile"] body > .kawaii-global-scene,
+html#mobilePreview[data-device="mobile"] body > .background-orb,
+html#mobilePreview[data-device="mobile"] body > .global-stickers,
+html#mobilePreview[data-device="mobile"] .kawaii-page-decor,
+html#mobilePreview[data-device="mobile"] .kawaii-floating-notes,
+html#mobilePreview[data-device="mobile"] .subject-page-decor,
+html#mobilePreview[data-device="mobile"] .flashcard-page-bg,
+html#mobilePreview[data-device="mobile"] .word-practice-page-bg,
+html#mobilePreview[data-device="mobile"] #landingPage .home-v2-sky,
+html#mobilePreview[data-device="mobile"] #landingPage .home-bottom-garden{
+    display:none!important;
+    visibility:hidden!important;
+    background:none!important;
+    background-image:none!important;
+}
+
+/* Kill page-level pseudo-backgrounds without touching card pseudo-elements. */
+html#mobilePreview[data-device="mobile"] body::before,
+html#mobilePreview[data-device="mobile"] body::after,
+html#mobilePreview[data-device="mobile"] main.container::before,
+html#mobilePreview[data-device="mobile"] main.container::after,
+html#mobilePreview[data-device="mobile"] .page-section::before,
+html#mobilePreview[data-device="mobile"] .page-section::after{
+    background:none!important;
+    background-image:none!important;
+    box-shadow:none!important;
+    content:none!important;
+    display:none!important;
+}
+
+/* Avoid inherited translucent page backdrop colors around content. */
+html#mobilePreview[data-device="mobile"] .quiz-layout,
+html#mobilePreview[data-device="mobile"] .subjects,
+html#mobilePreview[data-device="mobile"] .resource-category-grid,
+html#mobilePreview[data-device="mobile"] .book-list,
+html#mobilePreview[data-device="mobile"] .read-list,
+html#mobilePreview[data-device="mobile"] .flashcard-stage,
+html#mobilePreview[data-device="mobile"] .word-practice-dashboard{
+    background-color:transparent!important;
+    background-image:none!important;
+}

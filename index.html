@@ -2,26 +2,219 @@
 <html lang="vi">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="theme-color" content="#f28da8">
-<title>Tấn Vương | Chọn giao diện</title>
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#ffffff">
+<title>Tấn Vương | Bạn học bằng gì?</title>
 <style>
-*{box-sizing:border-box}html,body{margin:0;min-height:100%;font-family:Inter,"Segoe UI",Arial,sans-serif}body{min-height:100vh;display:grid;place-items:center;padding:22px;background:radial-gradient(circle at 15% 15%,#fff7fb 0 15%,transparent 35%),radial-gradient(circle at 85% 80%,#eefcff 0 15%,transparent 38%),linear-gradient(135deg,#ffeaf2,#eef8ff 55%,#effff6);color:#29405a}.chooser{width:min(680px,100%);padding:34px;border:1px solid rgba(255,255,255,.9);border-radius:34px;background:rgba(255,255,255,.86);box-shadow:0 24px 70px rgba(70,83,118,.14);text-align:center}.icon{font-size:48px}.chooser h1{margin:10px 0 8px;font-size:clamp(25px,5vw,38px)}.chooser p{margin:0 auto 26px;max-width:520px;color:#66778b;line-height:1.55}.options{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}.option{min-height:150px;border:0;border-radius:26px;padding:22px;cursor:pointer;font:inherit;font-weight:900;font-size:18px;transition:transform .18s,box-shadow .18s}.option span{display:block;font-size:42px;margin-bottom:10px}.pc{background:linear-gradient(145deg,#fff4f8,#ffe2ed);color:#d93f72;box-shadow:0 10px 25px rgba(218,74,119,.10)}.mobile{background:linear-gradient(145deg,#eef7ff,#e2f1ff);color:#2878cf;box-shadow:0 10px 25px rgba(57,126,202,.10)}.option:hover{transform:translateY(-3px);box-shadow:0 15px 30px rgba(58,76,105,.14)}.note{margin-top:19px;font-size:12px;color:#8b98a8}@media(max-width:560px){.chooser{padding:25px 18px;border-radius:28px}.options{grid-template-columns:1fr}.option{min-height:112px}.option span{font-size:34px}}
+:root{
+  --ink:#243f60;
+  --pink:#ff4f8c;
+  --blue:#5576ff;
+}
+*{box-sizing:border-box}
+html,body{margin:0;min-height:100%;font-family:Inter,"Segoe UI",Arial,sans-serif}
+body{
+  min-height:100vh;
+  display:grid;
+  place-items:center;
+  overflow-x:hidden;
+  padding:max(18px,env(safe-area-inset-top)) max(16px,env(safe-area-inset-right)) max(18px,env(safe-area-inset-bottom)) max(16px,env(safe-area-inset-left));
+  background:
+    radial-gradient(circle at 12% 10%,rgba(255,126,177,.10),transparent 26%),
+    radial-gradient(circle at 88% 18%,rgba(96,163,255,.11),transparent 28%),
+    linear-gradient(180deg,#fff,#fbfdff 72%,#f9fbff);
+  color:var(--ink);
+}
+.chooser{
+  position:relative;
+  isolation:isolate;
+  width:min(1180px,96vw);
+  padding:clamp(22px,3.5vw,44px) clamp(16px,3.2vw,42px) clamp(28px,4vw,48px);
+  border:1px solid rgba(255,255,255,.95);
+  border-radius:clamp(30px,4vw,58px);
+  background:rgba(255,255,255,.94);
+  box-shadow:0 28px 90px rgba(72,94,126,.13),inset 0 1px 0 rgba(255,255,255,.98);
+  text-align:center;
+  overflow:hidden;
+}
+.chooser::before{
+  content:"";
+  position:absolute;inset:-25%;z-index:-2;
+  background:
+    radial-gradient(circle at 18% 55%,rgba(255,111,167,.09),transparent 24%),
+    radial-gradient(circle at 82% 55%,rgba(95,161,255,.10),transparent 25%);
+  animation:ambientGlow 7s ease-in-out infinite alternate;
+}
+.chooser::after{
+  content:"";
+  position:absolute;inset:0;z-index:-1;pointer-events:none;
+  background:linear-gradient(115deg,transparent 15%,rgba(255,255,255,.56) 43%,transparent 61%);
+  transform:translateX(-115%);
+  animation:panelSheen 8s ease-in-out infinite;
+}
+.title-art{
+  display:block;
+  width:min(710px,80vw);
+  height:auto;
+  margin:0 auto clamp(8px,1.7vw,18px);
+  user-select:none;
+  -webkit-user-drag:none;
+  animation:titleFloat 4.6s ease-in-out infinite;
+}
+.options{
+  width:100%;
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:clamp(18px,2.2vw,30px);
+  align-items:stretch;
+  margin-top:-2px;
+}
+.option{
+  appearance:none;
+  position:relative;
+  display:block;
+  width:100%;
+  border:0;
+  padding:0;
+  background:transparent;
+  border-radius:34px;
+  cursor:pointer;
+  outline:none;
+  transform:translateZ(0);
+  transition:transform .28s cubic-bezier(.2,.8,.2,1),filter .28s ease;
+}
+.option img{
+  display:block;
+  width:100%;
+  height:auto;
+  border-radius:34px;
+  user-select:none;
+  -webkit-user-drag:none;
+  filter:drop-shadow(0 16px 24px rgba(72,89,128,.09));
+  transition:filter .28s ease;
+}
+.option::before{
+  content:"";
+  position:absolute;
+  inset:4.4% 2.8% 2.8%;
+  z-index:2;
+  border-radius:31px;
+  border:2px solid transparent;
+  pointer-events:none;
+  transition:border-color .25s ease,box-shadow .25s ease,background .25s ease;
+}
+.option::after{
+  content:"";
+  position:absolute;
+  inset:4% 4% 5%;
+  z-index:3;
+  pointer-events:none;
+  border-radius:28px;
+  background:linear-gradient(112deg,transparent 24%,rgba(255,255,255,.55) 44%,transparent 61%);
+  opacity:0;
+  transform:translateX(-44%);
+}
+.option:hover,.option:focus-visible{transform:translateY(-8px) scale(1.018)}
+.option:hover img,.option:focus-visible img{filter:drop-shadow(0 24px 34px rgba(67,89,137,.18)) saturate(1.04)}
+.option.pc:hover::before,.option.pc:focus-visible::before{border-color:rgba(255,79,140,.42);box-shadow:0 0 0 8px rgba(255,79,140,.07),0 16px 34px rgba(255,79,140,.12)}
+.option.mobile:hover::before,.option.mobile:focus-visible::before{border-color:rgba(85,118,255,.40);box-shadow:0 0 0 8px rgba(85,118,255,.07),0 16px 34px rgba(85,118,255,.12)}
+.option:hover::after,.option:focus-visible::after{opacity:1;animation:cardSheen .78s ease-out 1}
+.option:active{transform:translateY(-2px) scale(.985)}
+.sticker{
+  position:absolute;
+  z-index:5;
+  pointer-events:none;
+  user-select:none;
+  filter:drop-shadow(0 5px 7px rgba(67,80,114,.10));
+  animation:stickerFloat var(--dur,4s) ease-in-out infinite;
+  animation-delay:var(--delay,0s);
+}
+.s1{left:3.2%;top:21%;font-size:clamp(24px,3vw,40px);--dur:4.2s;--delay:-1.4s}
+.s2{right:3.5%;top:19%;font-size:clamp(25px,3.2vw,42px);--dur:4.8s;--delay:-.5s}
+.s3{left:2.8%;bottom:10%;font-size:clamp(22px,2.6vw,36px);--dur:3.8s;--delay:-2s}
+.s4{right:2.5%;bottom:11%;font-size:clamp(22px,2.8vw,38px);--dur:4.4s;--delay:-1.2s}
+.s5{left:49%;top:6%;font-size:clamp(18px,2.1vw,30px);--dur:3.6s;--delay:-.8s}
+.spark{
+  position:absolute;width:9px;height:9px;border-radius:999px;z-index:4;pointer-events:none;
+  background:#ffd755;box-shadow:0 0 18px rgba(255,206,66,.72);
+  animation:sparkPulse 2.3s ease-in-out infinite;
+}
+.spark.a{left:9%;top:39%}.spark.b{right:8%;top:42%;animation-delay:-.8s}.spark.c{left:49%;bottom:8%;animation-delay:-1.45s}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+@keyframes titleFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}
+@keyframes stickerFloat{0%,100%{transform:translateY(0) rotate(-2deg)}50%{transform:translateY(-9px) rotate(3deg)}}
+@keyframes sparkPulse{0%,100%{transform:scale(.7);opacity:.35}50%{transform:scale(1.35);opacity:1}}
+@keyframes cardSheen{0%{transform:translateX(-46%)}100%{transform:translateX(58%)}}
+@keyframes ambientGlow{0%{transform:translate3d(-1%,0,0) scale(1)}100%{transform:translate3d(1.5%,1%,0) scale(1.04)}}
+@keyframes panelSheen{0%,73%{transform:translateX(-115%)}88%,100%{transform:translateX(120%)}}
+@media(max-width:720px){
+  body{place-items:start center;padding:12px;background:#fff}
+  .chooser{width:100%;padding:18px 10px 24px;border-radius:30px;box-shadow:none;border-color:#f3f5f8}
+  .title-art{width:min(650px,96vw);margin-bottom:0}
+  .options{grid-template-columns:1fr;gap:8px;margin-top:-4px}
+  .option{width:min(610px,100%);margin-inline:auto;border-radius:28px}
+  .option img{border-radius:28px}
+  .option:hover,.option:focus-visible{transform:translateY(-4px) scale(1.008)}
+  .s1{left:1.5%;top:18%}.s2{right:1.5%;top:18%}.s3{bottom:5%}.s4{bottom:5%}.s5{top:2.5%}
+}
+@media(max-width:430px){
+  body{padding:5px}
+  .chooser{padding:10px 5px 18px;border-radius:24px}
+  .title-art{width:100%;margin-top:-2px}
+  .options{gap:3px}
+  .sticker{opacity:.80}
+  .option::before{inset:5% 3% 3%}
+}
+/* V8 — thu nhỏ toàn bộ hộp chọn giao diện còn 50% */
+.chooser{
+  transform:scale(.5);
+  transform-origin:center center;
+}
+@media(max-width:720px){
+  .chooser{transform-origin:top center}
+}
+
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important}
+}
 </style>
 </head>
 <body>
-<main class="chooser">
-<div class="icon">📚</div>
-<h1>Chọn giao diện học</h1>
-<p>PC và điện thoại đã được tách thành hai luồng riêng. Mỗi phiên bản chỉ tải phần giao diện cần thiết.</p>
-<div class="options">
-<button class="option pc" data-target="pc.html"><span>🖥️</span>Máy tính</button>
-<button class="option mobile" data-target="mobile.html"><span>📱</span>Điện thoại</button>
-</div>
-<div class="note">Lựa chọn không được lưu. Sau khi chọn, giao diện sẽ được khóa cho phiên hiện tại. Muốn chọn lại, hãy tải lại Trang chủ.</div>
+<main class="chooser" aria-labelledby="chooserTitle">
+  <h1 class="sr-only" id="chooserTitle">Bạn học bằng gì</h1>
+  <img class="title-art" src="assets/device-chooser/chooser-title.webp?v=20260912c1" alt="Bạn học bằng gì" draggable="false">
+
+  <span class="sticker s1" aria-hidden="true">💗</span>
+  <span class="sticker s2" aria-hidden="true">⭐</span>
+  <span class="sticker s3" aria-hidden="true">✨</span>
+  <span class="sticker s4" aria-hidden="true">🌈</span>
+  <span class="sticker s5" aria-hidden="true">📚</span>
+  <i class="spark a" aria-hidden="true"></i><i class="spark b" aria-hidden="true"></i><i class="spark c" aria-hidden="true"></i>
+
+  <section class="options" aria-label="Chọn thiết bị học">
+    <button class="option pc" type="button" data-target="pc.html" aria-label="Học bằng máy tính">
+      <img src="assets/device-chooser/chooser-pc.webp?v=20260912c1" alt="Máy tính" draggable="false">
+    </button>
+    <button class="option mobile" type="button" data-target="mobile.html" aria-label="Học bằng điện thoại">
+      <img src="assets/device-chooser/chooser-mobile.webp?v=20260912c1" alt="Điện thoại" draggable="false">
+    </button>
+  </section>
 </main>
 <script>
-document.querySelectorAll('[data-target]').forEach(b=>b.addEventListener('click',()=>{location.href=b.dataset.target+(location.hash||'')}));
+(() => {
+  document.querySelectorAll('[data-target]').forEach((button) => {
+    button.addEventListener('click', () => {
+      button.style.pointerEvents = 'none';
+      button.animate(
+        [{transform:'translateY(-7px) scale(1.018)'},{transform:'translateY(-2px) scale(.975)'},{transform:'translateY(-5px) scale(1.01)'}],
+        {duration:300,easing:'cubic-bezier(.2,.8,.2,1)'}
+      );
+      setTimeout(() => {
+        location.href = button.dataset.target + (location.hash || '');
+      }, 180);
+    });
+  });
+})();
 </script>
 </body>
 </html>
