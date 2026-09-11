@@ -101,6 +101,126 @@ const subjectSetLoadState = {};
 let allSubjectSetsPreloaded = false;
 let allSubjectSetsPreloadPromise = null;
 
+/* =========================================================
+   MOBILE FAST COUNTS
+   question-manifest.json chứa số câu đã đếm sẵn.
+   Trang chủ không cần tải 90 file câu hỏi chỉ để đếm.
+========================================================= */
+const QUESTION_MANIFEST_URL = "question-manifest.json";
+const QUESTION_MANIFEST_CACHE_KEY = "medquiz_question_manifest_v1";
+
+let questionManifest = null;
+let questionManifestPromise = null;
+
+function normalizeQuestionManifest(data) {
+    if (!data || typeof data !== "object") return null;
+
+    return {
+        version: data.version ?? 1,
+        generatedAt: data.generatedAt || "",
+        totalQuestions:
+            Number.isFinite(Number(data.totalQuestions))
+                ? Number(data.totalQuestions)
+                : null,
+        subjects: data.subjects || {}
+    };
+}
+
+function readQuestionManifestCache() {
+    if (questionManifest) return questionManifest;
+
+    try {
+        const cached =
+            localStorage.getItem(
+                QUESTION_MANIFEST_CACHE_KEY
+            );
+
+        if (cached) {
+            questionManifest =
+                normalizeQuestionManifest(
+                    JSON.parse(cached)
+                );
+        }
+    } catch (error) {}
+
+    return questionManifest;
+}
+
+function saveQuestionManifestCache() {
+    if (!questionManifest) return;
+
+    try {
+        localStorage.setItem(
+            QUESTION_MANIFEST_CACHE_KEY,
+            JSON.stringify(questionManifest)
+        );
+    } catch (error) {}
+}
+
+async function loadQuestionManifest(force = false) {
+    if (!force && questionManifest) {
+        return questionManifest;
+    }
+
+    if (questionManifestPromise) {
+        return questionManifestPromise;
+    }
+
+    questionManifestPromise =
+        (async () => {
+            try {
+                const response =
+                    await fetch(
+                        `${QUESTION_MANIFEST_URL}?t=${Date.now()}`,
+                        { cache: "no-store" }
+                    );
+
+                if (!response.ok) {
+                    throw new Error(
+                        `HTTP ${response.status}`
+                    );
+                }
+
+                questionManifest =
+                    normalizeQuestionManifest(
+                        await response.json()
+                    );
+
+                saveQuestionManifestCache();
+            }
+            catch (error) {
+                readQuestionManifestCache();
+            }
+            finally {
+                questionManifestPromise = null;
+            }
+
+            return questionManifest;
+        })();
+
+    return questionManifestPromise;
+}
+
+function getManifestSubjectCount(subject) {
+    const value =
+        questionManifest?.subjects?.[subject]?.total;
+
+    return Number.isFinite(Number(value))
+        ? Number(value)
+        : null;
+}
+
+function getManifestAllQuestionTotal() {
+    const value =
+        questionManifest?.totalQuestions;
+
+    return Number.isFinite(Number(value))
+        ? Number(value)
+        : null;
+}
+
+
+
 const READ_PAGE_SIZE = 50;
 
 let selectedQuestionCount = 15;
@@ -203,6 +323,14 @@ document.addEventListener(
 
 async function init() {
 
+    /*
+       Hiện số câu từ cache ngay khi có.
+       File manifest mới sẽ được kiểm tra ở nền.
+    */
+    readQuestionManifestCache();
+
+
+
     ensureQuestionSetUI();
 
     setupHistoryNavigation();
@@ -244,6 +372,10 @@ async function init() {
     updateQuestionLegend();
 
     setupKawaiiExperience();
+
+    setupMobilePerformance();
+
+    registerMedQuizServiceWorker();
 
 }
 
@@ -2284,6 +2416,34 @@ async function loadSubjectQuestionSets(
                 ] =
                     true;
 
+                /*
+                   Sau khi tải thật một môn, lưu tổng mới vào cache manifest.
+                */
+                const runtimeTotal =
+                    getAllSubjectQuestions(
+                        subject
+                    ).length;
+
+                if (!questionManifest) {
+                    questionManifest = {
+                        version: "runtime",
+                        generatedAt: "",
+                        totalQuestions: null,
+                        subjects: {}
+                    };
+                }
+
+                questionManifest.subjects =
+                    questionManifest.subjects || {};
+
+                questionManifest.subjects[subject] =
+                    questionManifest.subjects[subject] || {};
+
+                questionManifest.subjects[subject].total =
+                    runtimeTotal;
+
+                saveQuestionManifestCache();
+
             }
         )();
 
@@ -2306,82 +2466,17 @@ async function loadSubjectQuestionSets(
 async function preloadAllSubjectQuestionSets() {
 
     /*
-        Nếu đã tải xong trước đó thì chỉ cập nhật lại
-        số câu và không tải 90 file lần thứ hai.
+       TỐI ƯU MOBILE:
+       Trước đây hàm này tải 10 bộ của TẤT CẢ môn.
+       Bây giờ chỉ tải question-manifest.json để lấy số câu.
+       Câu hỏi thật chỉ tải khi người dùng chọn đúng môn.
     */
+    await loadQuestionManifest();
 
-    if (
-        allSubjectSetsPreloaded
-    ) {
-
-        updateSubjectCounts();
-
-        return;
-
-    }
-
-
-    /*
-        Nếu một lần preload đang chạy,
-        dùng lại Promise hiện tại để tránh tải trùng file.
-    */
-
-    if (
-        allSubjectSetsPreloadPromise
-    ) {
-
-        await allSubjectSetsPreloadPromise;
-
-        updateSubjectCounts();
-
-        return;
-
-    }
-
-
-    const subjects =
-        Object.keys(
-            SUBJECT_SET_CONFIG
-        );
-
-
-    allSubjectSetsPreloadPromise =
-        Promise.all(
-            subjects.map(
-                subject =>
-                    loadSubjectQuestionSets(
-                        subject
-                    )
-            )
-        );
-
-
-    try {
-
-        await allSubjectSetsPreloadPromise;
-
-        allSubjectSetsPreloaded =
-            true;
-
-
-        /*
-            Sau khi tất cả môn đã tải xong,
-            cập nhật số câu trên 9 ô môn học.
-        */
-
-        updateSubjectCounts();
-
-    }
-
-    finally {
-
-        allSubjectSetsPreloadPromise =
-            null;
-
-    }
+    updateSubjectCounts();
+    updateHomeQuestionTotal();
 
 }
-
 
 /* =========================================================
    SUBJECT
@@ -3118,33 +3213,15 @@ function updateSubjectCounts() {
                 const subject =
                     element.dataset.subjectCount;
 
-
-                const hasLoadedSets =
-
-                    subjectSetLoadState[
-                        subject
-                    ] === true;
-
-
                 const count =
-
-                    isSetManagedSubject(
+                    getCurrentSubjectQuestionCount(
                         subject
-                    )
-                    &&
-                    hasLoadedSets
-
-                        ? getAllSubjectQuestions(
-                            subject
-                        ).length
-
-                        : getRawQuestions(
-                            subject
-                        ).length;
-
+                    );
 
                 element.textContent =
-                    `${count} câu`;
+                    count === null
+                        ? "..."
+                        : `${count.toLocaleString("vi-VN")} câu`;
 
             }
         );
@@ -3161,148 +3238,162 @@ function updateSubjectCounts() {
 
 function getCurrentSubjectQuestionCount(subject) {
 
-    const setMap =
-        window.medQuizQuestionSets &&
-        window.medQuizQuestionSets[subject];
+    const hasLoadedSets =
+        subjectSetLoadState[subject] === true;
 
     if (
-        setMap &&
-        typeof setMap === "object"
+        isSetManagedSubject(subject)
+        &&
+        hasLoadedSets
     ) {
-        const setArrays =
-            Object.values(setMap)
-                .filter(Array.isArray);
-
-        if (setArrays.length) {
-            return setArrays.reduce(
-                (sum, questions) => sum + questions.length,
-                0
-            );
-        }
+        return getAllSubjectQuestions(
+            subject
+        ).length;
     }
 
-    const direct =
-        window.medQuizQuestions &&
-        window.medQuizQuestions[subject];
+    const manifestCount =
+        getManifestSubjectCount(subject);
 
-    return Array.isArray(direct)
-        ? direct.length
-        : 0;
+    if (manifestCount !== null) {
+        return manifestCount;
+    }
+
+    const rawCount =
+        getRawQuestions(subject).length;
+
+    return rawCount > 0
+        ? rawCount
+        : null;
+
 }
 
 
 function getCurrentAllQuestionTotal() {
 
-    const subjects =
-        Object.keys(SUBJECT_SET_CONFIG);
+    const manifestTotal =
+        getManifestAllQuestionTotal();
 
-    return subjects.reduce(
-        (sum, subject) =>
-            sum + getCurrentSubjectQuestionCount(subject),
-        0
-    );
+    if (manifestTotal !== null) {
+        return manifestTotal;
+    }
+
+    const counts =
+        Object.keys(SUBJECT_SET_CONFIG)
+            .map(
+                subject =>
+                    getCurrentSubjectQuestionCount(
+                        subject
+                    )
+            );
+
+    if (
+        counts.length
+        &&
+        counts.every(
+            count =>
+                Number.isFinite(
+                    Number(count)
+                )
+        )
+    ) {
+        return counts.reduce(
+            (total, count) =>
+                total + Number(count),
+            0
+        );
+    }
+
+    return null;
+
 }
 
 
-function formatHomeTotalV2(value) {
-    const number = Number(value) || 0;
-    return number.toLocaleString("vi-VN");
-}
-
-
-function animateHomeTotalV2(element) {
+function pulseHomeCount(element) {
 
     if (!element) {
         return;
     }
 
-    element.classList.remove("home-total-v2-updated");
+    element.classList.remove("count-pop");
     void element.offsetWidth;
-    element.classList.add("home-total-v2-updated");
-}
+    element.classList.add("count-pop");
 
-
-function setHomeTotalV2(element, value) {
-
-    if (!element) {
-        return;
-    }
-
-    element.textContent = formatHomeTotalV2(value);
-    element.classList.remove("is-loading");
-    animateHomeTotalV2(element);
 }
 
 
 function updateHomeQuestionTotal() {
 
-    const element = $("homeQuestionTotal");
+    const element =
+        $("homeQuestionTotal");
 
     if (!element) {
         return;
     }
 
-    setHomeTotalV2(
-        element,
-        getCurrentAllQuestionTotal()
+    const total =
+        getCurrentAllQuestionTotal();
+
+    element.textContent =
+        total === null
+            ? "..."
+            : `${total.toLocaleString("vi-VN")}`;
+
+    element.classList.remove(
+        "is-loading"
     );
+
+    if (total !== null) {
+        pulseHomeCount(element);
+    }
+
 }
 
 
 async function refreshHomeQuestionTotal() {
 
-    const element = $("homeQuestionTotal");
+    const element =
+        $("homeQuestionTotal");
 
     if (!element) {
         return;
     }
 
-    element.textContent = "…";
-    element.classList.add("is-loading");
+    element.textContent =
+        "...";
+
+    element.classList.add(
+        "is-loading"
+    );
 
     try {
-        /*
-           Tải đủ 10 bộ của từng môn trước khi cộng.
-           Mỗi bộ chỉ được cộng đúng một lần từ
-           window.medQuizQuestionSets[subject].
-        */
+
         await preloadAllSubjectQuestionSets();
+
+        updateHomeQuestionTotal();
+
     }
+
     catch (error) {
-        console.warn(
-            "Không tải đủ toàn bộ bộ câu hỏi, dùng dữ liệu đã tải được:",
+
+        console.error(
+            "Không thể tải đầy đủ tổng số câu hỏi:",
             error
         );
+
+        const total =
+            getCurrentAllQuestionTotal();
+
+        element.textContent =
+            total !== null && total > 0
+                ? `${total.toLocaleString("vi-VN")}`
+                : "...";
+
+        element.classList.remove(
+            "is-loading"
+        );
+
     }
 
-    setHomeTotalV2(
-        element,
-        getCurrentAllQuestionTotal()
-    );
-}
-
-
-function getHomeResourceTotalV2() {
-
-    const categories = [
-        "Sách Tham Khảo",
-        "Slide Tham Khảo"
-    ];
-
-    return categories.reduce(
-        (sum, category) => {
-            const items =
-                window.medQuizResources &&
-                window.medQuizResources[category];
-
-            return sum + (
-                Array.isArray(items)
-                    ? items.length
-                    : 0
-            );
-        },
-        0
-    );
 }
 
 
@@ -3310,29 +3401,38 @@ function updateHomeResourceTotal() {
 
     const elements =
         Array.from(
-            document.querySelectorAll(
-                "[data-home-resource-total]"
-            )
+            document.querySelectorAll("[data-home-resource-total]")
         );
 
-    const fallback = $("homeResourceTotal");
-
-    if (
-        fallback &&
-        !elements.includes(fallback)
-    ) {
-        elements.push(fallback);
+    if (!elements.length) {
+        const fallback = $("homeResourceTotal");
+        if (fallback) {
+            elements.push(fallback);
+        }
     }
 
     if (!elements.length) {
         return;
     }
 
-    const total = getHomeResourceTotalV2();
+    const books =
+        getResources("Sách Tham Khảo").length;
+
+    const slides =
+        getResources("Slide Tham Khảo").length;
+
+    const total =
+        books + slides;
 
     elements.forEach(
-        element => setHomeTotalV2(element, total)
+        element => {
+            element.textContent =
+                `${total.toLocaleString("vi-VN")}`;
+            element.classList.remove("is-loading");
+            pulseHomeCount(element);
+        }
     );
+
 }
 
 
@@ -9650,6 +9750,70 @@ function formatDuration(
 }
 
 /* =========================================================
+   MOBILE PERFORMANCE
+========================================================= */
+function setupMobilePerformance() {
+
+    const isTouchMobile =
+        window.matchMedia(
+            "(max-width: 700px), (pointer: coarse)"
+        ).matches;
+
+    if (!isTouchMobile) return;
+
+    document.documentElement.classList.add(
+        "mobile-optimized"
+    );
+
+    document
+        .querySelectorAll("img")
+        .forEach(img => {
+            img.decoding = "async";
+
+            if (
+                !img.closest(
+                    ".home-hero-v2-fixed"
+                )
+            ) {
+                img.loading = "lazy";
+            }
+        });
+
+}
+
+
+function registerMedQuizServiceWorker() {
+
+    if (
+        !("serviceWorker" in navigator)
+        ||
+        location.protocol === "file:"
+    ) {
+        return;
+    }
+
+    window.addEventListener(
+        "load",
+        () => {
+            navigator.serviceWorker
+                .register(
+                    "./service-worker.js"
+                )
+                .catch(
+                    error =>
+                        console.warn(
+                            "Service Worker chưa hoạt động:",
+                            error
+                        )
+                );
+        },
+        { once: true }
+    );
+
+}
+
+
+/* =========================================================
    KAWAII EXPERIENCE 2026 — purely visual/interaction layer
    Does not change quiz data, scoring, timers or storage.
 ========================================================= */
@@ -9721,7 +9885,14 @@ function setupKawaiiExperience() {
         if (e.target.closest('button,.subject-btn,.question-set-pro-card,.portal-card,.mode-card,.answer')) sparkle(e.clientX, e.clientY);
     }, {passive:true});
 
-    const tiltTargets = document.querySelectorAll('.subject-btn,.portal-card,.mode-card,.config-group');
+    const allowPointerTilt =
+        window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+
+    const tiltTargets =
+        allowPointerTilt
+            ? document.querySelectorAll('.subject-btn,.portal-card,.mode-card,.config-group')
+            : [];
+
     tiltTargets.forEach(el => {
         el.addEventListener('pointermove', e => {
             if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
@@ -9864,115 +10035,4 @@ document.addEventListener('DOMContentLoaded', () => setTimeout(setupHomeV2Action
         }
     });
     document.addEventListener('DOMContentLoaded', syncEnglishOnlyModes);
-})();
-
-
-/* =========================================================
-   PC / MOBILE MODE — 2026-09-11
-   - Does NOT save the user's choice.
-   - Home entry/reload: show chooser.
-   - Reload on inner pages: do not show chooser.
-   - Entry from common search engines: show chooser.
-========================================================= */
-(function initPcMobileMode(){
-    const root = document.documentElement;
-    const metaViewport = document.querySelector('meta[name="viewport"]');
-
-    function applyDeviceMode(mode){
-        const next = mode === 'mobile' ? 'mobile' : 'pc';
-        root.dataset.device = next;
-
-        if (metaViewport) {
-            metaViewport.setAttribute(
-                'content',
-                next === 'pc'
-                    ? 'width=1200'
-                    : 'width=device-width, initial-scale=1.0'
-            );
-        }
-
-        const switchBtn = document.getElementById('deviceSwitch');
-        if (switchBtn) {
-            if (next === 'mobile') {
-                switchBtn.textContent = '🖥️ Máy tính';
-                switchBtn.setAttribute('aria-label', 'Chuyển sang giao diện máy tính');
-            } else {
-                switchBtn.textContent = '📱 Điện thoại';
-                switchBtn.setAttribute('aria-label', 'Chuyển sang giao diện điện thoại');
-            }
-        }
-
-        // Recalculate viewport-dependent layout without touching app state.
-        requestAnimationFrame(() => window.dispatchEvent(new Event('resize')));
-    }
-
-    window.applyDeviceMode = applyDeviceMode;
-
-    function cameFromSearch(referrer){
-        if (!referrer) return false;
-        try {
-            const u = new URL(referrer);
-            const h = u.hostname.toLowerCase();
-            return (
-                h.includes('google.') ||
-                h.includes('bing.') ||
-                h.includes('search.yahoo.') ||
-                h.includes('duckduckgo.') ||
-                h.includes('coccoc.') ||
-                h.includes('baidu.') ||
-                h.includes('yandex.')
-            );
-        } catch (_) {
-            return false;
-        }
-    }
-
-    function entryIsHome(hash){
-        const h = (hash || '').trim().toLowerCase();
-        return !h || h === '#' || h === '#home' || h === '#landingpage' || h === '#/home';
-    }
-
-    function setup(){
-        const dialog = document.getElementById('deviceDialog');
-        const switchBtn = document.getElementById('deviceSwitch');
-        if (!dialog || !switchBtn) return;
-
-        // Respect only the current screen for the initial rendering; never persist it.
-        applyDeviceMode(root.dataset.device === 'mobile' ? 'mobile' : 'pc');
-
-        dialog.querySelectorAll('[data-choose-device]').forEach((btn) => {
-            btn.addEventListener('click', () => {
-                applyDeviceMode(btn.dataset.chooseDevice);
-                if (dialog.open) dialog.close();
-            });
-        });
-
-        // One-tap switch between versions after entering the site.
-        switchBtn.addEventListener('click', () => {
-            applyDeviceMode(root.dataset.device === 'mobile' ? 'pc' : 'mobile');
-        });
-
-        // Do not allow ESC to silently skip the required choice on an entry prompt.
-        dialog.addEventListener('cancel', (event) => {
-            if (dialog.dataset.entryPrompt === '1') event.preventDefault();
-        });
-
-        const entry = window.__deviceEntry || { hash: location.hash, referrer: document.referrer };
-        const shouldPrompt = entryIsHome(entry.hash) || cameFromSearch(entry.referrer);
-
-        if (shouldPrompt) {
-            dialog.dataset.entryPrompt = '1';
-            if (typeof dialog.showModal === 'function') {
-                dialog.showModal();
-            } else {
-                dialog.setAttribute('open', '');
-            }
-        }
-    }
-
-    if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', setup, { once: true });
-    } else {
-        setup();
-    }
 })();

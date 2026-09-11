@@ -11,6 +11,65 @@ window.medQuizQuestionSets = window.medQuizQuestionSets || {};
 
 
 /* =========================================================
+   LAZY DATA LOADER — split PC/mobile architecture
+   Heavy learning-data files are loaded only when needed or
+   after the first screen has painted.
+========================================================= */
+const __lazyScriptPromises = new Map();
+function loadLazyScript(path) {
+    if (__lazyScriptPromises.has(path)) return __lazyScriptPromises.get(path);
+    const task = new Promise((resolve, reject) => {
+        const s = document.createElement("script");
+        s.src = path;
+        s.async = true;
+        s.onload = () => resolve(true);
+        s.onerror = () => reject(new Error(`Không tải được ${path}`));
+        document.head.appendChild(s);
+    });
+    __lazyScriptPromises.set(path, task);
+    return task;
+}
+
+let __resourceDataPromise = null;
+async function ensureResourceDataLoaded() {
+    if (!__resourceDataPromise) {
+        __resourceDataPromise = Promise.allSettled([
+            loadLazyScript("resources/sachthamkhao.js"),
+            loadLazyScript("resources/slidethamkhao.js")
+        ]).then(() => {
+            updateResourceCounts();
+            updateHomeResourceTotal();
+            return true;
+        });
+    }
+    return __resourceDataPromise;
+}
+
+let __englishFlashcardsPromise = null;
+async function ensureEnglishFlashcardsLoaded() {
+    const existing = window.medQuizFlashcards && window.medQuizFlashcards["Tiếng Anh"];
+    if (Array.isArray(existing) && existing.length) return true;
+    if (!__englishFlashcardsPromise) {
+        __englishFlashcardsPromise = loadLazyScript("flashcards/tienganh.js")
+            .catch((error) => { console.warn(error); return false; });
+    }
+    return __englishFlashcardsPromise;
+}
+
+function scheduleBackgroundDataWarmup() {
+    const warmup = () => {
+        ensureResourceDataLoaded().catch(() => {});
+        refreshHomeQuestionTotal().catch(() => {});
+    };
+    if ("requestIdleCallback" in window) {
+        requestIdleCallback(warmup, { timeout: 3500 });
+    } else {
+        setTimeout(warmup, 1800);
+    }
+}
+
+
+/* =========================================================
    CẤU HÌNH 10 BỘ CHO TẤT CẢ MÔN
 ========================================================= */
 
@@ -235,11 +294,8 @@ async function init() {
 
     updateSubjectCounts();
 
-    updateResourceCounts();
-
-    updateHomeResourceTotal();
-
-    refreshHomeQuestionTotal();
+    // Resource data is lazy-loaded; keep the home counter at … until it arrives.
+    scheduleBackgroundDataWarmup();
 
     updateQuestionLegend();
 
@@ -497,42 +553,12 @@ function setupPortal() {
     $("exercisePortalBtn")
         .addEventListener(
             "click",
-            async () => {
-
-                showLoading(
-                    "Đang tải ngân hàng câu hỏi",
-                    "Đang đếm số câu của tất cả môn học..."
-                );
-
-                try {
-
-                    /*
-                        Khi bấm BÀI TẬP:
-                        - tải luôn 10 bộ của tất cả môn
-                        - tính tổng số câu từng môn
-                        - chỉ sau đó mới mở trang Bài Tập
-
-                        Vì vậy người dùng sẽ thấy số câu
-                        ngay trên tất cả ô môn học,
-                        không cần bấm từng môn nữa.
-                    */
-
-                    await preloadAllSubjectQuestionSets();
-
-                    updateSubjectCounts();
-
-                    showPage(
-                        exerciseHub
-                    );
-
-                }
-
-                finally {
-
-                    hideLoading();
-
-                }
-
+            () => {
+                // Open immediately. Subject banks continue warming in background.
+                showPage(exerciseHub);
+                preloadAllSubjectQuestionSets()
+                    .then(updateSubjectCounts)
+                    .catch(error => console.warn("Tải nền ngân hàng câu hỏi:", error));
             }
         );
 
@@ -540,14 +566,10 @@ function setupPortal() {
     $("resourcePortalBtn")
         .addEventListener(
             "click",
-            () => {
-
+            async () => {
+                await ensureResourceDataLoaded();
                 updateResourceCounts();
-
-                showPage(
-                    resourceHub
-                );
-
+                showPage(resourceHub);
             }
         );
 
@@ -7509,7 +7531,9 @@ function normalizeFlashcard(
 }
 
 
-function openFlashcards() {
+async function openFlashcards() {
+
+    await ensureEnglishFlashcardsLoaded();
 
     const raw =
         window.medQuizFlashcards[
@@ -8096,7 +8120,9 @@ function getNormalizedEnglishFlashcards() {
 }
 
 
-function openWordPractice() {
+async function openWordPractice() {
+
+    await ensureEnglishFlashcardsLoaded();
 
     wordPracticeCards =
         getNormalizedEnglishFlashcards();
@@ -9675,16 +9701,15 @@ function setupKawaiiExperience() {
                 return;
             }
             if (target === 'exercise' || target === 'study') {
-                showLoading('Đang mở khu học tập', 'Chuẩn bị các bộ câu hỏi...');
-                try {
-                    await preloadAllSubjectQuestionSets();
-                    updateSubjectCounts();
-                    showPage(exerciseHub);
-                    setActive('exercise');
-                } finally { hideLoading(); }
+                showPage(exerciseHub);
+                setActive('exercise');
+                preloadAllSubjectQuestionSets()
+                    .then(updateSubjectCounts)
+                    .catch(error => console.warn('Tải nền ngân hàng câu hỏi:', error));
                 return;
             }
             if (target === 'resource') {
+                await ensureResourceDataLoaded();
                 updateResourceCounts();
                 showPage(resourceHub);
                 setActive('resource');
@@ -9766,9 +9791,9 @@ function setupKawaiiExperience() {
             const subject = tile.dataset.homeSubject;
             showLoading('Đang mở môn học', `Chuẩn bị ${subject}...`);
             try {
-                await preloadAllSubjectQuestionSets();
-                updateSubjectCounts();
                 showPage(exerciseHub);
+                await loadSubjectQuestionSets(subject);
+                updateSubjectCountFor(subject);
                 setActive('exercise');
                 const subjectButton = document.querySelector(`.subject-btn[data-subject="${subject}"]`);
                 if (subjectButton) {
@@ -9832,9 +9857,9 @@ function setupHomeV2Actions(){
             const subject = btn.dataset.homeSubject;
             showLoading('Đang mở môn học', `Chuẩn bị ${subject}...`);
             try{
-                await preloadAllSubjectQuestionSets();
-                updateSubjectCounts();
                 showPage(exerciseHub);
+                await loadSubjectQuestionSets(subject);
+                updateSubjectCountFor(subject);
                 const target = document.querySelector(`.subject-btn[data-subject="${subject}"]`);
                 if(target) await selectSubject(target);
             } finally { hideLoading(); }
@@ -9864,115 +9889,4 @@ document.addEventListener('DOMContentLoaded', () => setTimeout(setupHomeV2Action
         }
     });
     document.addEventListener('DOMContentLoaded', syncEnglishOnlyModes);
-})();
-
-
-/* =========================================================
-   PC / MOBILE MODE — 2026-09-11
-   - Does NOT save the user's choice.
-   - Home entry/reload: show chooser.
-   - Reload on inner pages: do not show chooser.
-   - Entry from common search engines: show chooser.
-========================================================= */
-(function initPcMobileMode(){
-    const root = document.documentElement;
-    const metaViewport = document.querySelector('meta[name="viewport"]');
-
-    function applyDeviceMode(mode){
-        const next = mode === 'mobile' ? 'mobile' : 'pc';
-        root.dataset.device = next;
-
-        if (metaViewport) {
-            metaViewport.setAttribute(
-                'content',
-                next === 'pc'
-                    ? 'width=1200'
-                    : 'width=device-width, initial-scale=1.0'
-            );
-        }
-
-        const switchBtn = document.getElementById('deviceSwitch');
-        if (switchBtn) {
-            if (next === 'mobile') {
-                switchBtn.textContent = '🖥️ Máy tính';
-                switchBtn.setAttribute('aria-label', 'Chuyển sang giao diện máy tính');
-            } else {
-                switchBtn.textContent = '📱 Điện thoại';
-                switchBtn.setAttribute('aria-label', 'Chuyển sang giao diện điện thoại');
-            }
-        }
-
-        // Recalculate viewport-dependent layout without touching app state.
-        requestAnimationFrame(() => window.dispatchEvent(new Event('resize')));
-    }
-
-    window.applyDeviceMode = applyDeviceMode;
-
-    function cameFromSearch(referrer){
-        if (!referrer) return false;
-        try {
-            const u = new URL(referrer);
-            const h = u.hostname.toLowerCase();
-            return (
-                h.includes('google.') ||
-                h.includes('bing.') ||
-                h.includes('search.yahoo.') ||
-                h.includes('duckduckgo.') ||
-                h.includes('coccoc.') ||
-                h.includes('baidu.') ||
-                h.includes('yandex.')
-            );
-        } catch (_) {
-            return false;
-        }
-    }
-
-    function entryIsHome(hash){
-        const h = (hash || '').trim().toLowerCase();
-        return !h || h === '#' || h === '#home' || h === '#landingpage' || h === '#/home';
-    }
-
-    function setup(){
-        const dialog = document.getElementById('deviceDialog');
-        const switchBtn = document.getElementById('deviceSwitch');
-        if (!dialog || !switchBtn) return;
-
-        // Respect only the current screen for the initial rendering; never persist it.
-        applyDeviceMode(root.dataset.device === 'mobile' ? 'mobile' : 'pc');
-
-        dialog.querySelectorAll('[data-choose-device]').forEach((btn) => {
-            btn.addEventListener('click', () => {
-                applyDeviceMode(btn.dataset.chooseDevice);
-                if (dialog.open) dialog.close();
-            });
-        });
-
-        // One-tap switch between versions after entering the site.
-        switchBtn.addEventListener('click', () => {
-            applyDeviceMode(root.dataset.device === 'mobile' ? 'pc' : 'mobile');
-        });
-
-        // Do not allow ESC to silently skip the required choice on an entry prompt.
-        dialog.addEventListener('cancel', (event) => {
-            if (dialog.dataset.entryPrompt === '1') event.preventDefault();
-        });
-
-        const entry = window.__deviceEntry || { hash: location.hash, referrer: document.referrer };
-        const shouldPrompt = entryIsHome(entry.hash) || cameFromSearch(entry.referrer);
-
-        if (shouldPrompt) {
-            dialog.dataset.entryPrompt = '1';
-            if (typeof dialog.showModal === 'function') {
-                dialog.showModal();
-            } else {
-                dialog.setAttribute('open', '');
-            }
-        }
-    }
-
-    if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', setup, { once: true });
-    } else {
-        setup();
-    }
 })();

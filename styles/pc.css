@@ -8582,65 +8582,7 @@ input:focus-visible {
    TABLET
 ========================================================= */
 
-@media (max-width: 1050px) {
 
-    .global-sticker {
-        opacity: .22;
-    }
-
-
-    .subjects {
-
-        grid-template-columns:
-            repeat(3,1fr);
-    }
-
-
-    .mode-grid.english-mode-grid {
-
-        grid-template-columns:
-            repeat(2,1fr);
-    }
-
-
-    .flashcard-mode {
-
-        grid-column:
-            1/-1;
-    }
-
-
-    .quiz-layout {
-
-        grid-template-columns:
-            1fr;
-    }
-
-
-    .quiz-sidebar {
-
-        position: static;
-
-        order: -1;
-    }
-
-
-    .question-grid {
-
-        max-height: none;
-
-        grid-template-columns:
-            repeat(10,1fr);
-    }
-
-
-    .book-row {
-
-        grid-template-columns:
-            155px 1fr 180px;
-    }
-
-}
 
 
 
@@ -8648,421 +8590,7 @@ input:focus-visible {
    MOBILE
 ========================================================= */
 
-@media (max-width: 760px) {
 
-    .global-stickers {
-        display: none;
-    }
-
-
-    .container {
-
-        padding:
-            8px 13px 55px;
-    }
-
-
-    .header-inner {
-
-        min-height: 64px;
-
-        padding:
-            8px 13px;
-    }
-
-
-    .brand-logo {
-
-        width: 42px;
-        height: 42px;
-    }
-
-
-    .brand-name {
-        font-size: 19px;
-    }
-
-
-    /*
-       HERO mobile cũng thu gọn.
-    */
-
-    .hero-medical {
-
-        min-height: 205px;
-
-        padding:
-            13px 28px 8px;
-    }
-
-
-    .hero-title-line {
-
-        line-height: 1.16;
-
-        padding-bottom: .12em;
-
-        font-size:
-            clamp(37px,12vw,54px);
-    }
-
-
-    .hero-sticker {
-
-        width: 41px;
-        height: 41px;
-
-        border-radius: 14px;
-
-        font-size: 20px;
-    }
-
-
-    .hs1 {
-
-        left: 4%;
-        top: 8%;
-    }
-
-
-    .hs2 {
-
-        right: 4%;
-        top: 8%;
-    }
-
-
-    .hs3 {
-
-        left: 1%;
-        top: 55%;
-    }
-
-
-    .hs4 {
-
-        right: 1%;
-        top: 56%;
-    }
-
-
-    .hs5,
-    .hs6 {
-
-        display: none;
-    }
-
-
-    .portal-grid,
-    .resource-category-grid,
-    .test-config,
-    .mode-grid,
-    .mode-grid.english-mode-grid {
-
-        grid-template-columns:
-            1fr;
-    }
-
-
-    .flashcard-mode {
-
-        grid-column:
-            auto;
-    }
-
-
-    .portal-card {
-
-        min-height: 245px;
-
-        padding: 23px;
-    }
-
-
-    .portal-icon {
-
-        width: 70px;
-        height: 70px;
-
-        font-size: 33px;
-    }
-
-
-    .subjects {
-
-        grid-template-columns:
-            repeat(2,1fr);
-    }
-
-
-    .library-banner {
-
-        grid-template-columns:
-            auto 1fr;
-    }
-
-
-    .drive-status {
-
-        grid-column:
-            1/-1;
-
-        justify-self:
-            start;
-    }
-
-
-    /* BOOK */
-
-    .book-row {
-
-        grid-template-columns:
-            130px 1fr;
-    }
-
-
-    .book-cover-wrapper {
-
-        min-height: 190px;
-
-        border-radius:
-            27px 0 0 0;
-    }
-
-
-    .book-row-main {
-
-        min-height: 190px;
-
-        padding:
-            22px 18px;
-    }
-
-
-    .book-actions {
-
-        grid-column:
-            1/-1;
-
-        padding: 14px;
-
-        display: grid;
-
-        grid-template-columns:
-            1fr 1fr;
-
-        border-left: 0;
-
-        border-top:
-            1px solid #eee4e8;
-
-        border-radius:
-            0 0 27px 27px;
-    }
-
-
-    .quiz-main {
-
-        padding: 18px;
-    }
-
-
-    .question-grid {
-
-        grid-template-columns:
-            repeat(5,1fr);
-    }
-
-
-    .quiz-navigation {
-
-        flex-direction:
-            column;
-    }
-
-
-    .quiz-nav-btn {
-
-        width: 100%;
-    }
-
-
-    /* FLASHCARD */
-
-    .flash-dashboard {
-
-        align-items:
-            flex-start;
-
-        flex-direction:
-            column;
-    }
-
-
-    .flash-stats {
-
-        width: 100%;
-
-        grid-template-columns:
-            repeat(3,1fr);
-    }
-
-
-    .flash-search-row {
-
-        grid-template-columns:
-            auto 1fr;
-    }
-
-
-    .flashcard-stage {
-
-        height: 350px;
-    }
-
-
-    .flashcard-face {
-
-        padding:
-            28px 20px;
-    }
-
-
-    .flashcard-actions {
-
-        grid-template-columns:
-            1fr;
-    }
-
-
-    /* WORD PRACTICE */
-
-    .word-practice-dashboard {
-
-        grid-template-columns:
-            1fr;
-    }
-
-
-    .word-direction-panel {
-
-        align-items:
-            flex-start;
-
-        flex-direction:
-            column;
-    }
-
-
-    .word-direction-buttons {
-
-        width: 100%;
-
-        display: grid;
-
-        grid-template-columns:
-            1fr;
-    }
-
-
-    .word-direction-btn {
-
-        width: 100%;
-    }
-
-
-    .word-practice-card {
-
-        padding:
-            23px 17px;
-
-        border-radius: 24px;
-    }
-
-
-    .word-action-grid {
-
-        grid-template-columns:
-            1fr;
-    }
-
-
-    .word-action-btn {
-
-        width: 100%;
-    }
-
-
-    /* VIEWER */
-
-    .resource-viewer-modal {
-
-        padding: 5px;
-    }
-
-
-    .resource-viewer-box {
-
-        width: 100%;
-        height: 97vh;
-
-        border-radius: 18px;
-    }
-
-
-    .viewer-header {
-
-        align-items:
-            flex-start;
-
-        flex-direction:
-            column;
-    }
-
-
-    .viewer-actions {
-
-        width: 100%;
-
-        display: grid;
-
-        grid-template-columns:
-            1fr 1fr;
-    }
-
-
-    .viewer-action {
-
-        width: 100%;
-    }
-
-
-    .viewer-title-group strong {
-
-        max-width:
-            calc(100vw - 100px);
-
-        white-space: normal;
-    }
-
-
-    .viewer-status-bar {
-
-        align-items:
-            flex-start;
-
-        flex-wrap: wrap;
-    }
-
-
-    .viewer-status-bar small {
-
-        width: 100%;
-
-        margin-left: 14px;
-    }
-
-}
 
 
 
@@ -9070,164 +8598,7 @@ input:focus-visible {
    SMALL MOBILE
 ========================================================= */
 
-@media (max-width: 500px) {
 
-    .private-text {
-        display: none;
-    }
-
-
-    .private-badge {
-
-        width: 35px;
-        height: 35px;
-
-        padding: 0;
-
-        justify-content: center;
-    }
-
-
-    .hero-medical {
-
-        min-height: 190px;
-    }
-
-
-    .hero-title-line {
-
-        font-size:
-            clamp(35px,12.5vw,50px);
-    }
-
-
-    .choice-row,
-    .time-choice-row {
-
-        grid-template-columns:
-            repeat(3,1fr);
-    }
-
-
-    .book-row {
-
-        display: block;
-    }
-
-
-    .book-cover-wrapper {
-
-        min-height: 170px;
-
-        border-radius:
-            27px 27px 0 0;
-    }
-
-
-    .book-row-main {
-
-        min-height: auto;
-
-        padding: 20px;
-    }
-
-
-    .book-actions {
-
-        grid-template-columns:
-            1fr;
-    }
-
-
-    .resource-search {
-
-        grid-template-columns:
-            auto 1fr auto;
-    }
-
-
-    .resource-result-count {
-
-        display: none;
-    }
-
-
-    .flashcard-stage {
-
-        height: 330px;
-    }
-
-
-    .flashcard-face h2 {
-
-        font-size:
-            clamp(25px,9vw,36px);
-    }
-
-
-    .flash-stats {
-
-        gap: 5px;
-    }
-
-
-    .flash-stats > div {
-
-        padding:
-            8px 4px;
-    }
-
-
-    .word-practice-header {
-
-        grid-template-columns:
-            auto 1fr auto;
-    }
-
-
-    .word-header-center {
-
-        justify-content:
-            center;
-    }
-
-
-    .word-header-center small {
-
-        display: none;
-    }
-
-
-    .word-practice-stats {
-
-        gap: 5px;
-    }
-
-
-    .word-practice-stats > div {
-
-        min-height: 82px;
-
-        padding:
-            9px 4px;
-    }
-
-
-    .word-question-area h2 {
-
-        font-size:
-            clamp(26px,10vw,38px);
-    }
-
-
-    #wordPracticeInput {
-
-        min-height: 55px;
-
-        font-size: 16px;
-    }
-
-}
 
 
 
@@ -9332,20 +8703,7 @@ input:focus-visible {
     50% { opacity: 1; }
 }
 
-@media (max-width: 640px) {
-    .portal-card {
-        min-height: 300px;
-        padding-bottom: 74px;
-    }
 
-    .portal-total {
-        left: 22px;
-        right: 22px;
-        bottom: 18px;
-        justify-content: space-between;
-        max-width: none;
-    }
-}
 
 
 /* =========================================================
@@ -10123,317 +9481,17 @@ input:focus-visible {
 
 /* DESKTOP TIGHTENING */
 
-@media (max-width: 1180px) {
-    .home-welcome-bar {
-        padding-left: 52px;
-        padding-right: 52px;
-    }
 
-    .home-portal-scene {
-        padding-left: 45px;
-        padding-right: 45px;
-    }
-
-    .home-portal-card.portal-card {
-        min-height: 405px;
-    }
-
-    .home-card-body {
-        min-height: 405px;
-        padding: 35px 26px 86px 30px;
-        grid-template-columns: 56% 44%;
-    }
-
-    .home-card-copy h2 {
-        font-size: clamp(41px, 4.8vw, 55px);
-    }
-
-    .brain-sticker { font-size: 104px; }
-    .brain-book { font-size: 61px; right: 26px; }
-    .resource-books { font-size: 108px; }
-    .resource-stethoscope { font-size: 68px; }
-
-    .home-card-doodle {
-        right: 20%;
-        font-size: 13px;
-    }
-
-    .home-portal-card .home-portal-total.portal-total {
-        right: 28px;
-        max-width: calc(100% - 225px);
-        font-size: 12px;
-        padding: 11px 16px;
-    }
-}
 
 
 /* TABLET */
 
-@media (max-width: 920px) {
-    .home-welcome-bar {
-        grid-template-columns: 1fr auto;
-        padding: 7px 36px 8px;
-    }
 
-    .home-welcome-art {
-        display: none;
-    }
-
-    .home-welcome-quote {
-        width: 260px;
-    }
-
-    .home-portal-grid {
-        grid-template-columns: 1fr;
-        gap: 24px;
-    }
-
-    .home-portal-card.portal-card {
-        min-height: 400px;
-    }
-
-    .home-card-body {
-        min-height: 400px;
-        grid-template-columns: 58% 42%;
-    }
-
-    .home-corner-books {
-        left: -36px;
-        bottom: 380px;
-        transform: scale(.82) rotate(-4deg);
-    }
-
-    .home-corner-microscope {
-        right: -22px;
-        bottom: -52px;
-        transform: scale(.85);
-    }
-
-    .scene-clipboard,
-    .scene-pill-2 {
-        right: -8px;
-    }
-
-    .scene-pill-1 {
-        left: auto;
-        right: 44%;
-        top: 565px;
-    }
-}
 
 
 /* MOBILE */
 
-@media (max-width: 640px) {
-    #landingPage {
-        padding-top: 4px;
-    }
 
-    .home-welcome-bar {
-        min-height: 100px;
-        padding: 7px 8px 12px;
-        display: block;
-        text-align: center;
-    }
-
-    .home-welcome-title {
-        justify-content: center;
-    }
-
-    .home-welcome-title strong {
-        font-size: 30px;
-    }
-
-    .home-welcome-copy p {
-        max-width: 360px;
-        margin: 8px auto 0;
-        font-size: 12px;
-    }
-
-    .home-welcome-quote {
-        width: 100%;
-        margin-top: 10px;
-        font-size: 12px;
-    }
-
-    .home-welcome-quote span {
-        display: none;
-    }
-
-    .home-welcome-quote strong {
-        font-size: 12px;
-    }
-
-    .home-portal-scene {
-        padding: 0 3px;
-    }
-
-    .home-portal-grid {
-        gap: 17px;
-    }
-
-    .home-portal-card.portal-card {
-        min-height: 430px;
-        border-radius: 30px;
-    }
-
-    .home-card-body {
-        min-height: 430px;
-        display: block;
-        padding: 28px 23px 104px;
-    }
-
-    .home-card-copy {
-        width: 72%;
-    }
-
-    .home-portal-icon.portal-icon {
-        width: 72px;
-        height: 72px;
-        margin-bottom: 20px;
-        border-radius: 22px;
-        font-size: 35px;
-    }
-
-    .home-card-copy .portal-kicker {
-        font-size: 10px;
-        letter-spacing: 1.7px;
-    }
-
-    .home-card-copy h2 {
-        margin-top: 7px;
-        font-size: 42px;
-    }
-
-    .home-card-copy p {
-        margin-top: 12px;
-        font-size: 12px;
-    }
-
-    .home-card-copy p br {
-        display: none;
-    }
-
-    .home-main-action.portal-enter {
-        min-width: 128px;
-        min-height: 47px;
-        margin-top: 19px;
-        padding: 10px 18px;
-        font-size: 13px;
-    }
-
-    .home-card-illustration {
-        position: absolute;
-        right: 5px;
-        top: 88px;
-        width: 42%;
-        height: 250px;
-    }
-
-    .brain-sticker {
-        right: -5px;
-        top: 88px;
-        font-size: 82px;
-    }
-
-    .brain-book {
-        right: 7px;
-        top: 139px;
-        font-size: 49px;
-    }
-
-    .exercise-checklist {
-        left: -10px;
-        top: 171px;
-        font-size: 12px;
-    }
-
-    .illustration-pill {
-        display: none;
-    }
-
-    .resource-books {
-        right: -4px;
-        top: 108px;
-        font-size: 84px;
-    }
-
-    .resource-stethoscope {
-        left: -6px;
-        top: 118px;
-        font-size: 53px;
-    }
-
-    .resource-paper {
-        right: 3px;
-        top: 59px;
-        padding: 9px 12px;
-        font-size: 14px;
-    }
-
-    .resource-heart {
-        font-size: 31px;
-    }
-
-    .home-card-doodle {
-        display: none;
-    }
-
-    .home-card-mini-stickers {
-        right: 15px;
-        top: 17px;
-        gap: 5px;
-    }
-
-    .home-card-mini-stickers span {
-        width: 30px;
-        height: 30px;
-        border-radius: 10px;
-        font-size: 14px;
-    }
-
-    .home-portal-card .home-portal-total.portal-total {
-        left: 20px;
-        right: 20px;
-        bottom: 24px;
-        width: auto;
-        max-width: none;
-        min-height: 54px;
-        padding: 10px 14px;
-        justify-content: center;
-        flex-wrap: wrap;
-        row-gap: 2px;
-        font-size: 11px;
-    }
-
-    .home-portal-card .home-portal-total strong {
-        font-size: 12px;
-    }
-
-    .home-total-icon {
-        font-size: 17px;
-    }
-
-    .home-scene-stickers {
-        display: none;
-    }
-
-    .home-corner-books,
-    .home-corner-microscope {
-        display: none;
-    }
-
-    .home-bottom-motto {
-        width: 100%;
-        margin-top: 16px;
-        font-size: 10px;
-        gap: 7px;
-    }
-
-    .home-bottom-motto > span {
-        width: 24px;
-    }
-}
 
 /* =========================================================
    HOME DESKTOP SHORT-SCREEN FIT — 2026-09-09
@@ -11013,8 +10071,8 @@ body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:-2;op
 @keyframes clickSpark{to{opacity:0;transform:translate(var(--dx),var(--dy)) scale(.4) rotate(90deg)}}
 @keyframes mascotBob{0%,100%{transform:translateY(0) rotate(-1.5deg)}50%{transform:translateY(-8px) rotate(1.5deg)}}@keyframes mascotWiggle{0%,100%{transform:rotate(-3deg)}50%{transform:rotate(4deg) translateY(-5px)}}
 
-@media(max-width:1100px){.kawaii-header-nav{display:none}.subjects{grid-template-columns:repeat(3,1fr)}.question-set-grid{grid-template-columns:repeat(3,1fr)!important}.quiz-layout{grid-template-columns:1fr!important}.quiz-sidebar{position:relative!important;top:auto!important}.question-set-header-mascot{display:none}.home-welcome-bar{padding:34px 170px}.kh-capy{width:165px}.kh-cat{width:125px}}
-@media(max-width:760px){.header-inner{padding:8px 14px}.brand-name{font-size:23px}.container{width:100%;padding:12px 12px 70px}.subjects{grid-template-columns:repeat(2,1fr);gap:10px}.subject-btn{min-height:138px}.question-set-grid{grid-template-columns:repeat(2,1fr)!important}.test-config,.mode-grid{grid-template-columns:1fr!important}.home-welcome-bar{min-height:190px;padding:26px 20px;text-align:center}.kawaii-home-hero{display:none}.home-welcome-title strong{font-size:34px!important}.home-portal-grid{grid-template-columns:1fr!important}.quiz-main{padding:18px 15px!important}.quiz-layout{gap:12px!important}.question-text{font-size:19px!important}.exercise-page-decor,.quiz-page-decor{display:none}}
+
+
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important;transition-duration:.01ms!important}}
 
 
@@ -11039,7 +10097,7 @@ body.closer-kawaii-theme::before{
 .page-section > *{position:relative; z-index:1}
 .page-section::after{
     content:""; position:absolute; inset:auto 0 0; height:150px; z-index:0; pointer-events:none;
-    background:url('assets/stickers/meadow-band.svg') center bottom/100% 100% no-repeat;
+    background:url("../assets/stickers/meadow-band.svg") center bottom/100% 100% no-repeat;
     opacity:.98;
 }
 #landingPage::after{height:155px}
@@ -11112,8 +10170,8 @@ body.closer-kawaii-theme::before{
 
 /* config page closeness */
 .selected-subject{padding:20px 24px!important; min-height:98px!important; overflow:visible!important}
-.selected-subject::before{content:""; position:absolute; right:82px; top:-16px; width:130px; height:78px; background:url('assets/stickers/cat-peek.svg') center/contain no-repeat; filter:drop-shadow(0 8px 16px rgba(107,81,95,.09)); animation:mascotBob 5.3s ease-in-out infinite}
-.selected-subject::after{content:""; position:absolute; right:22px; top:14px; width:34px; height:34px; border-radius:12px; background:#f4ecff url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><text x="12" y="17" text-anchor="middle" font-size="16">🩹</text></svg>') center/70% no-repeat}
+.selected-subject::before{content:""; position:absolute; right:82px; top:-16px; width:130px; height:78px; background:url("../assets/stickers/cat-peek.svg") center/contain no-repeat; filter:drop-shadow(0 8px 16px rgba(107,81,95,.09)); animation:mascotBob 5.3s ease-in-out infinite}
+.selected-subject::after{content:""; position:absolute; right:22px; top:14px; width:34px; height:34px; border-radius:12px; background:#f4ecff url("data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\"><text x=\"12\" y=\"17\" text-anchor=\"middle\" font-size=\"16\">🩹</text></svg>") center/70% no-repeat}
 .test-config{grid-template-columns:repeat(2,minmax(0,1fr))!important}
 .config-group{min-height:191px}
 .mode-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important}
@@ -11132,30 +10190,17 @@ body.closer-kawaii-theme::before{
 .answer{padding-right:18px!important}
 .answer:hover{transform:translateX(3px)!important}
 .sidebar-title-row{position:relative}
-.sidebar-title-row::after{content:""; position:absolute; right:0; top:-10px; width:94px; height:56px; background:url('assets/stickers/cat-peek.svg') center/contain no-repeat; opacity:.92}
+.sidebar-title-row::after{content:""; position:absolute; right:0; top:-10px; width:94px; height:56px; background:url("../assets/stickers/cat-peek.svg") center/contain no-repeat; opacity:.92}
 .question-grid button.current, .question-grid button.active{background:linear-gradient(135deg,#cf75f0,#9c72ef)!important; color:#fff!important}
 .submit-action{box-shadow:0 12px 22px rgba(93,78,130,.22)!important}
 
 /* read page */
 .read-page-header,.read-search,.read-card{position:relative; z-index:3}
-.read-page-header::after{content:""; position:absolute; right:18px; bottom:-8px; width:130px; height:74px; background:url('assets/stickers/cloud-smile.svg') center/contain no-repeat; opacity:.35}
+.read-page-header::after{content:""; position:absolute; right:18px; bottom:-8px; width:130px; height:74px; background:url("../assets/stickers/cloud-smile.svg") center/contain no-repeat; opacity:.35}
 
 /* responsive */
-@media (max-width: 1200px){
-    .home-welcome-bar{padding:36px 220px 28px 200px!important}
-    .kh-capy{width:178px}.kh-cat{width:140px; right:165px}.kh-books{left:285px; top:176px; width:142px}
-    .home-portal-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important}
-}
-@media (max-width: 880px){
-    .page-section{padding-bottom:96px}
-    .page-section::after{height:96px!important}
-    .kh-capy,.kh-cat,.kh-books,.kh-rainbow,.kawaii-paper-note,.exercise-page-decor,.quiz-page-decor{display:none!important}
-    .home-welcome-bar{padding:28px 20px 26px!important; min-height:180px!important}
-    .home-welcome-bar::before,.home-welcome-bar::after{display:none}
-    .home-welcome-copy p{font-size:18px!important}
-    .home-portal-grid{grid-template-columns:1fr!important}
-    .test-config,.mode-grid{grid-template-columns:1fr!important}
-}
+
+
 
 
 /* =========================================================
@@ -11226,12 +10271,8 @@ body.closer-kawaii-theme::before{
 /* richer meadow / side greenery */
 #landingPage::before,#exerciseHub::before,#quizPage::before{content:"";position:absolute;inset:auto -55px 90px -55px;height:115px;z-index:0;pointer-events:none;background:radial-gradient(ellipse at 3% 100%,rgba(135,192,101,.35),transparent 33%),radial-gradient(ellipse at 97% 100%,rgba(135,192,101,.35),transparent 33%)}
 
-@media(max-width:1180px){
-  .home-hero-panel{padding-left:210px;padding-right:210px}.home-hero-capy{width:190px}.home-hero-cat{width:145px;right:70px}.home-hero-dino{display:none}.home-hero-books{left:210px;width:150px}.home-quick-grid{grid-template-columns:repeat(2,1fr)}.home-subject-row{grid-template-columns:repeat(4,1fr)}
-}
-@media(max-width:820px){
-  .home-scene-v2,.home-ground-mascots{display:none}.home-hero-panel{height:auto;min-height:190px;padding:28px 20px}.home-hero-copy-v2 h1{font-size:42px}.home-hero-copy-v2 p{font-size:16px}.home-hero-quote-v2{display:none}.home-quick-grid{grid-template-columns:1fr;padding:0}.home-subject-row{grid-template-columns:repeat(2,1fr)}.home-subject-heading small{display:none}.mode-card{grid-template-columns:58px 1fr 42px!important}.home-quick-copy span{min-height:0}
-}
+
+
 
 
 /* =========================================================
@@ -11252,7 +10293,7 @@ body.closer-kawaii-theme::before{
     position:absolute!important;
     left:0!important; right:0!important; bottom:0!important;
     height:190px!important;
-    background:url('assets/stickers/meadow-band.svg') center bottom/cover 100% no-repeat!important;
+    background:url("../assets/stickers/meadow-band.svg") center bottom/cover 100% no-repeat!important;
     opacity:1!important;
     z-index:0!important;
     pointer-events:none!important;
@@ -11348,12 +10389,9 @@ body.closer-kawaii-theme::before{
 
 .home-bottom-garden{position:absolute;left:0;right:0;bottom:0;height:160px;z-index:1;pointer-events:none}.home-bottom-garden img{position:absolute;bottom:3px;filter:drop-shadow(0 10px 15px rgba(82,69,77,.1));animation:mascotBob 5.8s ease-in-out infinite}.garden-capy{width:118px;left:3%}.garden-fox{width:110px;left:15%;animation-delay:-1.2s!important}.garden-rainbow{width:176px;left:50%;transform:translateX(-50%);bottom:8px!important;animation:none!important}.garden-sleep{width:132px;right:15%;animation-delay:-2.4s!important}.garden-penguin{width:108px;right:3%;animation-delay:-3.1s!important}.garden-message{position:absolute;bottom:72px;padding:10px 13px;border-radius:20px 20px 20px 7px;background:rgba(255,255,255,.76);border:1px solid rgba(241,196,211,.5);font-family:"Segoe Print","Comic Sans MS",cursive;font-size:11px;line-height:1.35;font-weight:800;color:#bb6b9f;text-align:center}.msg-left{left:26%;transform:rotate(-3deg)}.msg-right{right:27%;transform:rotate(3deg)}
 
-@media(max-width:1180px){
-    .home-hero-v2-fixed{padding-left:210px;padding-right:210px}.hero-capy-fixed{width:190px}.hero-cat-fixed{width:145px}.hero-dino-fixed{display:none}.hero-books-fixed{left:185px;width:130px}.hero-copy-fixed h1{font-size:49px}.home-actions-v2{grid-template-columns:repeat(2,minmax(0,1fr))}.home-subjects-row{grid-template-columns:repeat(4,minmax(0,1fr))}
-}
-@media(max-width:820px){
-    #landingPage.home-v2-page{padding:10px 0 110px!important}.home-hero-v2-fixed{height:auto;min-height:190px;padding:28px 20px}.home-hero-mascots,.hero-quote-fixed,.hero-doodle-left,.hero-doodle-right,.home-bottom-garden{display:none}.hero-copy-fixed h1{font-size:42px}.hero-copy-fixed p{font-size:15px}.home-actions-v2{grid-template-columns:1fr}.home-action-card{min-height:118px}.home-subjects-row{grid-template-columns:repeat(2,minmax(0,1fr))}.home-subjects-head small{display:none}#landingPage.home-v2-page::after{height:120px!important}}
-@media(max-width:480px){.home-action-card{grid-template-columns:50px minmax(0,1fr) 34px;padding:13px;gap:10px}.home-action-icon{width:50px;height:50px}.home-action-text strong{font-size:15px}.home-action-text small{font-size:11px}.home-subjects-v2{padding:13px}.home-subjects-head strong{font-size:15px}}
+
+
+
 
 
 /* =========================================================
@@ -11373,7 +10411,7 @@ body.study-meadow-background {
             rgba(255, 250, 253, .22),
             rgba(248, 246, 255, .18)
         ),
-        url("assets/backgrounds/kawaii-meadow-bg.webp");
+        url("../assets/backgrounds/kawaii-meadow-bg.webp");
     background-repeat: no-repeat;
     background-position: center bottom;
     background-size: cover;
@@ -11404,765 +10442,10 @@ body.study-meadow-background .book-card {
    MOBILE / ĐIỆN THOẠI
    Các rule dưới đây KHÔNG tác động giao diện desktop.
 ========================================================= */
-@media (max-width: 768px) {
 
-    html,
-    body {
-        width: 100%;
-        max-width: 100%;
-        overflow-x: hidden;
-    }
-
-    body.study-meadow-background {
-        /* fixed background thường giật trên điện thoại */
-        background-attachment: scroll;
-        background-size: auto 100vh;
-        background-position: center bottom;
-        background-repeat: repeat-y;
-    }
-
-    /* HEADER */
-    .header {
-        position: sticky;
-        top: 0;
-        z-index: 1000;
-    }
-
-    .header-inner {
-        min-height: 58px !important;
-        padding: 7px 10px !important;
-        gap: 8px;
-    }
-
-    .brand {
-        min-width: 0;
-        gap: 8px !important;
-    }
-
-    .brand-logo {
-        width: 38px !important;
-        height: 38px !important;
-        border-radius: 12px !important;
-        flex: 0 0 38px;
-    }
-
-    .brand-cross {
-        font-size: 20px !important;
-    }
-
-    .brand-name {
-        font-size: 18px !important;
-        white-space: nowrap;
-    }
-
-    .kawaii-header-nav {
-        display: none !important;
-    }
-
-    .header-actions {
-        gap: 6px !important;
-        flex: 0 0 auto;
-    }
-
-    .private-badge {
-        padding: 7px 9px !important;
-        font-size: 9px !important;
-        max-width: 126px;
-        white-space: nowrap;
-    }
-
-    .fullscreen-btn {
-        width: 36px !important;
-        height: 36px !important;
-        border-radius: 11px !important;
-    }
-
-    /* KHUNG CHÍNH */
-    .container {
-        width: 100% !important;
-        max-width: 100% !important;
-        margin: 0 !important;
-        padding: 10px 10px 80px !important;
-    }
-
-    .page-section {
-        width: 100%;
-        min-width: 0;
-        padding-bottom: 88px !important;
-    }
-
-    /* Thanh điều hướng các trang */
-    .section-navigation {
-        min-height: 72px !important;
-        padding: 10px 12px !important;
-        border-radius: 20px !important;
-        gap: 8px !important;
-    }
-
-    .nav-back-btn {
-        padding: 8px 10px !important;
-        border-radius: 12px !important;
-        font-size: 11px !important;
-        white-space: nowrap;
-    }
-
-    .section-nav-center {
-        gap: 9px !important;
-        min-width: 0;
-    }
-
-    .section-navigation .nav-main-icon,
-    .nav-main-icon {
-        width: 42px !important;
-        height: 42px !important;
-        flex: 0 0 42px !important;
-        border-radius: 13px !important;
-        font-size: 21px !important;
-    }
-
-    .section-nav-center small {
-        font-size: 8px !important;
-        letter-spacing: .8px !important;
-    }
-
-    .section-nav-center strong,
-    .section-navigation .section-nav-center strong {
-        font-size: 17px !important;
-        line-height: 1.15 !important;
-    }
-
-    .nav-decoration {
-        display: none !important;
-    }
-
-    /* DANH SÁCH MÔN */
-    .subjects {
-        display: grid !important;
-        grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
-        gap: 10px !important;
-        margin-top: 10px !important;
-    }
-
-    .subject-btn {
-        width: 100%;
-        min-width: 0;
-        min-height: 132px !important;
-        padding: 14px 12px 13px !important;
-        border-radius: 20px !important;
-        text-align: left;
-    }
-
-    .subject-icon {
-        width: 48px !important;
-        height: 48px !important;
-        border-radius: 15px !important;
-        font-size: 24px !important;
-    }
-
-    .subject-name {
-        max-width: calc(100% - 12px);
-        margin-top: 9px !important;
-        font-size: 14px !important;
-        line-height: 1.2 !important;
-        overflow-wrap: anywhere;
-    }
-
-    .subject-count {
-        margin-top: 5px !important;
-        padding: 5px 8px !important;
-        font-size: 9px !important;
-    }
-
-    .subject-btn::after {
-        width: 30px !important;
-        height: 30px !important;
-        right: 10px !important;
-        bottom: 10px !important;
-        border-radius: 10px !important;
-        font-size: 14px !important;
-    }
-
-    .english-new-badge {
-        top: 8px !important;
-        right: 8px !important;
-        font-size: 7px !important;
-        padding: 4px 6px !important;
-    }
-
-    /* CHỌN 10 BỘ */
-    .question-set-area {
-        margin-top: 12px !important;
-    }
-
-    .question-set-heading {
-        min-height: auto !important;
-        padding: 14px !important;
-        padding-right: 14px !important;
-        border-radius: 20px !important;
-        display: block !important;
-    }
-
-    .question-set-heading-main {
-        gap: 10px !important;
-    }
-
-    .question-set-heading-icon {
-        width: 50px !important;
-        height: 50px !important;
-        flex: 0 0 50px !important;
-        border-radius: 15px !important;
-        font-size: 24px !important;
-    }
-
-    .question-set-kicker {
-        font-size: 8px !important;
-        letter-spacing: 1px !important;
-    }
-
-    .question-set-heading h2 {
-        font-size: 21px !important;
-        line-height: 1.15 !important;
-    }
-
-    .question-set-heading p {
-        margin-top: 4px !important;
-        font-size: 11px !important;
-        line-height: 1.35 !important;
-    }
-
-    .question-set-heading-right {
-        width: 100%;
-        margin-top: 12px;
-        display: flex !important;
-        justify-content: stretch !important;
-    }
-
-    .test-all-sets-btn {
-        width: 100% !important;
-        min-width: 0 !important;
-        min-height: 58px !important;
-        padding: 10px 12px !important;
-        border-radius: 16px !important;
-    }
-
-    .test-all-icon {
-        width: 40px !important;
-        height: 40px !important;
-        font-size: 21px !important;
-    }
-
-    .test-all-content strong {
-        font-size: 13px !important;
-    }
-
-    .test-all-content small {
-        font-size: 9px !important;
-    }
-
-    .question-set-heading-stickers,
-    .question-set-header-mascot {
-        display: none !important;
-    }
-
-    .question-set-grid {
-        display: grid !important;
-        grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
-        gap: 10px !important;
-        margin-top: 10px !important;
-    }
-
-    .question-set-card {
-        min-height: 154px !important;
-        padding: 12px 11px !important;
-        border-radius: 19px !important;
-    }
-
-    .kawaii-set-card-icon,
-    .set-card-icon {
-        width: 56px !important;
-        height: 56px !important;
-        border-radius: 16px !important;
-    }
-
-    .set-card-title {
-        max-width: calc(100% - 2px) !important;
-        margin-top: 8px !important;
-        font-size: 13px !important;
-        line-height: 1.25 !important;
-    }
-
-    .set-card-count {
-        margin-top: 5px !important;
-        padding: 4px 7px !important;
-        font-size: 9px !important;
-    }
-
-    .set-card-number {
-        top: 9px !important;
-        right: 10px !important;
-        font-size: 9px !important;
-    }
-
-    .set-card-arrow {
-        width: 29px !important;
-        height: 29px !important;
-        right: 9px !important;
-        bottom: 9px !important;
-        border-radius: 9px !important;
-        font-size: 13px !important;
-    }
-
-    /* TRANG CẤU HÌNH TEST */
-    .mode-area {
-        margin-top: 12px !important;
-    }
-
-    .selected-subject {
-        min-height: 72px !important;
-        padding: 13px 14px !important;
-        border-radius: 20px !important;
-        gap: 8px !important;
-    }
-
-    .selected-subject::before,
-    .selected-subject::after {
-        display: none !important;
-    }
-
-    .selected-subject-info {
-        min-width: 0;
-    }
-
-    .selected-subject-info small {
-        font-size: 8px !important;
-    }
-
-    .selected-subject h2 {
-        font-size: 17px !important;
-        line-height: 1.25 !important;
-        overflow-wrap: anywhere;
-    }
-
-    .selected-count {
-        flex: 0 0 auto;
-        padding: 7px 9px !important;
-        font-size: 9px !important;
-    }
-
-    .test-config {
-        display: grid !important;
-        grid-template-columns: 1fr !important;
-        gap: 10px !important;
-        margin-top: 10px !important;
-    }
-
-    .config-group {
-        min-height: 0 !important;
-        padding: 14px !important;
-        border-radius: 20px !important;
-    }
-
-    .config-header {
-        margin-bottom: 12px !important;
-        gap: 10px !important;
-    }
-
-    .config-icon {
-        width: 46px !important;
-        height: 46px !important;
-        flex: 0 0 46px;
-        border-radius: 14px !important;
-        font-size: 22px !important;
-    }
-
-    .config-header strong {
-        font-size: 16px !important;
-    }
-
-    .config-header small {
-        font-size: 10px !important;
-    }
-
-    .choice-row,
-    .time-choice-row {
-        display: grid !important;
-        grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
-        gap: 7px !important;
-    }
-
-    .choice-btn {
-        width: 100% !important;
-        min-width: 0 !important;
-        min-height: 62px !important;
-        padding: 7px 4px !important;
-        border-radius: 13px !important;
-    }
-
-    .choice-btn strong {
-        font-size: 18px !important;
-    }
-
-    .choice-btn span {
-        font-size: 9px !important;
-    }
-
-    .mode-grid {
-        display: grid !important;
-        grid-template-columns: 1fr !important;
-        gap: 10px !important;
-        margin-top: 10px !important;
-    }
-
-    .mode-card {
-        min-height: 108px !important;
-        padding: 14px !important;
-        border-radius: 20px !important;
-        gap: 11px !important;
-    }
-
-    .mode-icon {
-        width: 48px !important;
-        height: 48px !important;
-        flex: 0 0 48px;
-        border-radius: 15px !important;
-        font-size: 23px !important;
-    }
-
-    .mode-content > span {
-        font-size: 8px !important;
-    }
-
-    .mode-content h3 {
-        font-size: 17px !important;
-        line-height: 1.2 !important;
-    }
-
-    .mode-content p {
-        margin-top: 3px !important;
-        font-size: 10px !important;
-        line-height: 1.35 !important;
-    }
-
-    .mode-arrow {
-        width: 35px !important;
-        height: 35px !important;
-        flex: 0 0 35px;
-        border-radius: 12px !important;
-    }
-
-    .mode-sticker {
-        display: none !important;
-    }
-
-    /* TRANG LÀM BÀI */
-    #quizPage {
-        padding-bottom: 88px !important;
-    }
-
-    .quiz-header {
-        min-height: 52px !important;
-        padding: 7px 8px !important;
-        margin-bottom: 8px !important;
-        border-radius: 17px !important;
-    }
-
-    .quiz-header-btn {
-        min-height: 36px !important;
-        padding: 7px 9px !important;
-        font-size: 10px !important;
-        border-radius: 11px !important;
-    }
-
-    .quiz-header-subject {
-        min-width: 0;
-        gap: 5px !important;
-    }
-
-    .quiz-header-subject span {
-        display: none;
-    }
-
-    .quiz-header-subject strong {
-        max-width: 145px;
-        font-size: 11px !important;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        white-space: nowrap;
-    }
-
-    .quiz-layout {
-        display: flex !important;
-        flex-direction: column !important;
-        gap: 10px !important;
-    }
-
-    .quiz-main {
-        order: 1;
-        width: 100%;
-        min-width: 0;
-        padding: 15px 12px 14px !important;
-        border-radius: 21px !important;
-    }
-
-    .quiz-sidebar {
-        order: 2;
-        width: 100% !important;
-        max-width: none !important;
-        position: static !important;
-        top: auto !important;
-        padding: 14px 12px !important;
-        border-radius: 21px !important;
-    }
-
-    .quiz-top {
-        gap: 8px !important;
-        padding-bottom: 12px !important;
-    }
-
-    .quiz-live {
-        font-size: 8px !important;
-        letter-spacing: .8px !important;
-    }
-
-    .quiz-top h2 {
-        margin-top: 3px !important;
-        font-size: 18px !important;
-        line-height: 1.25 !important;
-    }
-
-    #quizInfoText {
-        margin-top: 2px !important;
-        font-size: 10px !important;
-    }
-
-    .timer {
-        flex: 0 0 auto;
-        padding: 9px 10px !important;
-        border-radius: 13px !important;
-        font-size: 11px !important;
-    }
-
-    .timer strong {
-        font-size: 14px !important;
-    }
-
-    .progress-box {
-        margin-top: 10px !important;
-    }
-
-    .progress-head,
-    .answered-status {
-        font-size: 10px !important;
-    }
-
-    .question-head {
-        margin-top: 15px !important;
-    }
-
-    .question-number {
-        padding: 6px 9px !important;
-        font-size: 9px !important;
-    }
-
-    .flag-btn {
-        padding: 7px 9px !important;
-        font-size: 9px !important;
-        border-radius: 11px !important;
-    }
-
-    .question-text {
-        margin-top: 9px !important;
-        padding: 12px 10px !important;
-        border-radius: 15px !important;
-        font-size: 17px !important;
-        line-height: 1.42 !important;
-        letter-spacing: 0 !important;
-        overflow-wrap: anywhere;
-    }
-
-    .answers {
-        margin-top: 9px !important;
-        gap: 8px !important;
-    }
-
-    .answer {
-        min-height: 56px !important;
-        padding: 10px 11px !important;
-        border-radius: 14px !important;
-        font-size: 13px !important;
-        line-height: 1.35 !important;
-        gap: 9px !important;
-        text-align: left;
-    }
-
-    .answer-letter {
-        width: 34px !important;
-        height: 34px !important;
-        flex: 0 0 34px !important;
-        border-radius: 10px !important;
-        font-size: 12px !important;
-    }
-
-    .answer-explanation {
-        padding: 13px !important;
-        border-radius: 16px !important;
-    }
-
-    .explanation-head strong {
-        font-size: 13px !important;
-    }
-
-    #explanationText,
-    .answer-detail-list {
-        font-size: 12px !important;
-        line-height: 1.5 !important;
-    }
-
-    .quiz-navigation {
-        margin-top: 14px !important;
-        gap: 8px !important;
-    }
-
-    .quiz-nav-btn {
-        min-height: 42px !important;
-        padding: 9px 11px !important;
-        border-radius: 12px !important;
-        font-size: 10px !important;
-    }
-
-    /* SIDEBAR mobile: danh sách câu đủ lớn để bấm */
-    .sidebar-title-row {
-        font-size: 13px !important;
-    }
-
-    .sidebar-title-row::after {
-        display: none !important;
-    }
-
-    .question-grid {
-        display: grid !important;
-        grid-template-columns: repeat(5, minmax(0, 1fr)) !important;
-        gap: 7px !important;
-        margin-top: 10px !important;
-    }
-
-    .question-grid button {
-        min-width: 0 !important;
-        min-height: 42px !important;
-        border-radius: 11px !important;
-        font-size: 11px !important;
-    }
-
-    .question-legend {
-        font-size: 9px !important;
-        gap: 7px 10px !important;
-    }
-
-    .sidebar-action {
-        width: 100%;
-        min-height: 43px !important;
-        margin-top: 8px !important;
-        border-radius: 12px !important;
-        font-size: 10px !important;
-    }
-
-    /* READ / TÀI LIỆU / FLASHCARD */
-    .read-page-header,
-    .read-search,
-    .resource-page-header,
-    .flashcard-header,
-    .word-practice-header {
-        border-radius: 18px !important;
-    }
-
-    .read-page-header {
-        padding: 12px !important;
-        gap: 8px !important;
-    }
-
-    .read-page-header h2 {
-        font-size: 17px !important;
-        line-height: 1.25 !important;
-    }
-
-    .read-search {
-        margin-top: 9px !important;
-        padding: 10px 11px !important;
-    }
-
-    .read-search input {
-        min-width: 0;
-        font-size: 12px !important;
-    }
-
-    .read-card {
-        padding: 13px !important;
-        border-radius: 17px !important;
-    }
-
-    .resource-grid,
-    .book-grid,
-    .flashcard-grid {
-        grid-template-columns: 1fr !important;
-    }
-
-    /* Không để sticker lớn che nội dung trên điện thoại */
-    .exercise-page-decor,
-    .quiz-page-decor,
-    .kawaii-floating-notes,
-    .global-stickers {
-        display: none !important;
-    }
-}
 
 /* Điện thoại rất nhỏ */
-@media (max-width: 420px) {
-    .container {
-        padding-left: 8px !important;
-        padding-right: 8px !important;
-    }
 
-    .private-text {
-        display: none;
-    }
-
-    .private-badge {
-        width: 30px;
-        height: 30px;
-        padding: 0 !important;
-        justify-content: center;
-    }
-
-    .subjects,
-    .question-set-grid {
-        gap: 8px !important;
-    }
-
-    .subject-btn {
-        min-height: 125px !important;
-    }
-
-    .question-set-card {
-        min-height: 148px !important;
-    }
-
-    .question-grid {
-        grid-template-columns: repeat(5, 1fr) !important;
-        gap: 5px !important;
-    }
-
-    .question-grid button {
-        min-height: 38px !important;
-    }
-
-    .question-text {
-        font-size: 16px !important;
-    }
-
-    .answer {
-        font-size: 12px !important;
-    }
-}
 
 
 /* =========================================================
@@ -12181,7 +10464,7 @@ body:not(.study-meadow-background) {
             rgba(255, 250, 253, .10),
             rgba(252, 249, 255, .08)
         ),
-        url("assets/backgrounds/home-garden-bg.webp") !important;
+        url("../assets/backgrounds/home-garden-bg.webp") !important;
     background-repeat: no-repeat !important;
     background-position: center top !important;
     background-size: cover !important;
@@ -12283,68 +10566,12 @@ body:not(.study-meadow-background) {
 }
 
 /* Tablet */
-@media (max-width: 980px) {
-    body:not(.study-meadow-background) {
-        background-attachment: scroll !important;
-        background-size: auto 100vh !important;
-        background-position: center top !important;
-        background-repeat: repeat-y !important;
-    }
 
-    .home-hero-v2-fixed {
-        aspect-ratio: 4.2 / 1 !important;
-        margin-bottom: 10px !important;
-    }
-}
 
 /* Phone: zoom the transparent banner so the text remains readable. */
-@media (max-width: 768px) {
-    body:not(.study-meadow-background) {
-        background-attachment: scroll !important;
-        background-size: auto 100vh !important;
-        background-position: 48% top !important;
-        background-repeat: repeat-y !important;
-    }
 
-    #landingPage.home-v2-page {
-        padding: 8px 0 34px !important;
-        overflow: hidden !important;
-    }
 
-    .home-hero-v2-fixed {
-        height: 150px !important;
-        aspect-ratio: auto !important;
-        overflow: hidden !important;
-        margin: 0 -8px 10px !important;
-        width: calc(100% + 16px) !important;
-    }
 
-    .home-hero-transparent-art {
-        width: 168% !important;
-        max-width: none !important;
-        height: 100% !important;
-        left: 50% !important;
-        right: auto !important;
-        transform: translateX(-50%);
-        object-fit: contain !important;
-    }
-
-    #landingPage .home-action-card,
-    #landingPage .home-subjects-v2,
-    #landingPage .home-subject-tile {
-        background-color: rgba(255, 255, 255, .88) !important;
-    }
-}
-
-@media (max-width: 420px) {
-    .home-hero-v2-fixed {
-        height: 132px !important;
-    }
-
-    .home-hero-transparent-art {
-        width: 184% !important;
-    }
-}
 
 
 /* =========================================================
@@ -12508,51 +10735,9 @@ body:not(.study-meadow-background) {
     display:grid!important;
 }
 
-@media (max-width: 980px){
-    .header-inner{padding:8px 14px;min-height:72px;gap:12px}
-    .brand-logo{width:50px;height:50px;border-radius:16px}
-    .medical-snake-mark{width:36px;height:36px}
-    .brand-name{font-size:24px}
-    .kawaii-header-nav{max-width:520px;padding:5px;gap:4px}
-    .kawaii-nav-btn{min-height:42px;padding:0 13px;font-size:12px}
-    .private-badge{padding:0 12px;min-height:40px}
-}
-@media (max-width: 760px){
-    .header{position:sticky;top:0}
-    .header-inner{min-height:66px;padding:7px 10px;gap:9px}
-    .brand{gap:8px}
-    .brand-logo{width:45px;height:45px;border-radius:14px}
-    .medical-snake-mark{width:33px;height:33px}
-    .brand-name{font-size:20px;white-space:nowrap}
-    .kawaii-header-nav{
-        position:fixed;
-        left:10px;
-        right:10px;
-        bottom:10px;
-        z-index:1500;
-        max-width:none;
-        margin:0;
-        padding:6px;
-        border-radius:22px;
-        background:rgba(244,251,255,.94);
-        border-color:rgba(73,158,221,.24);
-        box-shadow:0 14px 34px rgba(39,111,171,.18);
-        backdrop-filter:blur(18px);
-        -webkit-backdrop-filter:blur(18px);
-    }
-    .kawaii-nav-btn{flex:1;min-width:0;min-height:46px;padding:0 7px;font-size:11px}
-    .kawaii-nav-btn span{display:inline}
-    .private-badge{margin-left:auto;min-height:38px;padding:0 10px}
-    .private-text{display:none}
-    .fullscreen-btn{width:38px;height:38px;border-radius:12px}
-    body{padding-bottom:74px}
-}
-@media (max-width: 420px){
-    .brand-name{font-size:18px}
-    .brand-logo{width:42px;height:42px}
-    .medical-snake-mark{width:30px;height:30px}
-    .kawaii-nav-btn{font-size:10px}
-}
+
+
+
 
 /* =========================================================
    9 SUBJECT CARDS — MEDSTUDY ILLUSTRATED V4
@@ -12783,47 +10968,47 @@ body:not(.study-meadow-background) {
 #exerciseHub .subject-btn[data-subject="Nội Khoa"]{
     --subject-accent:#e94f78;
     --subject-accent-rgb:233,79,120;
-    --subject-art:url("assets/subject-cards/noi-khoa.png");
+    --subject-art:url("../assets/subject-cards/noi-khoa.png");
 }
 #exerciseHub .subject-btn[data-subject="Ngoại Khoa"]{
     --subject-accent:#3f86ef;
     --subject-accent-rgb:63,134,239;
-    --subject-art:url("assets/subject-cards/ngoai-khoa.png");
+    --subject-art:url("../assets/subject-cards/ngoai-khoa.png");
 }
 #exerciseHub .subject-btn[data-subject="Nhi Khoa"]{
     --subject-accent:#f3a11c;
     --subject-accent-rgb:243,161,28;
-    --subject-art:url("assets/subject-cards/nhi-khoa.png");
+    --subject-art:url("../assets/subject-cards/nhi-khoa.png");
 }
 #exerciseHub .subject-btn[data-subject="Sản Phụ Khoa"]{
     --subject-accent:#ef5f91;
     --subject-accent-rgb:239,95,145;
-    --subject-art:url("assets/subject-cards/san-phu-khoa.png");
+    --subject-art:url("../assets/subject-cards/san-phu-khoa.png");
 }
 #exerciseHub .subject-btn[data-subject="Giải Phẫu"]{
     --subject-accent:#7655eb;
     --subject-accent-rgb:118,85,235;
-    --subject-art:url("assets/subject-cards/giai-phau.png");
+    --subject-art:url("../assets/subject-cards/giai-phau.png");
 }
 #exerciseHub .subject-btn[data-subject="Sinh Lý"]{
     --subject-accent:#1ebf83;
     --subject-accent-rgb:30,191,131;
-    --subject-art:url("assets/subject-cards/sinh-ly.png");
+    --subject-art:url("../assets/subject-cards/sinh-ly.png");
 }
 #exerciseHub .subject-btn[data-subject="Hóa Sinh"]{
     --subject-accent:#3f91ed;
     --subject-accent-rgb:63,145,237;
-    --subject-art:url("assets/subject-cards/hoa-sinh.png");
+    --subject-art:url("../assets/subject-cards/hoa-sinh.png");
 }
 #exerciseHub .subject-btn[data-subject="Các môn khác"]{
     --subject-accent:#f17b32;
     --subject-accent-rgb:241,123,50;
-    --subject-art:url("assets/subject-cards/cac-mon-khac.png");
+    --subject-art:url("../assets/subject-cards/cac-mon-khac.png");
 }
 #exerciseHub .subject-btn[data-subject="Tiếng Anh"]{
     --subject-accent:#7859e8;
     --subject-accent-rgb:120,89,232;
-    --subject-art:url("assets/subject-cards/tieng-anh.png");
+    --subject-art:url("../assets/subject-cards/tieng-anh.png");
 }
 
 /* Stagger nhẹ để card không chuyển động đồng loạt */
@@ -12862,68 +11047,12 @@ body:not(.study-meadow-background) {
 }
 
 /* Tablet */
-@media (max-width:1100px){
-    #exerciseHub .subjects{
-        width:100%!important;
-        margin:16px 0 0!important;
-        transform:none!important;
-        grid-template-columns:repeat(2,minmax(0,1fr))!important;
-        gap:14px!important;
-    }
-    #exerciseHub .subject-btn{
-        border-radius:25px!important;
-    }
-}
+
 
 /* Điện thoại: 1 card/ hàng để ảnh và chữ minh hoạ vẫn rõ */
-@media (max-width:680px){
-    #exerciseHub .subjects{
-        grid-template-columns:1fr!important;
-        gap:12px!important;
-        margin-top:12px!important;
-    }
-    #exerciseHub .subject-btn{
-        aspect-ratio:2.06 / 1!important;
-        border-radius:22px!important;
-    }
-    #exerciseHub .subject-btn .subject-count{
-        left:17px!important;
-        bottom:13px!important;
-        min-width:94px;
-        min-height:32px;
-        padding:6px 10px!important;
-        gap:5px;
-        font-size:11px!important;
-    }
-    #exerciseHub .subject-btn .subject-count::before{
-        width:17px;
-        height:17px;
-        flex-basis:17px;
-        border-radius:6px;
-        font-size:10px;
-    }
-    #exerciseHub .subject-btn:hover{
-        transform:
-            perspective(900px)
-            translateY(-4px)
-            rotateX(var(--tilt-x,0deg))
-            rotateY(var(--tilt-y,0deg))!important;
-    }
-}
 
-@media (max-width:390px){
-    #exerciseHub .subject-btn{
-        border-radius:19px!important;
-    }
-    #exerciseHub .subject-btn .subject-count{
-        left:14px!important;
-        bottom:11px!important;
-        min-width:88px;
-        min-height:29px;
-        padding:5px 8px!important;
-        font-size:10px!important;
-    }
-}
+
+
 
 @media (prefers-reduced-motion:reduce){
     #exerciseHub .subject-btn,
@@ -12963,32 +11092,9 @@ body:not(.study-meadow-background) {
     display:none!important;
 }
 
-@media (max-width:1100px){
-    #exerciseHub .subjects{
-        width:100%!important;
-        max-width:none!important;
-        margin:16px auto 0!important;
-        padding:0!important;
-        grid-template-columns:repeat(2,minmax(0,1fr))!important;
-        gap:14px!important;
-    }
-    #exerciseHub .subject-btn{
-        aspect-ratio:2.02 / 1!important;
-        border-radius:22px!important;
-    }
-}
 
-@media (max-width:680px){
-    #exerciseHub .subjects{
-        grid-template-columns:1fr!important;
-        gap:12px!important;
-        margin-top:12px!important;
-    }
-    #exerciseHub .subject-btn{
-        aspect-ratio:2.03 / 1!important;
-        border-radius:20px!important;
-    }
-}
+
+
 
 /* =========================================================
    SUBJECT CARDS V5 — NEW 9 CARD ART + LIVE TOTAL COUNT
@@ -13149,30 +11255,9 @@ body:not(.study-meadow-background) {
     100%{transform:scale(1);opacity:1}
 }
 
-@media (max-width:1100px){
-    #exerciseHub .subjects{
-        grid-template-columns:repeat(2,minmax(0,1fr))!important;
-        gap:13px!important;
-    }
-    #exerciseHub .subject-btn{border-radius:23px!important}
-}
 
-@media (max-width:680px){
-    #exerciseHub .subjects{
-        grid-template-columns:1fr!important;
-        gap:11px!important;
-        margin-top:12px!important;
-    }
-    #exerciseHub .subject-btn{border-radius:20px!important}
-    #exerciseHub .subject-btn .subject-count{
-        left:16px!important;
-        bottom:12px!important;
-        min-width:80px!important;
-        min-height:30px!important;
-        padding:6px 9px!important;
-        font-size:11px!important;
-    }
-}
+
+
 
 @media (prefers-reduced-motion:reduce){
     #exerciseHub .subject-btn,
@@ -13257,12 +11342,7 @@ body:not(.study-meadow-background) {
     transform:translateY(-1px) scale(1.04) rotate(4deg)!important;
 }
 
-@media (max-width:760px){
-    .kawaii-header-nav{
-        background:rgba(248,252,255,.56)!important;
-        border:1px solid rgba(255,255,255,.40)!important;
-    }
-}
+
 
 /* =========================================================
    SUBJECT DETAIL PAGE — TRANG RIÊNG SAU KHI CHỌN MÔN
@@ -13461,37 +11541,7 @@ body:not(.study-meadow-background) {
     display:none!important;
 }
 
-@media(max-width:760px){
-    .subject-page-navigation{
-        min-height:78px;
-        grid-template-columns:auto 1fr auto;
-        gap:8px;
-        padding:10px;
-        border-radius:22px;
-    }
-    .subject-page-back{
-        width:44px;
-        min-width:44px;
-        padding:0;
-        overflow:hidden;
-        font-size:0;
-    }
-    .subject-page-back::after{
-        content:"←";
-        font-size:21px;
-    }
-    .subject-page-home{
-        width:44px;
-        min-height:44px;
-    }
-    .subject-page-icon{
-        width:46px;height:46px;flex-basis:46px;border-radius:15px;font-size:23px;
-    }
-    .subject-page-heading{gap:9px;justify-content:flex-start}
-    .subject-page-heading small{font-size:8px;letter-spacing:1px}
-    .subject-page-heading strong{font-size:18px}
-    .subject-page-intro{font-size:10px;margin-top:10px}
-}
+
 
 @media(prefers-reduced-motion:reduce){
     #subjectPage.show,
@@ -13760,61 +11810,13 @@ body:not(.study-meadow-background) {
 }
 
 /* Tablet */
-@media (max-width: 1080px) {
-    .question-set-grid {
-        grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
-        gap: 16px !important;
-    }
-}
+
 
 /* Mobile */
-@media (max-width: 720px) {
-    .question-set-grid {
-        grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
-        gap: 10px !important;
-        padding: 0 2px !important;
-    }
 
-    .question-set-pro-card {
-        border-radius: 19px !important;
-        filter: drop-shadow(0 8px 12px rgba(74,55,92,.08)) !important;
-    }
-
-    .question-set-pro-card:hover {
-        transform: translateY(-4px) scale(1.012) !important;
-    }
-
-    .question-set-pro-count {
-        left: 13px !important;
-        bottom: 13px !important;
-        min-width: 48px !important;
-        height: 23px !important;
-        padding: 0 8px !important;
-        font-size: 9px !important;
-    }
-
-    .question-set-pro-active-indicator {
-        left: 12px !important;
-        top: 12px !important;
-        width: 22px !important;
-        height: 22px !important;
-        font-size: 10px !important;
-    }
-}
 
 /* Điện thoại rất hẹp */
-@media (max-width: 365px) {
-    .question-set-grid {
-        gap: 7px !important;
-    }
-    .question-set-pro-count {
-        left: 11px !important;
-        bottom: 11px !important;
-        height: 21px !important;
-        padding: 0 6px !important;
-        font-size: 8px !important;
-    }
-}
+
 
 @media (hover: none) {
     .question-set-pro-card:hover {
@@ -13908,21 +11910,8 @@ body:not(.study-meadow-background) {
 .notebook-clear-btn:hover{transform:translateY(-2px);box-shadow:0 8px 17px rgba(184,79,100,.10)}
 @keyframes notebookEnter{from{opacity:0;transform:translateY(16px) scale(.988)}to{opacity:1;transform:translateY(0) scale(1)}}
 
-@media(max-width:900px){
-    #landingPage .home-actions-v2.home-actions-three{grid-template-columns:1fr!important;width:min(650px,calc(100% - 18px))!important;gap:12px!important}
-    #landingPage .home-actions-three .home-action-card{min-height:125px!important}
-}
-@media(max-width:560px){
-    #landingPage .home-actions-three .home-action-card{grid-template-columns:54px minmax(0,1fr) 36px!important;padding:15px!important;gap:10px!important;border-radius:24px!important}
-    #landingPage .home-actions-three .home-action-icon{width:54px!important;height:54px!important;border-radius:17px!important;font-size:27px!important}
-    #landingPage .home-actions-three .home-action-text strong{font-size:17px!important}
-    #landingPage .home-actions-three .home-action-text small{font-size:11.5px!important;min-height:0!important}
-    #landingPage .home-actions-three .home-action-arrow{width:36px!important;height:36px!important;border-radius:12px!important}
-    .notebook-shell{padding:18px 13px;border-radius:25px}
-    .notebook-heading{flex-direction:column;gap:10px}
-    .notebook-textarea{min-height:400px;padding:20px 16px 20px 50px;font-size:14px}
-    .notebook-paper-wrap::before{left:34px}
-}
+
+
 
 
 /* =========================================================
@@ -13961,13 +11950,13 @@ body:not(.study-meadow-background) {
 #landingPage .home-image-card:nth-child(3){animation-delay:.18s!important}
 
 #landingPage .home-image-card--lesson{
-    background-image:url("assets/home-cards/bai-hoc.png")!important;
+    background-image:url("../assets/home-cards/bai-hoc.png")!important;
 }
 #landingPage .home-image-card--resource{
-    background-image:url("assets/home-cards/tai-lieu-tham-khao.png")!important;
+    background-image:url("../assets/home-cards/tai-lieu-tham-khao.png")!important;
 }
 #landingPage .home-image-card--notebook{
-    background-image:url("assets/home-cards/so-tay.png")!important;
+    background-image:url("../assets/home-cards/so-tay.png")!important;
 }
 
 /* Tắt các lớp trang trí cũ vì hình nền đã có toàn bộ nội dung. */
@@ -14115,31 +12104,9 @@ body:not(.study-meadow-background) {
     50%{transform:translateY(-50%) scale(1.07)}
 }
 
-@media(max-width:900px){
-    #landingPage .home-actions-v2.home-actions-three.home-image-actions{
-        width:min(650px,calc(100% - 18px))!important;
-        grid-template-columns:1fr!important;
-        gap:10px!important;
-    }
-    #landingPage .home-image-card{
-        aspect-ratio:548 / 415;
-        border-radius:36px!important;
-    }
-}
 
-@media(max-width:560px){
-    #landingPage .home-actions-v2.home-actions-three.home-image-actions{
-        width:calc(100% - 12px)!important;
-        gap:7px!important;
-    }
-    #landingPage .home-image-card{
-        border-radius:30px!important;
-    }
-    #landingPage .home-card-code-arrow{
-        min-width:28px;
-        min-height:28px;
-    }
-}
+
+
 
 @media(prefers-reduced-motion:reduce){
     #landingPage .home-image-card,
@@ -14291,36 +12258,7 @@ body:not(.study-meadow-background) {
     to   { opacity: 1; transform: translateY(0); }
 }
 
-@media (max-width: 720px) {
-    .quiz-config-page {
-        width: min(100% - 18px, 1180px);
-        padding-top: 10px;
-    }
 
-    .quiz-config-navigation {
-        grid-template-columns: auto 1fr auto;
-        gap: 8px;
-        padding: 9px;
-        border-radius: 20px;
-    }
-
-    .quiz-config-back {
-        min-height: 42px;
-        padding: 0 12px;
-        font-size: 13px;
-    }
-
-    .quiz-config-home {
-        width: 42px;
-        min-height: 42px;
-    }
-
-    .quiz-config-icon { display: none; }
-    .quiz-config-heading { justify-content: flex-start; }
-    .quiz-config-heading small { font-size: 9px; }
-    .quiz-config-heading strong { font-size: 15px; max-width: 48vw; }
-    .quiz-config-intro { font-size: 13px; padding: 0 8px; }
-}
 
 /* =========================================================
    2026-09-10 — BỎ TIÊU ĐỀ "KHU VỰC HỌC TẬP / BÀI TẬP"
@@ -14373,306 +12311,9 @@ body:not(.study-meadow-background) {
 }
 
 /* Chỉ áp dụng cho tablet/điện thoại — không đổi bố cục desktop. */
-@media (max-width: 768px){
-    html,body{
-        width:100% !important;
-        max-width:100% !important;
-        overflow-x:hidden !important;
-        -webkit-text-size-adjust:100%;
-    }
 
-    *{box-sizing:border-box}
-    img,svg,video,canvas{max-width:100%}
-    button,a{touch-action:manipulation}
 
-    .container{
-        width:100% !important;
-        max-width:100% !important;
-        margin:0 !important;
-        padding:9px 9px 76px !important;
-    }
 
-    .page-section{
-        width:100% !important;
-        max-width:100% !important;
-        min-width:0 !important;
-        overflow-x:hidden !important;
-    }
-
-    /* Header gọn hơn trên điện thoại */
-    .header-inner{
-        width:100% !important;
-        min-height:58px !important;
-        padding:7px 9px !important;
-        gap:7px !important;
-    }
-    .brand{min-width:0 !important}
-    .brand-logo{
-        width:38px !important;
-        height:38px !important;
-        flex:0 0 38px !important;
-    }
-    .brand-name{
-        max-width:44vw !important;
-        overflow:hidden !important;
-        text-overflow:ellipsis !important;
-        white-space:nowrap !important;
-        font-size:17px !important;
-    }
-    .kawaii-header-nav{display:none !important}
-    .header-actions{margin-left:auto !important;gap:5px !important}
-
-    /* Trang Bài tập: chỉ còn nút Trang chủ, bỏ cụm tiêu đề đã yêu cầu. */
-    #exerciseHub > .section-navigation{
-        min-height:58px !important;
-        display:flex !important;
-        align-items:center !important;
-        justify-content:flex-start !important;
-        padding:8px 10px !important;
-        margin-bottom:10px !important;
-        border-radius:18px !important;
-    }
-    #exerciseHub > .section-navigation .section-nav-center,
-    #exerciseHub > .section-navigation .nav-decoration{
-        display:none !important;
-    }
-    #exerciseHub > .section-navigation .nav-back-btn{
-        min-height:40px !important;
-        padding:0 12px !important;
-        font-size:11px !important;
-    }
-
-    /* Danh sách môn */
-    #exerciseHub .subjects{
-        display:grid !important;
-        grid-template-columns:repeat(2,minmax(0,1fr)) !important;
-        gap:9px !important;
-        margin-top:10px !important;
-    }
-    #exerciseHub .subject-btn{
-        min-width:0 !important;
-        min-height:126px !important;
-        padding:13px 11px !important;
-        border-radius:20px !important;
-    }
-    #exerciseHub .subject-name{
-        font-size:14px !important;
-        overflow-wrap:anywhere !important;
-    }
-
-    /* Trang môn */
-    .subject-page-navigation{
-        grid-template-columns:auto minmax(0,1fr) auto !important;
-        gap:7px !important;
-        min-height:68px !important;
-        padding:8px !important;
-        border-radius:19px !important;
-    }
-    .subject-page-heading{
-        min-width:0 !important;
-        justify-content:flex-start !important;
-    }
-    .subject-page-heading strong{
-        max-width:42vw !important;
-        overflow:hidden !important;
-        text-overflow:ellipsis !important;
-        white-space:nowrap !important;
-    }
-    .subject-page-intro{
-        margin-top:8px !important;
-        padding:0 8px !important;
-        text-align:center !important;
-    }
-
-    /* Khung chọn 10 bộ: nội dung xếp dọc gọn, TEST TẤT CẢ vẫn canh phải. */
-    #subjectPage .question-set-heading{
-        min-height:0 !important;
-        display:flex !important;
-        flex-direction:column !important;
-        align-items:stretch !important;
-        justify-content:flex-start !important;
-        gap:10px !important;
-        padding:13px !important;
-        padding-right:13px !important;
-        border-radius:20px !important;
-    }
-    #subjectPage .question-set-heading-main{
-        width:100% !important;
-        gap:10px !important;
-    }
-    #subjectPage .question-set-heading-icon{
-        width:48px !important;
-        height:48px !important;
-        flex:0 0 48px !important;
-        border-radius:15px !important;
-        font-size:23px !important;
-    }
-    #subjectPage .question-set-heading h2{
-        font-size:19px !important;
-    }
-    #subjectPage .question-set-heading p{
-        font-size:11px !important;
-        line-height:1.35 !important;
-    }
-    #subjectPage .question-set-heading-right{
-        width:100% !important;
-        margin:0 !important;
-        display:flex !important;
-        justify-content:flex-end !important;
-        align-items:center !important;
-    }
-    #subjectPage .question-set-heading-stickers,
-    #subjectPage .question-set-header-mascot{
-        display:none !important;
-    }
-    #subjectPage .test-all-sets-btn{
-        width:min(100%,280px) !important;
-        min-width:0 !important;
-        min-height:58px !important;
-        margin-left:auto !important;
-        padding:9px 12px !important;
-        border-radius:16px !important;
-    }
-
-    /* 10 bộ giữ 2 cột để không phải cuộn quá dài */
-    #subjectPage .question-set-grid{
-        width:100% !important;
-        grid-template-columns:repeat(2,minmax(0,1fr)) !important;
-        gap:9px !important;
-        margin-top:10px !important;
-    }
-    #subjectPage .question-set-pro-card{
-        width:100% !important;
-        min-width:0 !important;
-        border-radius:20px !important;
-    }
-    #subjectPage .question-set-pro-count{
-        left:10px !important;
-        bottom:10px !important;
-        height:23px !important;
-        min-width:48px !important;
-        max-width:calc(100% - 70px) !important;
-        padding:0 7px !important;
-        font-size:9px !important;
-    }
-
-    /* Trang cấu hình */
-    .quiz-config-page{
-        width:100% !important;
-        max-width:100% !important;
-        padding:8px 0 44px !important;
-    }
-    .quiz-config-navigation{
-        grid-template-columns:auto minmax(0,1fr) auto !important;
-        gap:7px !important;
-        padding:8px !important;
-        border-radius:18px !important;
-    }
-    .quiz-config-heading strong{
-        max-width:46vw !important;
-        overflow:hidden !important;
-        text-overflow:ellipsis !important;
-        white-space:nowrap !important;
-    }
-    .quiz-config-page .test-config,
-    .quiz-config-page .mode-grid{
-        grid-template-columns:1fr !important;
-        gap:9px !important;
-    }
-
-    /* Trang làm bài */
-    #quizPage .quiz-layout{
-        display:flex !important;
-        flex-direction:column !important;
-        gap:9px !important;
-    }
-    #quizPage .quiz-main,
-    #quizPage .quiz-sidebar{
-        width:100% !important;
-        max-width:100% !important;
-        min-width:0 !important;
-    }
-    #quizPage .quiz-sidebar{
-        position:static !important;
-        top:auto !important;
-    }
-    #quizPage .question-text{
-        overflow-wrap:anywhere !important;
-    }
-
-    /* Tài liệu / đọc bài / flashcard / luyện từ / sổ tay */
-    .resource-category-grid,
-    .resource-grid,
-    .book-grid,
-    .flashcard-grid,
-    .word-direction-grid{
-        grid-template-columns:1fr !important;
-    }
-    .resource-search,
-    .read-search,
-    .flash-search-row{
-        width:100% !important;
-        min-width:0 !important;
-    }
-    .resource-search input,
-    .read-search input,
-    .flash-search-row input{
-        width:100% !important;
-        min-width:0 !important;
-    }
-    .notebook-shell{
-        width:100% !important;
-        max-width:100% !important;
-    }
-    .notebook-textarea{
-        width:100% !important;
-        min-width:0 !important;
-    }
-
-    /* Trang chủ: 3 card ảnh xếp dọc đúng chiều rộng điện thoại. */
-    #landingPage .home-actions-v2.home-actions-three.home-image-actions{
-        width:calc(100% - 8px) !important;
-        grid-template-columns:1fr !important;
-        gap:8px !important;
-        margin-left:auto !important;
-        margin-right:auto !important;
-    }
-    #landingPage .home-image-card{
-        width:100% !important;
-        max-width:100% !important;
-        border-radius:28px !important;
-    }
-}
-
-@media (max-width: 420px){
-    .brand-name{font-size:16px !important;max-width:40vw !important}
-    .private-text{display:none !important}
-
-    #exerciseHub .subjects,
-    #subjectPage .question-set-grid{
-        grid-template-columns:repeat(2,minmax(0,1fr)) !important;
-        gap:7px !important;
-    }
-
-    #subjectPage .test-all-sets-btn{
-        width:100% !important;
-    }
-
-    .subject-page-heading small,
-    .quiz-config-heading small{
-        display:none !important;
-    }
-
-    .quiz-config-heading strong{
-        max-width:43vw !important;
-        font-size:14px !important;
-    }
-
-    #quizPage .question-grid{
-        grid-template-columns:repeat(5,minmax(0,1fr)) !important;
-        gap:5px !important;
-    }
-}
 
 
 /* =========================================================
@@ -14768,76 +12409,76 @@ body:not(.study-meadow-background) {
 .device-dialog h2{font-size:24px;margin:14px 0 10px;line-height:1.3}.device-dialog p{font-size:16px;line-height:1.6;color:#5c6d80;margin:0 0 20px}.device-dialog img{width:92px;height:84px;object-fit:contain}.device-dialog-icon{font-size:54px;line-height:1;margin:2px 0 4px}
 .device-options{display:grid;grid-template-columns:1fr 1fr;gap:12px}.device-options button{font:700 16px Arial;min-height:108px;border:1px solid #d9e5f2;border-radius:18px;background:#edf6ff;color:#285b8c;cursor:pointer}.device-options button:last-child{background:#fff0f5;border-color:#f3cfdd;color:#9e4269}.device-options span{display:block;font-size:30px;margin-bottom:12px}.device-options button:focus-visible{outline:3px solid #246bbb;outline-offset:3px}
 .device-switch{font:600 14px Arial;border:1px solid #d6e4f0;border-radius:12px;background:#fff;color:#385d7c;padding:10px 12px;min-height:44px;cursor:pointer}.mobile-greeting{display:none}
-html#mobilePreview[data-device=mobile] body{font-family:'Segoe UI',Arial,sans-serif!important;font-size:16px!important;color:var(--mobile-ink);min-width:0!important}
-html#mobilePreview[data-device=mobile] body *{box-sizing:border-box;backdrop-filter:none!important; -webkit-backdrop-filter:none!important}
-html#mobilePreview[data-device=mobile] .background-orb,html#mobilePreview[data-device=mobile] .global-stickers,html#mobilePreview[data-device=mobile] .kawaii-global-scene,html#mobilePreview[data-device=mobile] .kawaii-page-decor,html#mobilePreview[data-device=mobile] .kawaii-floating-notes,html#mobilePreview[data-device=mobile] .home-v2-sky,html#mobilePreview[data-device=mobile] .home-bottom-garden{display:none!important}
-html#mobilePreview[data-device=mobile] .header{position:sticky!important;top:0!important;display:block!important;background:#f7fbff!important;border-bottom:1px solid #dce8f3!important;box-shadow:none!important;z-index:40!important}
-html#mobilePreview[data-device=mobile] .header-inner{width:100%!important;max-width:620px!important;margin:auto!important;min-height:68px!important;padding:10px 18px!important;gap:10px!important}
-html#mobilePreview[data-device=mobile] .brand-name{font-size:21px!important;color:#295479!important;max-width:none!important}html#mobilePreview[data-device=mobile] .brand-logo{width:36px!important;height:36px!important;flex:0 0 36px!important;background:#dbefff!important;box-shadow:none!important}html#mobilePreview[data-device=mobile] .brand-logo img{width:26px;height:28px}
-html#mobilePreview[data-device=mobile] .kawaii-header-nav,html#mobilePreview[data-device=mobile] #fullscreenBtn{display:none!important}html#mobilePreview[data-device=mobile] .header-actions{display:flex!important;margin-left:auto!important}
-html#mobilePreview[data-device=mobile] .container{width:100%!important;max-width:620px!important;margin:0 auto!important;padding:16px 16px 36px!important}
-html#mobilePreview[data-device=mobile] .page-section{width:100%!important;min-width:0!important;max-width:100%!important;overflow:visible!important;margin:0!important;padding:0!important;animation:mobile-enter .22s ease-out!important}
-html#mobilePreview[data-device=mobile] .home-hero-v2-fixed{display:none!important}
-html#mobilePreview[data-device=mobile] .mobile-greeting{display:flex;align-items:center;justify-content:space-between;padding:4px 6px 14px;gap:12px}.mobile-greeting h1{font-size:27px;margin:0 0 5px;color:#294e70;line-height:1.3}.mobile-greeting p{font-size:15px;line-height:1.55;margin:0;color:#577089;max-width:245px}.mobile-greeting img{width:75px;height:82px;object-fit:contain;animation:mobile-bob 5s ease-in-out infinite}
-html#mobilePreview[data-device=mobile] #landingPage .home-actions-v2.home-actions-three.home-image-actions{width:100%!important;display:grid!important;grid-template-columns:1fr!important;gap:12px!important;margin:0!important}
-html#mobilePreview[data-device=mobile] #landingPage .home-image-card{width:100%!important;height:auto!important;min-height:0!important;aspect-ratio:548/415!important;background-size:100% 100%!important;border-radius:24px!important;transform:none!important;animation:none!important;filter:none!important;box-shadow:none!important}
-html#mobilePreview[data-device=mobile] #landingPage .home-image-card::before{display:none!important}
-html#mobilePreview[data-device=mobile] #landingPage .home-card-code-arrow{display:none!important}
-html#mobilePreview[data-device=mobile] #landingPage .home-card-live-count{top:auto!important;bottom:10%!important;left:32%!important;right:auto!important;transform:none!important;font-size:16px!important;line-height:1.3!important;color:#283e55!important;text-shadow:none!important;background:transparent!important;padding:0!important;min-width:24px!important}
-html#mobilePreview[data-device=mobile] .glass-card,html#mobilePreview[data-device=mobile] .blue-glass,html#mobilePreview[data-device=mobile] .word-glass{background:#fff!important;border:1px solid var(--mobile-border)!important;border-radius:20px!important;box-shadow:0 4px 14px #284e7610!important}
-html#mobilePreview[data-device=mobile] .section-navigation{padding:10px!important;margin:0 0 18px!important;min-height:58px!important;gap:10px!important}
-html#mobilePreview[data-device=mobile] .nav-back-btn{font-size:14px!important;min-height:42px!important;padding:10px 12px!important}
-html#mobilePreview[data-device=mobile] .section-nav-center strong{font-size:18px!important}html#mobilePreview[data-device=mobile] .section-nav-center small{font-size:12px!important}html#mobilePreview[data-device=mobile] .nav-decoration{display:none!important}
-html#mobilePreview[data-device=mobile] .subjects{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:12px!important;margin:0!important;padding:0!important}
-html#mobilePreview[data-device=mobile] .subject-btn{height:158px!important;min-height:0!important;width:100%!important;position:relative!important;display:flex!important;flex-direction:column!important;align-items:flex-start!important;justify-content:center!important;gap:8px!important;padding:18px!important;border:1px solid #d3e4ef!important;border-radius:22px!important;background:#e3f1ff!important;background-image:none!important;transform:none!important;box-shadow:0 4px 0 #cfdfee66!important;animation:none!important;overflow:hidden!important}
-html#mobilePreview[data-device=mobile] .subject-btn:nth-child(3n+2){background:#ffe8ef!important;border-color:#f1d5e0!important}html#mobilePreview[data-device=mobile] .subject-btn:nth-child(3n){background:#e8f5e4!important;border-color:#d4e6cc!important}
-html#mobilePreview[data-device=mobile] .subject-btn::before,html#mobilePreview[data-device=mobile] .subject-btn::after{display:none!important}
-html#mobilePreview[data-device=mobile] .subject-icon{display:block!important;position:static!important;font-size:33px!important;line-height:1!important;opacity:1!important;visibility:visible!important;transform:none!important;width:auto!important;height:auto!important;background:none!important;box-shadow:none!important}
-html#mobilePreview[data-device=mobile] .subject-name{display:block!important;position:static!important;font-size:17px!important;line-height:1.3!important;opacity:1!important;visibility:visible!important;transform:none!important;color:#29405a!important;text-shadow:none!important}
-html#mobilePreview[data-device=mobile] .subject-count{position:static!important;display:block!important;transform:none!important;font-size:14px!important;color:#546579!important;background:transparent!important;padding:0!important;line-height:1.3!important;border:0!important}
-html#mobilePreview[data-device=mobile] #subjectPage .question-set-heading{padding:16px!important;display:flex!important;flex-direction:column!important;align-items:stretch!important;gap:14px!important;margin:0 0 16px!important}
-html#mobilePreview[data-device=mobile] .question-set-heading-main{gap:10px!important}html#mobilePreview[data-device=mobile] .question-set-heading h2{font-size:22px!important;line-height:1.3!important}html#mobilePreview[data-device=mobile] .question-set-heading p{font-size:14px!important;line-height:1.5!important}
-html#mobilePreview[data-device=mobile] .question-set-heading-icon{display:none!important}html#mobilePreview[data-device=mobile] .question-set-kicker{font-size:12px!important}
-html#mobilePreview[data-device=mobile] #subjectPage .question-set-heading-right{width:100%!important;margin:0!important;display:block!important}
-html#mobilePreview[data-device=mobile] .question-set-heading-stickers,html#mobilePreview[data-device=mobile] .question-set-header-mascot{display:none!important}
-html#mobilePreview[data-device=mobile] .test-all-sets-btn{width:100%!important;min-height:62px!important;justify-content:space-between!important;border-radius:16px!important;font-size:16px!important;box-shadow:none!important}
-html#mobilePreview[data-device=mobile] .question-set-pro-grid{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:12px!important;padding:0!important}
-html#mobilePreview[data-device=mobile] .question-set-pro-card{width:100%!important;aspect-ratio:300/380!important;height:auto!important;min-height:0!important;border-radius:16px!important;background-size:100% 100%!important;transform:none!important;animation:none!important;box-shadow:none!important;filter:none!important}
-html#mobilePreview[data-device=mobile] .question-set-pro-count{left:10%!important;bottom:12%!important;top:auto!important;font-size:13px!important;transform:none!important;color:#304257!important;text-shadow:none!important}
-html#mobilePreview[data-device=mobile] .question-set-pro-card::after,html#mobilePreview[data-device=mobile] .question-set-pro-card::before{display:none!important}
-html#mobilePreview[data-device=mobile] .quiz-config-navigation{padding:10px!important;gap:8px!important}html#mobilePreview[data-device=mobile] .quiz-config-heading strong{font-size:15px!important;white-space:normal!important;max-width:none!important}html#mobilePreview[data-device=mobile] .quiz-config-heading small{font-size:12px!important}html#mobilePreview[data-device=mobile] .quiz-config-icon{display:none!important}
-html#mobilePreview[data-device=mobile] .selected-subject{padding:16px!important;gap:10px!important;flex-wrap:wrap!important}html#mobilePreview[data-device=mobile] .selected-subject h2{font-size:19px!important}html#mobilePreview[data-device=mobile] .selected-subject::before,html#mobilePreview[data-device=mobile] .selected-subject::after{display:none!important}
-html#mobilePreview[data-device=mobile] .test-config{display:grid!important;grid-template-columns:1fr!important;gap:12px!important}html#mobilePreview[data-device=mobile] .config-group{padding:16px!important}html#mobilePreview[data-device=mobile] .config-header strong{font-size:17px!important}html#mobilePreview[data-device=mobile] .config-header small{font-size:14px!important}
-html#mobilePreview[data-device=mobile] .choice-row{display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:8px!important}html#mobilePreview[data-device=mobile] .choice-btn{min-height:62px!important;padding:10px!important;border-radius:12px!important}html#mobilePreview[data-device=mobile] .choice-btn strong{font-size:19px!important}html#mobilePreview[data-device=mobile] .choice-btn span{font-size:14px!important}
-html#mobilePreview[data-device=mobile] .mode-grid{display:grid!important;grid-template-columns:1fr!important;gap:12px!important}html#mobilePreview[data-device=mobile] .mode-card{min-height:116px!important;padding:18px!important;border-radius:20px!important}html#mobilePreview[data-device=mobile] .mode-card[hidden]{display:none!important}
-html#mobilePreview[data-device=mobile] .quiz-layout{display:flex!important;flex-direction:column!important;gap:16px!important}html#mobilePreview[data-device=mobile] .quiz-main,html#mobilePreview[data-device=mobile] .quiz-sidebar{width:100%!important;padding:18px!important;min-width:0!important;position:static!important}
-html#mobilePreview[data-device=mobile] .question-text{font-size:19px!important;line-height:1.6!important}html#mobilePreview[data-device=mobile] .answer-btn{font-size:16px!important;line-height:1.55!important;min-height:60px!important;padding:14px!important}html#mobilePreview[data-device=mobile] .answer-explanation{font-size:17px!important;line-height:1.7!important}html#mobilePreview[data-device=mobile] .answer-explanation *{font-size:inherit!important;line-height:inherit!important}
-html#mobilePreview[data-device=mobile] .question-grid{grid-template-columns:repeat(5,minmax(0,1fr))!important;gap:8px!important}html#mobilePreview[data-device=mobile] .quiz-navigation{gap:10px!important}html#mobilePreview[data-device=mobile] .quiz-nav-btn{min-height:48px!important;font-size:15px!important}
-html#mobilePreview[data-device=mobile] .resource-category-grid{grid-template-columns:1fr!important;gap:16px!important}html#mobilePreview[data-device=mobile] .resource-category-card{min-height:210px!important;padding:24px!important}html#mobilePreview[data-device=mobile] .resource-list,html#mobilePreview[data-device=mobile] .resource-grid{grid-template-columns:1fr!important}html#mobilePreview[data-device=mobile] .read-card{padding:18px!important;font-size:17px!important}
-html#mobilePreview[data-device=mobile] .notebook-shell{padding:18px!important}html#mobilePreview[data-device=mobile] .notebook-heading{flex-direction:column!important}html#mobilePreview[data-device=mobile] .notebook-heading h2{font-size:23px!important}html#mobilePreview[data-device=mobile] .notebook-heading p{font-size:15px!important;line-height:1.6!important}html#mobilePreview[data-device=mobile] .notebook-textarea{font-size:17px!important;min-height:420px!important;padding:18px 14px 18px 38px!important;line-height:1.8!important}
-html#mobilePreview[data-device=mobile] .flashcard{max-width:100%!important}html#mobilePreview[data-device=mobile] .word-practice-dashboard{grid-template-columns:1fr!important}html#mobilePreview[data-device=mobile] input,html#mobilePreview[data-device=mobile] textarea,html#mobilePreview[data-device=mobile] select{font-size:16px!important;max-width:100%!important}
-html#mobilePreview[data-device=mobile] button:active{scale:.985}html#mobilePreview[data-device=mobile] button:focus-visible{outline:3px solid #2775c2!important;outline-offset:3px!important}
-html#mobilePreview[data-device=mobile] .page-section:not(.show){display:none!important}
+
+
+
+
+
+
+
+
+
+
+.mobile-greeting h1{font-size:27px;margin:0 0 5px;color:#294e70;line-height:1.3}.mobile-greeting p{font-size:15px;line-height:1.55;margin:0;color:#577089;max-width:245px}.mobile-greeting img{width:75px;height:82px;object-fit:contain;animation:mobile-bob 5s ease-in-out infinite}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 @keyframes mobile-enter{from{opacity:0;translate:0 6px}to{opacity:1;translate:0 0}}@keyframes mobile-bob{50%{transform:translateY(-4px)}}
 @media(prefers-reduced-motion:reduce){html#mobilePreview[data-device=mobile] *,html#mobilePreview[data-device=mobile] *::before,html#mobilePreview[data-device=mobile] *::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
 
-html#mobilePreview[data-device=mobile] #exerciseHub .subject-btn .subject-name{width:auto!important;height:auto!important;margin:0!important;clip:auto!important;overflow:visible!important;white-space:normal!important}
-html#mobilePreview[data-device=mobile] #exerciseHub .subject-btn .subject-count{min-width:0!important;min-height:0!important;animation:none!important;box-shadow:none!important}
-html#mobilePreview[data-device=mobile] #exerciseHub .subject-btn .subject-count::before{display:none!important}
-html#mobilePreview[data-device=mobile] .answer{font-size:17px!important;line-height:1.55!important;padding:14px!important;min-height:60px!important;border-radius:15px!important}
+
+
+
+
 .device-dialog{margin:auto!important;inset:0!important;height:fit-content!important;max-height:calc(100% - 32px)!important}
-html#mobilePreview[data-device=mobile] #landingPage .home-actions-v2.home-actions-three.home-image-actions{top:0!important;left:0!important}
-html#mobilePreview[data-device=mobile] #landingPage .home-card-live-count{left:auto!important;right:13%!important;bottom:11%!important;top:auto!important;width:auto!important;min-width:20px!important;height:auto!important;color:#25425d!important;opacity:1!important;font-size:16px!important;animation:none!important;transform:none!important}
-html#mobilePreview[data-device=mobile] button,html#mobilePreview[data-device=mobile] button *,html#mobilePreview[data-device=mobile] button::before,html#mobilePreview[data-device=mobile] button::after{animation:none!important}
-html#mobilePreview[data-device=mobile] .quiz-header-subject strong{white-space:normal!important;font-size:14px!important;line-height:1.35!important}
-html#mobilePreview[data-device=mobile] .quiz-top h2{font-size:20px!important;line-height:1.4!important}
-html#mobilePreview[data-device=mobile] .quiz-top p,html#mobilePreview[data-device=mobile] .answered-status,html#mobilePreview[data-device=mobile] .progress-info{font-size:14px!important;line-height:1.5!important}
-html#mobilePreview[data-device=mobile] .modal-card{max-height:calc(100dvh - 32px)!important;overflow-y:auto!important;padding:24px 18px!important;width:calc(100% - 32px)!important;max-width:420px!important}
-html#mobilePreview[data-device=mobile] .modal-actions button,html#mobilePreview[data-device=mobile] .result-actions button{min-height:44px!important;font-size:14px!important;line-height:1.4!important;padding:10px!important}
-html#mobilePreview[data-device=mobile] .modal-card p,html#mobilePreview[data-device=mobile] .result-fraction,html#mobilePreview[data-device=mobile] .result-stat-grid span{font-size:14px!important;line-height:1.5!important}
-html#mobilePreview[data-device=mobile] .modal-card small,html#mobilePreview[data-device=mobile] .result-tier{font-size:12px!important}
-html#mobilePreview[data-device=mobile] .result-buttons button{min-height:44px!important;font-size:14px!important;padding:10px!important}
-html#mobilePreview[data-device=mobile] .notebook-textarea{font-family:'Segoe UI',Arial,sans-serif!important;font-weight:500!important}
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 /* =========================================================
@@ -14859,139 +12500,24 @@ html#mobilePreview[data-device=mobile] .notebook-textarea{font-family:'Segoe UI'
 }
 
 /* Bản điện thoại: lớn hơn thiết lập 16px cũ nhưng vẫn tự co trên máy nhỏ. */
-html#mobilePreview[data-device="mobile"] #landingPage .home-card-live-count{
-    font-family:"Arial Rounded MT Bold","Trebuchet MS","Segoe UI",Arial,sans-serif !important;
-    font-size:clamp(18px,5.15vw,23px) !important;
-    font-weight:800 !important;
-    line-height:1 !important;
-    letter-spacing:-0.035em !important;
-    font-variant-numeric:tabular-nums !important;
-    font-feature-settings:"tnum" 1 !important;
-    white-space:nowrap !important;
-}
+
 
 /* Điện thoại rất nhỏ: tránh số đếm lấn sang phần chữ có sẵn trong ảnh. */
-@media (max-width:360px){
-    html#mobilePreview[data-device="mobile"] #landingPage .home-card-live-count{
-        font-size:18px !important;
-        letter-spacing:-0.045em !important;
-    }
-}
+
 
 /* =========================================================
    MOBILE SUBJECT BACKGROUNDS - same artwork as desktop
    Added 2026-09-11
 ========================================================= */
-html#mobilePreview[data-device=mobile] #exerciseHub .subjects{
-    display:grid!important;
-    grid-template-columns:repeat(2,minmax(0,1fr))!important;
-    gap:12px!important;
-    margin:0!important;
-    padding:0!important;
-}
-html#mobilePreview[data-device=mobile] #exerciseHub .subject-btn{
-    aspect-ratio:2.06 / 1!important;
-    height:auto!important;
-    min-height:0!important;
-    width:100%!important;
-    padding:0!important;
-    display:block!important;
-    position:relative!important;
-    overflow:hidden!important;
-    border-radius:22px!important;
-    border:1px solid rgba(255,255,255,.92)!important;
-    background:rgba(255,255,255,.65)!important;
-    background-image:none!important;
-    box-shadow:0 10px 24px rgba(91,73,115,.10),0 2px 0 rgba(255,255,255,.82) inset!important;
-    transform:none!important;
-    isolation:isolate!important;
-}
-html#mobilePreview[data-device=mobile] #exerciseHub .subject-btn::before{
-    content:""!important;
-    display:block!important;
-    position:absolute!important;
-    inset:-1px!important;
-    border-radius:inherit!important;
-    background-image:var(--subject-art)!important;
-    background-repeat:no-repeat!important;
-    background-position:center!important;
-    background-size:100% 100%!important;
-    opacity:1!important;
-    z-index:0!important;
-}
-html#mobilePreview[data-device=mobile] #exerciseHub .subject-btn::after{
-    display:none!important;
-}
-html#mobilePreview[data-device=mobile] #exerciseHub .subject-btn:nth-child(3n+2),
-html#mobilePreview[data-device=mobile] #exerciseHub .subject-btn:nth-child(3n){
-    background:rgba(255,255,255,.65)!important;
-    border-color:rgba(255,255,255,.92)!important;
-}
-html#mobilePreview[data-device=mobile] #exerciseHub .subject-btn .subject-icon,
-html#mobilePreview[data-device=mobile] #exerciseHub .subject-btn .subject-name,
-html#mobilePreview[data-device=mobile] #exerciseHub .subject-btn .english-new-badge{
-    display:none!important;
-}
-html#mobilePreview[data-device=mobile] #exerciseHub .subject-btn .subject-count,
-html#mobilePreview[data-device=mobile] #exerciseHub .english-subject .english-count{
-    position:absolute!important;
-    z-index:2!important;
-    left:10px!important;
-    bottom:9px!important;
-    display:inline-flex!important;
-    align-items:center!important;
-    justify-content:flex-start!important;
-    gap:5px!important;
-    min-width:84px!important;
-    min-height:28px!important;
-    margin:0!important;
-    padding:6px 9px!important;
-    border-radius:999px!important;
-    border:1px solid rgba(255,255,255,.82)!important;
-    background:rgba(255,255,255,.95)!important;
-    color:var(--subject-accent)!important;
-    box-shadow:0 6px 14px rgba(86,72,104,.10)!important;
-    backdrop-filter:blur(8px)!important;
-    -webkit-backdrop-filter:blur(8px)!important;
-    font-size:11px!important;
-    line-height:1!important;
-    font-weight:900!important;
-    letter-spacing:-.1px!important;
-    animation:none!important;
-}
-html#mobilePreview[data-device=mobile] #exerciseHub .subject-btn .subject-count::before,
-html#mobilePreview[data-device=mobile] #exerciseHub .english-subject .english-count::before{
-    content:"▤"!important;
-    width:16px!important;
-    height:16px!important;
-    flex:0 0 16px!important;
-    display:grid!important;
-    place-items:center!important;
-    border-radius:5px!important;
-    background:var(--subject-accent)!important;
-    color:#fff!important;
-    font-size:10px!important;
-    font-weight:900!important;
-    box-shadow:0 4px 8px rgba(var(--subject-accent-rgb),.22)!important;
-}
-@media (max-width:560px){
-    html#mobilePreview[data-device=mobile] #exerciseHub .subjects{
-        grid-template-columns:1fr!important;
-        gap:12px!important;
-    }
-    html#mobilePreview[data-device=mobile] #exerciseHub .subject-btn{
-        border-radius:20px!important;
-    }
-    html#mobilePreview[data-device=mobile] #exerciseHub .subject-btn .subject-count,
-    html#mobilePreview[data-device=mobile] #exerciseHub .english-subject .english-count{
-        left:11px!important;
-        bottom:10px!important;
-        min-width:88px!important;
-        min-height:30px!important;
-        padding:6px 10px!important;
-        font-size:11.5px!important;
-    }
-}
+
+
+
+
+
+
+
+
+
 
 /* =========================================================
    MOBILE SUBJECT BACKGROUND — DIRECT IMAGE FIX 2026-09-11
@@ -15002,117 +12528,24 @@ html#mobilePreview[data-device=mobile] #exerciseHub .english-subject .english-co
     display:none;
 }
 
-html#mobilePreview[data-device="mobile"] #exerciseHub .subject-btn{
-    position:relative!important;
-    display:block!important;
-    width:100%!important;
-    height:auto!important;
-    min-height:0!important;
-    aspect-ratio:960 / 520!important;
-    padding:0!important;
-    overflow:hidden!important;
-    border-radius:22px!important;
-    border:1px solid rgba(255,255,255,.92)!important;
-    background:transparent!important;
-    background-image:none!important;
-    box-shadow:0 8px 20px rgba(72,88,120,.11)!important;
-    transform:none!important;
-    isolation:isolate!important;
-}
+
 
 /* Disable every legacy pseudo background on mobile. */
-html#mobilePreview[data-device="mobile"] #exerciseHub .subject-btn::before,
-html#mobilePreview[data-device="mobile"] #exerciseHub .subject-btn::after{
-    content:none!important;
-    display:none!important;
-    background:none!important;
-}
+
 
 /* The supplied artwork itself is the card. */
-html#mobilePreview[data-device="mobile"] #exerciseHub .subject-btn > img.mobile-subject-bg{
-    display:block!important;
-    position:absolute!important;
-    inset:0!important;
-    z-index:0!important;
-    width:100%!important;
-    height:100%!important;
-    max-width:none!important;
-    max-height:none!important;
-    margin:0!important;
-    padding:0!important;
-    border:0!important;
-    border-radius:inherit!important;
-    object-fit:fill!important;
-    object-position:center!important;
-    opacity:1!important;
-    visibility:visible!important;
-    pointer-events:none!important;
-    transform:none!important;
-    filter:none!important;
-}
+
 
 /* Text/icon already exists inside the supplied artwork. */
-html#mobilePreview[data-device="mobile"] #exerciseHub .subject-btn > .subject-icon,
-html#mobilePreview[data-device="mobile"] #exerciseHub .subject-btn > .subject-name,
-html#mobilePreview[data-device="mobile"] #exerciseHub .subject-btn > .english-new-badge{
-    display:none!important;
-}
+
 
 /* Keep the live question counter above the artwork. */
-html#mobilePreview[data-device="mobile"] #exerciseHub .subject-btn > .subject-count,
-html#mobilePreview[data-device="mobile"] #exerciseHub .subject-btn > .english-count{
-    position:absolute!important;
-    z-index:5!important;
-    left:11px!important;
-    bottom:10px!important;
-    display:inline-flex!important;
-    align-items:center!important;
-    justify-content:flex-start!important;
-    gap:5px!important;
-    min-width:86px!important;
-    min-height:29px!important;
-    margin:0!important;
-    padding:6px 9px!important;
-    border:1px solid rgba(255,255,255,.88)!important;
-    border-radius:999px!important;
-    color:var(--subject-accent)!important;
-    background:rgba(255,255,255,.95)!important;
-    box-shadow:0 5px 13px rgba(64,73,98,.12)!important;
-    font-size:11px!important;
-    line-height:1!important;
-    font-weight:900!important;
-    letter-spacing:-.1px!important;
-    opacity:1!important;
-    visibility:visible!important;
-    transform:none!important;
-    animation:none!important;
-}
 
-html#mobilePreview[data-device="mobile"] #exerciseHub .subject-btn > .subject-count::before,
-html#mobilePreview[data-device="mobile"] #exerciseHub .subject-btn > .english-count::before{
-    content:"▤"!important;
-    display:grid!important;
-    place-items:center!important;
-    width:16px!important;
-    height:16px!important;
-    flex:0 0 16px!important;
-    border-radius:5px!important;
-    color:#fff!important;
-    background:var(--subject-accent)!important;
-    font-size:10px!important;
-    font-weight:900!important;
-}
+
+
 
 /* On phones, one wide artwork per row keeps its original composition readable. */
-@media (max-width:760px){
-    html#mobilePreview[data-device="mobile"] #exerciseHub .subjects{
-        display:grid!important;
-        grid-template-columns:1fr!important;
-        gap:12px!important;
-        margin:0!important;
-        padding:0!important;
-    }
-}
+
 
 /* =========================================================
    FINAL FIX 2026-09-11 — HOME TOTAL COUNTERS (PC + MOBILE)
@@ -15182,24 +12615,10 @@ html#mobilePreview[data-device="pc"] #landingPage .home-card-live-count{
 }
 
 /* Mobile giữ đúng tỉ lệ với background thay vì dùng vị trí/cỡ chữ riêng. */
-html#mobilePreview[data-device="mobile"] #landingPage .home-card-live-count{
-    top:85.2% !important;
-    bottom:auto !important;
-    left:auto !important;
-    right:8.0% !important;
-    transform:translateY(-50%) !important;
-    font-size:clamp(14px,3.25cqw,20px) !important;
-    color:#243b53 !important;
-}
+
 
 /* Màn hình rất nhỏ: chỉ giảm nhẹ để số 5–6 chữ số không chạm phần chữ bên trái. */
-@media (max-width:360px){
-    html#mobilePreview[data-device="mobile"] #landingPage .home-card-live-count{
-        font-size:13.5px !important;
-        right:7.6% !important;
-        letter-spacing:-0.035em !important;
-    }
-}
+
 
 /* =========================================================
    PC ONLY — HOME COUNTERS CENTERED IN FREE WHITE SPACE
@@ -15492,7 +12911,7 @@ html#mobilePreview[data-device="pc"] #landingPage .home-card-live-count.is-loadi
     html#mobilePreview[data-device="pc"] #landingPage .home-image-card--lesson {
         --home-card-accent: #ff3f82;
         --home-count-x: 74%;
-        background-image: url("assets/home-cards/bai-hoc.png") !important;
+        background-image: url("../assets/home-cards/bai-hoc.png") !important;
         background-size: 100% 100% !important;
         background-position: center center !important;
     }
@@ -15500,7 +12919,7 @@ html#mobilePreview[data-device="pc"] #landingPage .home-card-live-count.is-loadi
     html#mobilePreview[data-device="pc"] #landingPage .home-image-card--resource {
         --home-card-accent: #4e9df8;
         --home-count-x: 70%;
-        background-image: url("assets/home-cards/tai-lieu-tham-khao.png") !important;
+        background-image: url("../assets/home-cards/tai-lieu-tham-khao.png") !important;
         background-size: 100% 100% !important;
         background-position: center center !important;
     }
@@ -15508,7 +12927,7 @@ html#mobilePreview[data-device="pc"] #landingPage .home-card-live-count.is-loadi
     html#mobilePreview[data-device="pc"] #landingPage .home-image-card--notebook {
         --home-card-accent: #24c982;
         --home-count-x: 70%;
-        background-image: url("assets/home-cards/so-tay.png") !important;
+        background-image: url("../assets/home-cards/so-tay.png") !important;
         background-size: 100% 100% !important;
         background-position: center center !important;
     }
@@ -16051,20 +13470,7 @@ html#mobilePreview[data-device="pc"] #landingPage .home-card-live-count.is-loadi
 }
 
 /* Preserve usable placement if mobile is opened before its own redesign. */
-@media (max-width:768px){
-    html#mobilePreview[data-device="mobile"] #landingPage .home-total-v2{
-        top:auto!important;
-        bottom:7.2%!important;
-        left:auto!important;
-        right:10.5%!important;
-        transform:none!important;
-        min-width:52px!important;
-        height:27px!important;
-        padding:0 9px!important;
-        font-size:14px!important;
-        animation:none!important;
-    }
-}
+
 
 @media (prefers-reduced-motion:reduce){
     #landingPage .home-total-v2{
@@ -16087,12 +13493,65 @@ html#mobilePreview[data-device="pc"] #landingPage .home-card-live-count.is-loadi
     }
 }
 
-@media (max-width:768px){
-    html#mobilePreview[data-device="mobile"] #landingPage .home-total-v2{
-        min-width:78px!important;
-        height:40.5px!important;
-        padding:0 13.5px!important;
-        font-size:21px!important;
-        border-width:2px!important;
-    }
+
+
+/* =========================================================
+   FINAL MOBILE BADGE SCALE FIX — DEVICE MODE BASED
+   2026-09-11
+   Mobile mode can be selected even when viewport > 768px,
+   so do NOT gate this rule behind max-width.
+========================================================= */
+
+
+/* =========================================================
+   PC — DEVICE STATUS LOCK
+   Sau khi chọn PC, nút góc chỉ hiển thị trạng thái và không thể đổi.
+========================================================= */
+html[data-device="pc"] .device-switch.is-device-locked,
+html[data-device="pc"] .device-switch:disabled{
+    opacity:1!important;
+    cursor:default!important;
+    pointer-events:none!important;
+    user-select:none!important;
+    color:#245b91!important;
+    background:linear-gradient(145deg,#ffffff,#edf6ff)!important;
+    border:1px solid rgba(57,126,202,.24)!important;
+    box-shadow:0 5px 14px rgba(40,91,139,.08)!important;
+    transform:none!important;
 }
+
+
+/* =========================================================
+   QUIZ CARD BACKGROUND V2 — DIRECT IMG, PC
+   2026-09-11
+========================================================= */
+html#mobilePreview[data-device="pc"] .question-set-pro-card{
+    position:relative!important;
+    background-image:none!important;
+    background-color:transparent!important;
+}
+html#mobilePreview[data-device="pc"] .question-set-pro-card > img.question-set-pro-bg{
+    display:block!important;
+    position:absolute!important;
+    left:-3.5%!important;
+    top:-3.5%!important;
+    width:107%!important;
+    height:107%!important;
+    max-width:none!important;
+    object-fit:fill!important;
+    object-position:center!important;
+    opacity:1!important;
+    visibility:visible!important;
+    pointer-events:none!important;
+    user-select:none!important;
+    z-index:0!important;
+    border:0!important;
+    margin:0!important;
+    padding:0!important;
+    transform:none!important;
+    filter:none!important;
+}
+html#mobilePreview[data-device="pc"] .question-set-pro-card::after{z-index:1!important;}
+html#mobilePreview[data-device="pc"] .question-set-pro-card::before{z-index:2!important;}
+html#mobilePreview[data-device="pc"] .question-set-pro-count{z-index:5!important;}
+html#mobilePreview[data-device="pc"] .question-set-pro-active-indicator{z-index:6!important;}
