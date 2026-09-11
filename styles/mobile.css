@@ -15112,3 +15112,23 @@ html#mobilePreview[data-device="mobile"] .question-set-pro-card::after{z-index:1
 html#mobilePreview[data-device="mobile"] .question-set-pro-card::before{z-index:2!important;}
 html#mobilePreview[data-device="mobile"] .question-set-pro-count{z-index:5!important;}
 html#mobilePreview[data-device="mobile"] .question-set-pro-active-indicator{z-index:6!important;}
+
+/* =========================================================
+   MOBILE HOME TOTAL V2 — RAISE COUNTERS SLIGHTLY
+   2026-09-11
+   Only affects the 3 total badges on the mobile home page.
+========================================================= */
+/* Real mobile viewport: keep the current right alignment, raise by +1.2%. */
+@media (max-width:768px){
+    html#mobilePreview[data-device="mobile"] #landingPage .home-total-v2{
+        top:auto!important;
+        bottom:8.4%!important;
+    }
+}
+
+/* Mobile mode shown in a wider preview/window: raise by the same visual amount. */
+@media (min-width:769px){
+    html#mobilePreview[data-device="mobile"] #landingPage .home-total-v2{
+        top:83.7%!important;
+    }
+}
