@@ -13616,3 +13616,141 @@ html#mobilePreview[data-device="pc"] .header .fullscreen-btn{
     backdrop-filter:none!important;
     -webkit-backdrop-filter:none!important;
 }
+
+/* =========================================================
+   V10 — FIXED BLACK HEADER ON PC
+   2026-09-12
+   Keep the top black title bar permanently visible while scrolling.
+========================================================= */
+html#mobilePreview[data-device="pc"] .header{
+    position:fixed!important;
+    top:0!important;
+    left:0!important;
+    right:0!important;
+    width:100%!important;
+    z-index:5000!important;
+}
+html#mobilePreview[data-device="pc"] body{
+    padding-top:78px!important;
+}
+
+/* =========================================================
+   BRAND LOGO REDESIGN — MINISTRY OF HEALTH BOX
+   2026-09-12
+   Applied to both PC and Mobile
+========================================================= */
+.header .brand,
+.brand{
+    align-items:center!important;
+    gap:12px!important;
+}
+.brand-logo{
+    position:relative!important;
+    overflow:hidden!important;
+    isolation:isolate!important;
+    background:linear-gradient(180deg,#ffffff 0%,#f6f8ff 100%)!important;
+    border:1.6px solid rgba(255,255,255,.82)!important;
+    box-shadow:0 10px 24px rgba(0,0,0,.18), inset 0 1px 0 rgba(255,255,255,.95)!important;
+}
+.brand-logo::before{
+    content:""!important;
+    position:absolute!important;
+    inset:5px!important;
+    border-radius:14px!important;
+    background:
+        url("../assets/brand/bo-y-te.png") center/contain no-repeat,
+        radial-gradient(circle at 30% 22%, rgba(255,255,255,.96) 0%, rgba(244,247,255,.98) 52%, rgba(233,239,255,.95) 100%)!important;
+    box-shadow:inset 0 0 0 1px rgba(123,147,214,.16)!important;
+    z-index:2!important;
+}
+.brand-logo::after{
+    content:""!important;
+    position:absolute!important;
+    inset:0!important;
+    border-radius:inherit!important;
+    background:linear-gradient(135deg, rgba(255,255,255,.46) 0%, rgba(255,255,255,0) 42%, rgba(255,255,255,.18) 100%)!important;
+    pointer-events:none!important;
+    z-index:3!important;
+}
+.brand-pulse,
+.brand-cross,
+.brand-cross img,
+.medical-snake-mark{
+    display:none!important;
+}
+.brand-logo:hover,
+.brand:hover .brand-logo{
+    transform:none!important;
+    filter:none!important;
+}
+html#mobilePreview[data-device="pc"] .brand-logo{
+    width:72px!important;
+    height:72px!important;
+    flex:0 0 72px!important;
+    border-radius:22px!important;
+}
+html#mobilePreview[data-device="mobile"] .brand-logo{
+    width:54px!important;
+    height:54px!important;
+    flex:0 0 54px!important;
+    border-radius:16px!important;
+}
+html#mobilePreview[data-device="pc"] .brand-name{
+    line-height:1!important;
+}
+html#mobilePreview[data-device="mobile"] .brand-name{
+    line-height:1!important;
+}
+@media (max-width:560px){
+    html#mobilePreview[data-device="mobile"] .brand{
+        gap:10px!important;
+    }
+    html#mobilePreview[data-device="mobile"] .brand-logo{
+        width:48px!important;
+        height:48px!important;
+        flex:0 0 48px!important;
+        border-radius:15px!important;
+    }
+}
+
+
+/* =========================================================
+   V14 — DIRECT ENGLISH TOOLS (PC)
+========================================================= */
+.english-subject-tools{position:relative;width:100%;margin:22px 0 5px;isolation:isolate}
+.english-subject-tools[hidden]{display:none!important}.english-subject-tools.show{display:block!important}
+.english-tools-heading{display:flex;align-items:center;gap:15px;padding:19px 22px!important;border-radius:25px!important;background:linear-gradient(135deg,#fff,#f3f8ff,#fff5fb)!important;border:1px solid #d8e7fb!important;box-shadow:0 15px 36px rgba(70,104,158,.10)!important}
+.english-tools-heading-icon{width:58px;height:58px;flex:0 0 58px;display:grid;place-items:center;border-radius:19px;background:linear-gradient(135deg,#dceeff,#eee7ff,#ffe7f1);font-size:29px}
+.english-tools-heading small{color:#6585b8;font-size:10px;font-weight:950;letter-spacing:1px}.english-tools-heading h2{margin:3px 0 4px;color:#243b61;font-size:25px}.english-tools-heading p{margin:0;color:#71819a;font-size:12px}
+.english-tools-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:15px;margin-top:15px}.english-tool-card{position:relative;overflow:hidden;min-height:140px;padding:19px;display:grid;grid-template-columns:62px 1fr 44px;align-items:center;gap:15px;border:1px solid transparent;border-radius:26px;cursor:pointer;text-align:left;box-shadow:0 16px 36px rgba(71,98,143,.10);transition:transform .22s,box-shadow .22s,filter .22s}.english-tool-card:hover{transform:translateY(-5px);box-shadow:0 22px 42px rgba(71,98,143,.15);filter:saturate(1.05)}.english-tool-flash{color:#315a9f;background:linear-gradient(145deg,#fff,#edf6ff,#f7f2ff);border-color:#cfe4ff}.english-tool-word{color:#287b67;background:linear-gradient(145deg,#fff,#edfff8,#f4fbff);border-color:#caeee2}.english-tool-icon{width:62px;height:62px;display:grid;place-items:center;border-radius:20px;background:rgba(255,255,255,.88);box-shadow:0 9px 20px rgba(76,102,143,.10);font-size:31px}.english-tool-copy{min-width:0;display:flex;flex-direction:column}.english-tool-copy small{font-size:9px;font-weight:950;letter-spacing:1px;opacity:.72}.english-tool-copy strong{margin-top:4px;font-size:20px;line-height:1.15}.english-tool-copy em{margin-top:5px;font-size:11px;line-height:1.35;font-style:normal;opacity:.72}.english-tool-arrow{width:42px;height:42px;display:grid;place-items:center;border-radius:14px;color:#fff;font-size:22px;font-weight:950;background:linear-gradient(135deg,#6098f3,#9270ea)}.english-tool-word .english-tool-arrow{background:linear-gradient(135deg,#4ac89a,#40a7d8)}.english-tool-sticker{position:absolute;right:14px;top:10px;font-size:20px;opacity:.32}.english-tools-decor{display:none}
+
+/* =========================================================
+   FLASHCARD FRONT — ENGLISH WORD ONLY
+   2026-09-13
+========================================================= */
+#flashcardPage .flashcard-front{
+    display:flex!important;
+    align-items:center!important;
+    justify-content:center!important;
+    text-align:center!important;
+}
+#flashcardPage .flashcard-front .flash-face-label,
+#flashcardPage .flashcard-front .flash-word-icon,
+#flashcardPage .flashcard-front #flashFrontHint,
+#flashcardPage .flashcard-front .flash-click-hint{
+    display:none!important;
+}
+#flashcardPage .flashcard-front #flashFrontText{
+    display:block!important;
+    margin:auto!important;
+    max-width:90%!important;
+    font-weight:900!important;
+    line-height:1.15!important;
+    text-align:center!important;
+}
+html#mobilePreview[data-device="pc"] #flashcardPage .flashcard-front #flashFrontText{
+    font-size:clamp(42px,5vw,76px)!important;
+}
+html#mobilePreview[data-device="mobile"] #flashcardPage .flashcard-front #flashFrontText{
+    font-size:clamp(34px,10vw,58px)!important;
+}

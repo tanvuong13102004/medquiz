@@ -15265,8 +15265,6 @@ html#mobilePreview[data-device="mobile"] body > .global-stickers,
 html#mobilePreview[data-device="mobile"] .kawaii-page-decor,
 html#mobilePreview[data-device="mobile"] .kawaii-floating-notes,
 html#mobilePreview[data-device="mobile"] .subject-page-decor,
-html#mobilePreview[data-device="mobile"] .flashcard-page-bg,
-html#mobilePreview[data-device="mobile"] .word-practice-page-bg,
 html#mobilePreview[data-device="mobile"] #landingPage .home-v2-sky,
 html#mobilePreview[data-device="mobile"] #landingPage .home-bottom-garden{
     display:none!important;
@@ -15299,4 +15297,469 @@ html#mobilePreview[data-device="mobile"] .flashcard-stage,
 html#mobilePreview[data-device="mobile"] .word-practice-dashboard{
     background-color:transparent!important;
     background-image:none!important;
+}
+
+/* =========================================================
+   V10 — FIXED BLACK HEADER + MOBILE SCROLL-TOP POSITION
+   2026-09-12
+========================================================= */
+html#mobilePreview[data-device="mobile"] .header{
+    position:fixed!important;
+    top:0!important;
+    left:0!important;
+    right:0!important;
+    width:100%!important;
+    z-index:5000!important;
+}
+html#mobilePreview[data-device="mobile"] body{
+    padding-top:78px!important;
+}
+
+/* V11 — move the mobile ↑ button farther to the right.
+   Intentionally lets a small part approach the screen edge for the requested placement. */
+html#mobilePreview[data-device="mobile"] .scroll-top-btn{
+    right:-6px!important;
+}
+
+/* =========================================================
+   BRAND LOGO REDESIGN — MINISTRY OF HEALTH BOX
+   2026-09-12
+   Applied to both PC and Mobile
+========================================================= */
+.header .brand,
+.brand{
+    align-items:center!important;
+    gap:12px!important;
+}
+.brand-logo{
+    position:relative!important;
+    overflow:hidden!important;
+    isolation:isolate!important;
+    background:linear-gradient(180deg,#ffffff 0%,#f6f8ff 100%)!important;
+    border:1.6px solid rgba(255,255,255,.82)!important;
+    box-shadow:0 10px 24px rgba(0,0,0,.18), inset 0 1px 0 rgba(255,255,255,.95)!important;
+}
+.brand-logo::before{
+    content:""!important;
+    position:absolute!important;
+    inset:5px!important;
+    border-radius:14px!important;
+    background:
+        url("../assets/brand/bo-y-te.png") center/contain no-repeat,
+        radial-gradient(circle at 30% 22%, rgba(255,255,255,.96) 0%, rgba(244,247,255,.98) 52%, rgba(233,239,255,.95) 100%)!important;
+    box-shadow:inset 0 0 0 1px rgba(123,147,214,.16)!important;
+    z-index:2!important;
+}
+.brand-logo::after{
+    content:""!important;
+    position:absolute!important;
+    inset:0!important;
+    border-radius:inherit!important;
+    background:linear-gradient(135deg, rgba(255,255,255,.46) 0%, rgba(255,255,255,0) 42%, rgba(255,255,255,.18) 100%)!important;
+    pointer-events:none!important;
+    z-index:3!important;
+}
+.brand-pulse,
+.brand-cross,
+.brand-cross img,
+.medical-snake-mark{
+    display:none!important;
+}
+.brand-logo:hover,
+.brand:hover .brand-logo{
+    transform:none!important;
+    filter:none!important;
+}
+html#mobilePreview[data-device="pc"] .brand-logo{
+    width:72px!important;
+    height:72px!important;
+    flex:0 0 72px!important;
+    border-radius:22px!important;
+}
+html#mobilePreview[data-device="mobile"] .brand-logo{
+    width:54px!important;
+    height:54px!important;
+    flex:0 0 54px!important;
+    border-radius:16px!important;
+}
+html#mobilePreview[data-device="pc"] .brand-name{
+    line-height:1!important;
+}
+html#mobilePreview[data-device="mobile"] .brand-name{
+    line-height:1!important;
+}
+@media (max-width:560px){
+    html#mobilePreview[data-device="mobile"] .brand{
+        gap:10px!important;
+    }
+    html#mobilePreview[data-device="mobile"] .brand-logo{
+        width:48px!important;
+        height:48px!important;
+        flex:0 0 48px!important;
+        border-radius:15px!important;
+    }
+}
+
+/* =========================================================
+   V13 — MOBILE ENGLISH FLASHCARD + WORD PRACTICE FIX
+   2026-09-12
+   - Undo accidental hiding from the all-white mobile rule.
+   - Keep white page canvas while preserving feature content.
+   - Add lightweight decorative stickers only on Mobile.
+========================================================= */
+html#mobilePreview[data-device="mobile"] #flashcardPage .flashcard-page-bg,
+html#mobilePreview[data-device="mobile"] #wordPracticePage .word-practice-page-bg{
+    display:block!important;
+    visibility:visible!important;
+    position:relative!important;
+    width:100%!important;
+    min-height:calc(100vh - 90px)!important;
+    overflow:hidden!important;
+    background:#fff!important;
+    background-image:none!important;
+}
+
+/* Old decorative labels used negative z-index; use the new sticker layer instead. */
+html#mobilePreview[data-device="mobile"] #flashcardPage .flash-decor,
+html#mobilePreview[data-device="mobile"] #wordPracticePage .word-decor{
+    display:none!important;
+}
+
+html#mobilePreview[data-device="mobile"] .mobile-english-stickers{
+    display:block!important;
+    position:absolute!important;
+    inset:0!important;
+    z-index:1!important;
+    pointer-events:none!important;
+    overflow:hidden!important;
+}
+html#mobilePreview[data-device="mobile"] .mobile-english-stickers .mes{
+    position:absolute!important;
+    width:44px!important;
+    height:44px!important;
+    display:grid!important;
+    place-items:center!important;
+    border-radius:16px!important;
+    background:rgba(255,255,255,.93)!important;
+    border:1px solid rgba(190,214,255,.58)!important;
+    box-shadow:0 8px 22px rgba(54,91,150,.12)!important;
+    font-size:23px!important;
+    line-height:1!important;
+    opacity:.88!important;
+    animation:mobileEnglishStickerFloat 4.8s ease-in-out infinite!important;
+}
+html#mobilePreview[data-device="mobile"] .mobile-word-stickers .mes{
+    border-color:rgba(178,232,211,.72)!important;
+    box-shadow:0 8px 22px rgba(51,139,109,.11)!important;
+}
+html#mobilePreview[data-device="mobile"] .mobile-english-stickers .mes-1{left:4px!important;top:86px!important}
+html#mobilePreview[data-device="mobile"] .mobile-english-stickers .mes-2{right:5px!important;top:145px!important;animation-delay:-.8s!important}
+html#mobilePreview[data-device="mobile"] .mobile-english-stickers .mes-3{left:7px!important;top:42%!important;animation-delay:-1.6s!important}
+html#mobilePreview[data-device="mobile"] .mobile-english-stickers .mes-4{right:6px!important;top:57%!important;animation-delay:-2.4s!important}
+html#mobilePreview[data-device="mobile"] .mobile-english-stickers .mes-5{left:9px!important;bottom:118px!important;animation-delay:-3.2s!important}
+html#mobilePreview[data-device="mobile"] .mobile-english-stickers .mes-6{right:7px!important;bottom:55px!important;animation-delay:-4s!important}
+@keyframes mobileEnglishStickerFloat{
+    0%,100%{transform:translateY(0) rotate(-4deg) scale(1)}
+    50%{transform:translateY(-8px) rotate(5deg) scale(1.06)}
+}
+
+/* Keep all real controls above decorative stickers. */
+html#mobilePreview[data-device="mobile"] #flashcardPage .flashcard-page-bg > :not(.mobile-english-stickers),
+html#mobilePreview[data-device="mobile"] #wordPracticePage .word-practice-page-bg > :not(.mobile-english-stickers){
+    position:relative!important;
+    z-index:2!important;
+}
+
+/* Mobile reading comfort — final override. */
+html#mobilePreview[data-device="mobile"] .flash-header-btn,
+html#mobilePreview[data-device="mobile"] .word-header-btn{
+    min-height:42px!important;
+    padding:8px 12px!important;
+    font-size:13px!important;
+}
+html#mobilePreview[data-device="mobile"] .flash-header-center small,
+html#mobilePreview[data-device="mobile"] .word-header-center small{
+    font-size:10px!important;
+}
+html#mobilePreview[data-device="mobile"] .flash-header-center strong,
+html#mobilePreview[data-device="mobile"] .word-header-center strong{
+    font-size:16px!important;
+}
+html#mobilePreview[data-device="mobile"] .flash-dashboard-title > div > span,
+html#mobilePreview[data-device="mobile"] .word-practice-intro small{
+    font-size:10px!important;
+}
+html#mobilePreview[data-device="mobile"] .flash-dashboard-title p,
+html#mobilePreview[data-device="mobile"] .word-practice-intro p{
+    font-size:13px!important;
+    line-height:1.45!important;
+}
+html#mobilePreview[data-device="mobile"] .flash-stats small,
+html#mobilePreview[data-device="mobile"] .word-practice-stats small{
+    font-size:9px!important;
+}
+html#mobilePreview[data-device="mobile"] .flash-search-row input{
+    min-height:44px!important;
+    font-size:16px!important;
+}
+html#mobilePreview[data-device="mobile"] .flash-small-btn,
+html#mobilePreview[data-device="mobile"] .word-direction-btn,
+html#mobilePreview[data-device="mobile"] .word-shuffle-btn{
+    min-height:42px!important;
+    font-size:12px!important;
+}
+html#mobilePreview[data-device="mobile"] .flashcard-stage{
+    height:360px!important;
+    margin-top:14px!important;
+}
+html#mobilePreview[data-device="mobile"] .flashcard-face{
+    padding:26px 18px!important;
+}
+html#mobilePreview[data-device="mobile"] .flashcard-face h2{
+    font-size:clamp(28px,9vw,40px)!important;
+    line-height:1.18!important;
+}
+html#mobilePreview[data-device="mobile"] .flashcard-face > p,
+html#mobilePreview[data-device="mobile"] .flash-pronunciation,
+html#mobilePreview[data-device="mobile"] .flash-example{
+    font-size:14px!important;
+}
+html#mobilePreview[data-device="mobile"] .flashcard-actions button{
+    min-height:46px!important;
+    font-size:14px!important;
+}
+html#mobilePreview[data-device="mobile"] .word-direction-copy strong{
+    font-size:14px!important;
+}
+html#mobilePreview[data-device="mobile"] .word-direction-copy small,
+html#mobilePreview[data-device="mobile"] .word-progress-info strong,
+html#mobilePreview[data-device="mobile"] .word-input-label,
+html#mobilePreview[data-device="mobile"] .word-practice-feedback,
+html#mobilePreview[data-device="mobile"] .word-example{
+    font-size:12px!important;
+}
+html#mobilePreview[data-device="mobile"] .word-question-label{
+    font-size:10px!important;
+}
+html#mobilePreview[data-device="mobile"] .word-direction-label,
+html#mobilePreview[data-device="mobile"] .word-pronunciation{
+    font-size:13px!important;
+}
+html#mobilePreview[data-device="mobile"] .word-action-btn{
+    min-height:46px!important;
+    font-size:14px!important;
+}
+
+@media (max-width:430px){
+    html#mobilePreview[data-device="mobile"] .mobile-english-stickers .mes{
+        width:38px!important;
+        height:38px!important;
+        border-radius:14px!important;
+        font-size:20px!important;
+        opacity:.74!important;
+    }
+    html#mobilePreview[data-device="mobile"] .flashcard-stage{
+        height:340px!important;
+    }
+}
+
+@media (prefers-reduced-motion:reduce){
+    html#mobilePreview[data-device="mobile"] .mobile-english-stickers .mes{
+        animation:none!important;
+    }
+}
+
+
+/* =========================================================
+   V14 — DIRECT ENGLISH TOOLS + HARD MOBILE FEATURE GUARD
+   2026-09-13
+========================================================= */
+.english-subject-tools{
+    position:relative;
+    width:100%;
+    margin:20px 0 4px;
+    isolation:isolate;
+}
+.english-subject-tools[hidden]{display:none!important}
+.english-subject-tools.show{display:block!important}
+.english-tools-heading{
+    position:relative;
+    z-index:2;
+    display:flex;
+    align-items:center;
+    gap:14px;
+    padding:18px 20px!important;
+    border-radius:24px!important;
+    background:linear-gradient(135deg,#fff,#f5f9ff,#fff7fb)!important;
+    border:1px solid rgba(190,214,255,.72)!important;
+    box-shadow:0 14px 34px rgba(73,110,166,.10)!important;
+}
+.english-tools-heading-icon{
+    width:54px;height:54px;flex:0 0 54px;
+    display:grid;place-items:center;
+    border-radius:18px;
+    background:linear-gradient(135deg,#dceeff,#eee7ff,#ffe7f1);
+    font-size:27px;
+}
+.english-tools-heading small{
+    color:#6688bd;font-size:10px;font-weight:950;letter-spacing:1px;
+}
+.english-tools-heading h2{
+    margin:3px 0 4px;color:#253b61;font-size:24px;line-height:1.1;
+}
+.english-tools-heading p{
+    margin:0;color:#71829d;font-size:12px;line-height:1.4;
+}
+.english-tools-grid{
+    position:relative;z-index:2;
+    display:grid;grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:14px;margin-top:14px;
+}
+.english-tool-card{
+    position:relative;overflow:hidden;
+    min-height:134px;padding:18px;
+    display:grid;grid-template-columns:58px 1fr 42px;
+    align-items:center;gap:14px;
+    border:1px solid transparent;border-radius:25px;
+    cursor:pointer;text-align:left;
+    box-shadow:0 16px 34px rgba(71,98,143,.10);
+    transition:transform .22s ease,box-shadow .22s ease,filter .22s ease;
+}
+.english-tool-card:hover{transform:translateY(-4px);filter:saturate(1.04)}
+.english-tool-flash{
+    color:#315a9f;
+    background:linear-gradient(145deg,#fff,#edf6ff,#f7f2ff);
+    border-color:#cfe4ff;
+}
+.english-tool-word{
+    color:#287b67;
+    background:linear-gradient(145deg,#fff,#edfff8,#f4fbff);
+    border-color:#caeee2;
+}
+.english-tool-icon{
+    width:58px;height:58px;display:grid;place-items:center;
+    border-radius:19px;background:rgba(255,255,255,.86);
+    box-shadow:0 9px 20px rgba(76,102,143,.10);font-size:29px;
+}
+.english-tool-copy{min-width:0;display:flex;flex-direction:column}
+.english-tool-copy small{font-size:9px;font-weight:950;letter-spacing:1px;opacity:.72}
+.english-tool-copy strong{margin-top:4px;font-size:19px;line-height:1.15}
+.english-tool-copy em{margin-top:5px;font-size:11px;line-height:1.35;font-style:normal;opacity:.72}
+.english-tool-arrow{
+    width:40px;height:40px;display:grid;place-items:center;border-radius:14px;
+    color:#fff;font-size:21px;font-weight:950;
+    background:linear-gradient(135deg,#6098f3,#9270ea);
+}
+.english-tool-word .english-tool-arrow{background:linear-gradient(135deg,#4ac89a,#40a7d8)}
+.english-tool-sticker{position:absolute;right:13px;top:10px;font-size:19px;opacity:.34}
+.english-tools-decor{display:none}
+
+html#mobilePreview[data-device="mobile"] #flashcardPage,
+html#mobilePreview[data-device="mobile"] #wordPracticePage{
+    visibility:visible!important;
+    opacity:1!important;
+}
+html#mobilePreview[data-device="mobile"] #flashcardPage.show,
+html#mobilePreview[data-device="mobile"] #wordPracticePage.show{
+    display:block!important;
+}
+html#mobilePreview[data-device="mobile"] #flashcardPage .flashcard-page-bg,
+html#mobilePreview[data-device="mobile"] #wordPracticePage .word-practice-page-bg{
+    display:block!important;
+    visibility:visible!important;
+    opacity:1!important;
+    background:#fff!important;
+    min-height:calc(100vh - 88px)!important;
+}
+
+html#mobilePreview[data-device="mobile"] .english-subject-tools{
+    margin:14px 0 8px!important;
+    padding:0 2px 12px!important;
+}
+html#mobilePreview[data-device="mobile"] .english-tools-heading{
+    gap:10px!important;padding:14px!important;border-radius:20px!important;
+}
+html#mobilePreview[data-device="mobile"] .english-tools-heading-icon{
+    width:46px!important;height:46px!important;flex-basis:46px!important;border-radius:15px!important;font-size:23px!important;
+}
+html#mobilePreview[data-device="mobile"] .english-tools-heading small{font-size:9px!important}
+html#mobilePreview[data-device="mobile"] .english-tools-heading h2{font-size:20px!important}
+html#mobilePreview[data-device="mobile"] .english-tools-heading p{font-size:11px!important}
+html#mobilePreview[data-device="mobile"] .english-tools-grid{
+    grid-template-columns:1fr!important;gap:11px!important;margin-top:11px!important;
+}
+html#mobilePreview[data-device="mobile"] .english-tool-card{
+    min-height:112px!important;
+    padding:15px 14px!important;
+    grid-template-columns:50px 1fr 38px!important;
+    gap:11px!important;border-radius:20px!important;
+}
+html#mobilePreview[data-device="mobile"] .english-tool-icon{
+    width:50px!important;height:50px!important;border-radius:16px!important;font-size:25px!important;
+}
+html#mobilePreview[data-device="mobile"] .english-tool-copy small{font-size:9px!important}
+html#mobilePreview[data-device="mobile"] .english-tool-copy strong{font-size:17px!important}
+html#mobilePreview[data-device="mobile"] .english-tool-copy em{font-size:11px!important}
+html#mobilePreview[data-device="mobile"] .english-tool-arrow{
+    width:38px!important;height:38px!important;border-radius:13px!important;font-size:19px!important;
+}
+
+/* Mobile-only stickers around the English tools themselves. */
+html#mobilePreview[data-device="mobile"] .english-tools-decor{
+    display:block!important;position:absolute!important;inset:-8px -2px!important;
+    z-index:3!important;pointer-events:none!important;overflow:visible!important;
+}
+html#mobilePreview[data-device="mobile"] .english-tools-decor .etd{
+    position:absolute!important;width:32px!important;height:32px!important;
+    display:grid!important;place-items:center!important;border-radius:12px!important;
+    background:rgba(255,255,255,.93)!important;border:1px solid rgba(204,220,247,.82)!important;
+    box-shadow:0 7px 18px rgba(67,97,144,.11)!important;font-size:17px!important;
+    animation:englishToolSticker 4.2s ease-in-out infinite!important;
+}
+html#mobilePreview[data-device="mobile"] .english-tools-decor .etd-1{left:-2px;top:78px}
+html#mobilePreview[data-device="mobile"] .english-tools-decor .etd-2{right:1px;top:52px;animation-delay:-.7s!important}
+html#mobilePreview[data-device="mobile"] .english-tools-decor .etd-3{left:3px;top:50%;animation-delay:-1.4s!important}
+html#mobilePreview[data-device="mobile"] .english-tools-decor .etd-4{right:2px;top:58%;animation-delay:-2.1s!important}
+html#mobilePreview[data-device="mobile"] .english-tools-decor .etd-5{left:9px;bottom:-3px;animation-delay:-2.8s!important}
+html#mobilePreview[data-device="mobile"] .english-tools-decor .etd-6{right:10px;bottom:-5px;animation-delay:-3.5s!important}
+@keyframes englishToolSticker{
+    0%,100%{transform:translateY(0) rotate(-5deg) scale(1)}
+    50%{transform:translateY(-7px) rotate(6deg) scale(1.06)}
+}
+@media(max-width:430px){
+    html#mobilePreview[data-device="mobile"] .english-tools-decor .etd{width:28px!important;height:28px!important;font-size:15px!important;opacity:.82!important}
+}
+@media(prefers-reduced-motion:reduce){
+    html#mobilePreview[data-device="mobile"] .english-tools-decor .etd{animation:none!important}
+}
+
+/* =========================================================
+   FLASHCARD FRONT — ENGLISH WORD ONLY
+   2026-09-13
+========================================================= */
+#flashcardPage .flashcard-front{
+    display:flex!important;
+    align-items:center!important;
+    justify-content:center!important;
+    text-align:center!important;
+}
+#flashcardPage .flashcard-front .flash-face-label,
+#flashcardPage .flashcard-front .flash-word-icon,
+#flashcardPage .flashcard-front #flashFrontHint,
+#flashcardPage .flashcard-front .flash-click-hint{
+    display:none!important;
+}
+#flashcardPage .flashcard-front #flashFrontText{
+    display:block!important;
+    margin:auto!important;
+    max-width:90%!important;
+    font-weight:900!important;
+    line-height:1.15!important;
+    text-align:center!important;
+}
+html#mobilePreview[data-device="pc"] #flashcardPage .flashcard-front #flashFrontText{
+    font-size:clamp(42px,5vw,76px)!important;
+}
+html#mobilePreview[data-device="mobile"] #flashcardPage .flashcard-front #flashFrontText{
+    font-size:clamp(34px,10vw,58px)!important;
 }

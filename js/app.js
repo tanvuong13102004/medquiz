@@ -7,6 +7,7 @@
 window.medQuizQuestions = window.medQuizQuestions || {};
 window.medQuizResources = window.medQuizResources || {};
 window.medQuizFlashcards = window.medQuizFlashcards || {};
+window.medQuizWordPractice = window.medQuizWordPractice || {};
 window.medQuizQuestionSets = window.medQuizQuestionSets || {};
 
 
@@ -50,10 +51,38 @@ async function ensureEnglishFlashcardsLoaded() {
     const existing = window.medQuizFlashcards && window.medQuizFlashcards["Tiếng Anh"];
     if (Array.isArray(existing) && existing.length) return true;
     if (!__englishFlashcardsPromise) {
-        __englishFlashcardsPromise = loadLazyScript("flashcards/tienganh.js")
+        __englishFlashcardsPromise = loadLazyScript("flashcards/tienganh.js?v=20260913f1")
+            .then(() => {
+                const cards = window.medQuizFlashcards && window.medQuizFlashcards["Tiếng Anh"];
+                return Array.isArray(cards) && cards.length > 0;
+            })
             .catch((error) => { console.warn(error); return false; });
     }
     return __englishFlashcardsPromise;
+}
+
+let __englishWordPracticePromise = null;
+async function ensureEnglishWordPracticeLoaded() {
+    const existing = window.medQuizWordPractice && window.medQuizWordPractice["Tiếng Anh"];
+    if (Array.isArray(existing) && existing.length) return true;
+    if (!__englishWordPracticePromise) {
+        __englishWordPracticePromise = loadLazyScript("flashcards/tienganh11.js?v=20260913f1")
+            .then(() => {
+                const cards = window.medQuizWordPractice && window.medQuizWordPractice["Tiếng Anh"];
+                return Array.isArray(cards) && cards.length > 0;
+            })
+            .catch(async (error) => {
+                console.warn(error);
+                await ensureEnglishFlashcardsLoaded();
+                const fallback = window.medQuizFlashcards && window.medQuizFlashcards["Tiếng Anh"];
+                if (Array.isArray(fallback) && fallback.length) {
+                    window.medQuizWordPractice["Tiếng Anh"] = fallback.map(card => ({ ...card }));
+                    return true;
+                }
+                return false;
+            });
+    }
+    return __englishWordPracticePromise;
 }
 
 function scheduleBackgroundDataWarmup() {
@@ -221,6 +250,15 @@ let wordPracticeLocked = false;
 let wordPracticeHintLevel = 0;
 let wordPracticeCurrentDirection = "en-vi";
 
+/* =========================================================
+   ENGLISH STUDY SCOPE
+   - __all__  : toàn bộ 10 bộ Tiếng Anh
+   - tienganhN: chỉ bộ N đang chọn
+========================================================= */
+let englishStudyScope = "__all__";
+let englishStudyReturnPage = null;
+let englishStudyScopeLabel = "Tiếng Anh • 10 bộ";
+
 
 /* =========================================================
    HELPER
@@ -263,6 +301,8 @@ document.addEventListener(
 async function init() {
 
     ensureQuestionSetUI();
+
+    ensureEnglishSubjectToolsUI();
 
     setupHistoryNavigation();
 
@@ -481,6 +521,7 @@ function syncStateSelection(state) {
         const icon = $("subjectPageIcon");
         if (title) title.textContent = selectedSubject;
         if (icon) icon.textContent = config.icon || "📚";
+        syncEnglishSubjectTools();
     }
 
     if (Object.prototype.hasOwnProperty.call(state, "questionSet")) {
@@ -1880,6 +1921,335 @@ function ensureQuestionSetUI() {
 
 
 /* =========================================================
+   ENGLISH SUBJECT QUICK TOOLS
+   Flashcard + Luyện từ are available directly on the English
+   subject page and do not depend on quiz-set loading.
+========================================================= */
+function ensureEnglishSubjectToolsUI() {
+
+    if (document.getElementById("englishSubjectTools")) {
+        return;
+    }
+
+    const subjectContainer = $("subjectPage");
+    const questionArea = $("questionSetArea");
+
+    if (!subjectContainer) {
+        return;
+    }
+
+    const tools = document.createElement("section");
+    tools.id = "englishSubjectTools";
+    tools.className = "english-subject-tools";
+    tools.hidden = true;
+    tools.innerHTML = `
+        <div class="english-tools-decor" aria-hidden="true">
+            <span class="etd etd-1">✨</span>
+            <span class="etd etd-2">💬</span>
+            <span class="etd etd-3">🎧</span>
+            <span class="etd etd-4">✏️</span>
+            <span class="etd etd-5">📚</span>
+            <span class="etd etd-6">⭐</span>
+        </div>
+
+        <div class="english-tools-heading glass-card">
+            <div class="english-tools-heading-icon">🔤</div>
+            <div>
+                <small>HỌC TIẾNG ANH</small>
+                <h2>Flashcard &amp; Luyện từ</h2>
+                <p>Random nội dung của toàn bộ 10 bộ Tiếng Anh.</p>
+            </div>
+        </div>
+
+        <div class="english-tools-grid">
+            <button class="english-tool-card english-tool-flash ripple-target" id="englishSubjectFlashBtn" type="button">
+                <span class="english-tool-sticker">💙</span>
+                <span class="english-tool-icon">🎴</span>
+                <span class="english-tool-copy">
+                    <small>FLASHCARD</small>
+                    <strong>Học bằng Flashcard</strong>
+                    <em>Random tất cả câu hỏi • 10 bộ</em>
+                </span>
+                <span class="english-tool-arrow">→</span>
+            </button>
+
+            <button class="english-tool-card english-tool-word ripple-target" id="englishSubjectWordBtn" type="button">
+                <span class="english-tool-sticker">🌱</span>
+                <span class="english-tool-icon">⌨️</span>
+                <span class="english-tool-copy">
+                    <small>LUYỆN TỪ</small>
+                    <strong>Luyện Anh ↔ Việt</strong>
+                    <em>Random tất cả câu hỏi • 10 bộ</em>
+                </span>
+                <span class="english-tool-arrow">→</span>
+            </button>
+        </div>
+    `;
+
+    /* Flashcard + Luyện từ phải nằm TRÊN 10 bộ Tiếng Anh. */
+    if (questionArea && questionArea.parentNode === subjectContainer) {
+        questionArea.insertAdjacentElement("beforebegin", tools);
+    }
+    else {
+        subjectContainer.prepend(tools);
+    }
+
+    $("englishSubjectFlashBtn")?.addEventListener("click", async () => {
+        await openEnglishStudyFromSubject("flashcard");
+    });
+
+    $("englishSubjectWordBtn")?.addEventListener("click", async () => {
+        await openEnglishStudyFromSubject("word");
+    });
+}
+
+function syncEnglishSubjectTools() {
+
+    const tools = $("englishSubjectTools");
+
+    if (!tools) {
+        return;
+    }
+
+    const isEnglish = selectedSubject === "Tiếng Anh";
+
+    tools.hidden = !isEnglish;
+    tools.classList.toggle("show", isEnglish);
+
+    if (isEnglish) {
+        /* Tiny 55-word datasets: warm them immediately while the
+           question sets continue loading independently. */
+        Promise.allSettled([
+            ensureEnglishFlashcardsLoaded(),
+            ensureEnglishWordPracticeLoaded()
+        ]).catch(() => {});
+    }
+}
+
+/* =========================================================
+   ENGLISH STUDY — PHẠM VI 10 BỘ / TỪNG BỘ
+========================================================= */
+function getEnglishStudyScopeLabel(scope = englishStudyScope) {
+    if (scope === "__all__") {
+        return "Tiếng Anh • Random cả 10 bộ";
+    }
+
+    const keys = getSubjectSetKeys("Tiếng Anh");
+    const index = keys.indexOf(scope);
+    if (index >= 0) {
+        return `Tiếng Anh • Bộ trắc nghiệm ${index + 1}`;
+    }
+
+    return "Tiếng Anh";
+}
+
+function getEnglishStudyQuestions(scope = englishStudyScope) {
+    if (scope === "__all__") {
+        return getAllSubjectQuestions("Tiếng Anh");
+    }
+
+    if (scope && scope !== "__all__") {
+        return getSubjectQuestionSet("Tiếng Anh", scope);
+    }
+
+    return [];
+}
+
+function getQuestionCorrectText(question) {
+    if (!question || typeof question !== "object") return "";
+
+    const answers = Array.isArray(question.answers) ? question.answers : [];
+    let correct = question.correct;
+
+    if (typeof correct === "string") {
+        const trimmed = correct.trim();
+        if (/^[A-Da-d]$/.test(trimmed)) {
+            correct = trimmed.toUpperCase().charCodeAt(0) - 65;
+        }
+        else if (/^\d+$/.test(trimmed)) {
+            correct = Number(trimmed);
+        }
+        else if (trimmed) {
+            return trimmed;
+        }
+    }
+
+    if (Number.isInteger(correct) && answers[correct] != null) {
+        return String(answers[correct]).trim();
+    }
+
+    if (question.correctAnswer != null) return String(question.correctAnswer).trim();
+    if (question.answer != null) return String(question.answer).trim();
+    return "";
+}
+
+function hasVietnameseMarks(value) {
+    return /[ÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠƯẠ-ỹ]/i.test(String(value || ""));
+}
+
+function looksLikeEnglishTerm(value) {
+    const text = String(value || "").trim();
+    if (!text || text.length > 80 || hasVietnameseMarks(text)) return false;
+    if (!/[A-Za-z]/.test(text)) return false;
+    if (/[?!:;]/.test(text)) return false;
+    return text.split(/\s+/).length <= 8;
+}
+
+function extractEnglishVocabularyPair(question) {
+    if (!question || typeof question !== "object") return null;
+
+    const directEnglish = String(
+        question.en || question.english || question.word || question.front || ""
+    ).trim();
+    const directVietnamese = String(
+        question.vi || question.vietnamese || question.meaning || question.back || ""
+    ).trim();
+
+    if (directEnglish && directVietnamese && looksLikeEnglishTerm(directEnglish)) {
+        return { en: directEnglish, vi: directVietnamese };
+    }
+
+    const prompt = String(
+        question.question || question.text || question.prompt || ""
+    ).trim();
+    const correct = getQuestionCorrectText(question);
+    const explanation = String(question.explanation || "").trim();
+
+    /* Ưu tiên dạng giải thích: word = nghĩa. */
+    const eqMatch = explanation.replace(/^\s*[✅✔️]+\s*/u, "").match(/^(.+?)\s*=\s*(.+?)\s*$/);
+    if (eqMatch) {
+        const left = eqMatch[1].trim();
+        const right = eqMatch[2].trim();
+        if (looksLikeEnglishTerm(left)) return { en: left, vi: right };
+        if (looksLikeEnglishTerm(right)) return { en: right, vi: left };
+    }
+
+    const quoted = prompt.match(/[“"]([^”"]+)[”"]/);
+    const quotedText = quoted ? quoted[1].trim() : "";
+    const lower = prompt.toLowerCase();
+
+    /* Anh -> Việt: Từ “airport” có nghĩa là gì? */
+    if (quotedText && /(có nghĩa|nghĩa là|tiếng việt|dịch.*việt)/i.test(prompt)) {
+        if (looksLikeEnglishTerm(quotedText) && correct) {
+            return { en: quotedText, vi: correct };
+        }
+    }
+
+    /* Việt -> Anh: “sân bay” trong tiếng Anh là gì? */
+    if (correct && /(tiếng anh|english)/i.test(prompt)) {
+        if (looksLikeEnglishTerm(correct)) {
+            return { en: correct, vi: quotedText || prompt };
+        }
+    }
+
+    /* Fallback có kiểm soát. */
+    if (quotedText && looksLikeEnglishTerm(quotedText) && correct) {
+        return { en: quotedText, vi: correct };
+    }
+    if (correct && looksLikeEnglishTerm(correct) && prompt) {
+        return { en: correct, vi: quotedText || prompt };
+    }
+
+    return null;
+}
+
+function quizQuestionToStudyCard(question, index, scope) {
+    const pair = extractEnglishVocabularyPair(question);
+    if (!pair || !pair.en || !pair.vi) return null;
+
+    const rawId = question?.id || `${scope || "english"}-${index + 1}`;
+
+    return {
+        id: `quiz-study-${scope || "all"}-${rawId}`,
+        front: pair.en,
+        back: pair.vi,
+        pronunciation: "",
+        example: "",
+        studyKind: "vocabulary",
+        fixedDirection: false,
+        sourceScope: scope || "__all__"
+    };
+}
+
+function getEnglishScopedStudyCards(scope = englishStudyScope) {
+    const seen = new Set();
+    return getEnglishStudyQuestions(scope)
+        .map((question, index) => quizQuestionToStudyCard(question, index, scope))
+        .filter(Boolean)
+        .filter(card => {
+            const key = `${card.front.toLowerCase()}\u0000${card.back.toLowerCase()}`;
+            if (seen.has(key)) return false;
+            seen.add(key);
+            return true;
+        });
+}
+
+async function ensureEnglishStudyScopeReady(scope = "__all__") {
+    if (subjectSetLoadState["Tiếng Anh"] !== true) {
+        showToast("Đang tải các bộ Tiếng Anh...", "info");
+        await loadSubjectQuestionSets("Tiếng Anh");
+        updateQuestionSetCounts();
+        updateSubjectCountFor("Tiếng Anh");
+    }
+
+    const questions = getEnglishStudyQuestions(scope);
+    return Array.isArray(questions) && questions.length > 0;
+}
+
+async function openEnglishStudyFromSubject(kind) {
+    englishStudyScope = "__all__";
+    englishStudyReturnPage = subjectPage;
+    englishStudyScopeLabel = getEnglishStudyScopeLabel("__all__");
+
+    const ready = await ensureEnglishStudyScopeReady("__all__");
+    if (!ready) {
+        showToast("Chưa tìm thấy câu hỏi trong 10 bộ Tiếng Anh.", "warning");
+    }
+
+    if (kind === "word") {
+        await openWordPractice("__all__", subjectPage);
+    }
+    else {
+        await openFlashcards("__all__", subjectPage);
+    }
+}
+
+function resolveEnglishStudyScope(requestedScope) {
+    if (typeof requestedScope === "string" && requestedScope) {
+        return requestedScope;
+    }
+
+    if (
+        selectedSubject === "Tiếng Anh" &&
+        selectedQuestionSet &&
+        selectedQuestionSet !== "__all__"
+    ) {
+        return selectedQuestionSet;
+    }
+
+    return "__all__";
+}
+
+function updateEnglishStudyScopeUI(kind, total) {
+    const label = englishStudyScopeLabel || getEnglishStudyScopeLabel();
+
+    if (kind === "flashcard") {
+        const dashboardTitle = document.querySelector("#flashcardPage .flash-dashboard-title h2");
+        const dashboardText = document.querySelector("#flashcardPage .flash-dashboard-title p");
+        const backButton = $("backFromFlashcardBtn");
+        if (dashboardTitle) dashboardTitle.textContent = "English Flashcards";
+        if (dashboardText) dashboardText.textContent = `${label} • ${total} câu • đã xáo trộn`;
+        if (backButton) backButton.textContent = englishStudyScope === "__all__" ? "← Tiếng Anh" : `← Bộ ${selectedQuestionSetNumber || ""}`.trim();
+    }
+    else {
+        const introSmall = document.querySelector("#wordPracticePage .word-practice-intro small");
+        const backButton = $("backFromWordPracticeBtn");
+        if (introSmall) introSmall.textContent = `${label.toUpperCase()} • ${total} CÂU`;
+        if (backButton) backButton.textContent = englishStudyScope === "__all__" ? "← Tiếng Anh" : `← Bộ ${selectedQuestionSetNumber || ""}`.trim();
+    }
+}
+
+/* =========================================================
    RENDER 10 BỘ
 ========================================================= */
 
@@ -2481,6 +2851,9 @@ async function selectSubject(
         button.dataset.subject;
 
 
+    syncEnglishSubjectTools();
+
+
     const subjectConfig =
         SUBJECT_SET_CONFIG[
             selectedSubject
@@ -2787,6 +3160,12 @@ function selectQuestionSet(
         ) || 0;
 
 
+    if (selectedSubject === "Tiếng Anh") {
+        englishStudyScope = selectedQuestionSet;
+        englishStudyScopeLabel = getEnglishStudyScopeLabel(selectedQuestionSet);
+    }
+
+
     const count =
         getRawQuestions(
             selectedSubject
@@ -2872,6 +3251,12 @@ function selectAllQuestionSets() {
 
     selectedQuestionSetNumber =
         0;
+
+
+    if (selectedSubject === "Tiếng Anh") {
+        englishStudyScope = "__all__";
+        englishStudyScopeLabel = getEnglishStudyScopeLabel("__all__");
+    }
 
 
     questionSetArea
@@ -6101,7 +6486,7 @@ function setupRead() {
     $("backFromReadBtn")
         .addEventListener(
             "click",
-            () => appBack(quizConfigPage || exerciseHub)
+            () => appBack(englishStudyReturnPage || quizConfigPage || exerciseHub)
         );
 
 
@@ -7400,7 +7785,7 @@ function setupFlashcards() {
     $("flashcardModeBtn")
         .addEventListener(
             "click",
-            openFlashcards
+            () => openFlashcards(resolveEnglishStudyScope(), quizConfigPage)
         );
 
 
@@ -7542,63 +7927,58 @@ function normalizeFlashcard(
                 card.example
                 ||
                 ""
-            )
+            ),
+
+        studyKind:
+            String(card.studyKind || "vocabulary"),
+
+        fixedDirection:
+            Boolean(card.fixedDirection),
+
+        sourceScope:
+            String(card.sourceScope || "")
 
     };
 
 }
 
 
-async function openFlashcards() {
+async function openFlashcards(requestedScope = null, returnPage = null) {
 
-    await ensureEnglishFlashcardsLoaded();
+    const scope = resolveEnglishStudyScope(requestedScope);
+    englishStudyScope = scope;
+    englishStudyReturnPage = returnPage || quizConfigPage || exerciseHub;
+    englishStudyScopeLabel = getEnglishStudyScopeLabel(scope);
 
-    const raw =
-        window.medQuizFlashcards[
-            "Tiếng Anh"
-        ];
+    $("flashFrontText").textContent = "Đang tải nội dung...";
+    $("flashFrontHint").textContent = "Vui lòng chờ một chút";
 
+    await ensureEnglishStudyScopeReady(scope);
 
-    flashcards =
-        Array.isArray(
-            raw
-        )
-            ? raw
-                .map(
-                    normalizeFlashcard
-                )
-                .filter(
-                    Boolean
-                )
+    let scopedCards = getEnglishScopedStudyCards(scope);
+
+    /* Fallback: nếu hosting thiếu file câu hỏi, vẫn dùng bộ từ vựng cũ. */
+    if (!scopedCards.length) {
+        await ensureEnglishFlashcardsLoaded();
+        const raw = window.medQuizFlashcards["Tiếng Anh"];
+        scopedCards = Array.isArray(raw)
+            ? raw.map(normalizeFlashcard).filter(Boolean)
             : [];
+    }
 
+    flashcards = scopedCards.map((card, index) =>
+        card && card.front && card.back ? normalizeFlashcard(card, index) : null
+    ).filter(Boolean);
 
-    filteredFlashcards =
-        [
-            ...flashcards
-        ];
+    /* Mỗi lần mở đều random lại toàn bộ phạm vi hiện tại. */
+    filteredFlashcards = shuffleArray([...flashcards]);
+    flashCurrentIndex = 0;
+    knownFlashcards = new Set();
+    $("flashSearchInput").value = "";
 
-
-    flashCurrentIndex =
-        0;
-
-
-    knownFlashcards =
-        new Set();
-
-
-    $("flashSearchInput")
-        .value =
-        "";
-
-
-    showPage(
-        flashcardPage
-    );
-
-
+    showPage(flashcardPage);
+    updateEnglishStudyScopeUI("flashcard", flashcards.length);
     renderFlashcard();
-
 }
 
 
@@ -7675,6 +8055,21 @@ function renderFlashcard() {
         ];
 
 
+    const isQuizStudy =
+        card.studyKind === "quiz" || card.fixedDirection;
+
+
+    const frontLabel = document.querySelector("#flashcardPage .flashcard-front .flash-face-label");
+    const backLabel = document.querySelector("#flashcardPage .flashcard-back .flash-face-label");
+    const flashKicker = document.querySelector("#flashcardPage .flash-dashboard-title > div > span");
+    const searchInput = $("flashSearchInput");
+
+    if (frontLabel) frontLabel.textContent = "";
+    if (backLabel) backLabel.textContent = "VIETNAMESE";
+    if (flashKicker) flashKicker.textContent = "HỌC TỪ VỰNG";
+    if (searchInput) searchInput.placeholder = "Tìm từ tiếng Anh...";
+
+
     $("flashcard")
         .classList.remove(
             "flipped"
@@ -7697,7 +8092,7 @@ function renderFlashcard() {
 
     $("flashFrontHint")
         .textContent =
-        "Nhấn để xem nghĩa";
+        "";
 
 
     $("flashBackText")
@@ -8024,14 +8419,14 @@ function setupWordPractice() {
     $("wordPracticeModeBtn")
         .addEventListener(
             "click",
-            openWordPractice
+            () => openWordPractice(resolveEnglishStudyScope(), quizConfigPage)
         );
 
 
     $("backFromWordPracticeBtn")
         .addEventListener(
             "click",
-            () => appBack(quizConfigPage || exerciseHub)
+            () => appBack(englishStudyReturnPage || quizConfigPage || exerciseHub)
         );
 
 
@@ -8118,6 +8513,10 @@ function setupWordPractice() {
 function getNormalizedEnglishFlashcards() {
 
     const raw =
+        (window.medQuizWordPractice && window.medQuizWordPractice[
+            "Tiếng Anh"
+        ])
+        ||
         window.medQuizFlashcards[
             "Tiếng Anh"
         ];
@@ -8138,44 +8537,48 @@ function getNormalizedEnglishFlashcards() {
 }
 
 
-async function openWordPractice() {
+async function openWordPractice(requestedScope = null, returnPage = null) {
 
-    await ensureEnglishFlashcardsLoaded();
+    const scope = resolveEnglishStudyScope(requestedScope);
+    englishStudyScope = scope;
+    englishStudyReturnPage = returnPage || quizConfigPage || exerciseHub;
+    englishStudyScopeLabel = getEnglishStudyScopeLabel(scope);
 
-    wordPracticeCards =
-        getNormalizedEnglishFlashcards();
+    $("wordPracticePrompt").textContent = "Đang tải nội dung...";
+    $("wordPracticeDirectionLabel").textContent = "Vui lòng chờ một chút";
 
+    await ensureEnglishStudyScopeReady(scope);
 
-    wordPracticeDirection =
-        "mixed";
+    let scopedCards = getEnglishScopedStudyCards(scope);
 
+    /* Fallback về dữ liệu từ vựng cũ nếu file bộ câu hỏi không có. */
+    if (!scopedCards.length) {
+        await ensureEnglishWordPracticeLoaded();
+        scopedCards = getNormalizedEnglishFlashcards();
+    }
+
+    wordPracticeCards = scopedCards
+        .map((card, index) => normalizeFlashcard(card, index))
+        .filter(Boolean);
+
+    wordPracticeDirection = "mixed";
 
     document
-        .querySelectorAll(
-            "[data-word-direction]"
-        )
-        .forEach(
-            button =>
-                button.classList.toggle(
-                    "active",
-                    button.dataset.wordDirection ===
-                    "mixed"
-                )
+        .querySelectorAll("[data-word-direction]")
+        .forEach(button =>
+            button.classList.toggle(
+                "active",
+                button.dataset.wordDirection === "mixed"
+            )
         );
-
 
     wordPracticeCorrectCount = 0;
     wordPracticeWrongCount = 0;
     wordPracticeAttemptCount = 0;
 
-
-    showPage(
-        wordPracticePage
-    );
-
-
+    showPage(wordPracticePage);
+    updateEnglishStudyScopeUI("word", wordPracticeCards.length);
     resetWordPracticeQueue();
-
 }
 
 
@@ -8293,7 +8696,7 @@ function renderWordPractice() {
 
         $("wordPracticeDirectionLabel")
             .textContent =
-            "Hãy thêm dữ liệu vào flashcards/tienganh.js";
+            "Hãy thêm dữ liệu vào flashcards/tienganh11.js";
 
 
         $("wordPracticeQuestionLabel")
@@ -8365,8 +8768,14 @@ function renderWordPractice() {
         ];
 
 
+    const isQuizStudy =
+        current.studyKind === "quiz" || current.fixedDirection;
+
+
     wordPracticeCurrentDirection =
-        pickWordPracticeDirection();
+        isQuizStudy
+            ? "en-vi"
+            : pickWordPracticeDirection();
 
 
     const isEnglishToVietnamese =
@@ -8376,41 +8785,57 @@ function renderWordPractice() {
 
     $("wordPracticeQuestionLabel")
         .textContent =
-        isEnglishToVietnamese
-            ? "ENGLISH → VIETNAMESE"
-            : "VIETNAMESE → ENGLISH";
+        isQuizStudy
+            ? "CÂU HỎI → ĐÁP ÁN"
+            : (
+                isEnglishToVietnamese
+                    ? "ENGLISH → VIETNAMESE"
+                    : "VIETNAMESE → ENGLISH"
+            );
 
 
     $("wordPracticePrompt")
         .textContent =
-        isEnglishToVietnamese
+        isQuizStudy
             ? current.front
-            : current.back;
+            : (isEnglishToVietnamese ? current.front : current.back);
 
 
     $("wordPracticeDirectionLabel")
         .textContent =
-        isEnglishToVietnamese
-            ? "Hãy nhập nghĩa tiếng Việt"
-            : "Hãy nhập từ / cụm từ tiếng Anh";
+        isQuizStudy
+            ? "Nhập đáp án đúng của câu hỏi"
+            : (
+                isEnglishToVietnamese
+                    ? "Hãy nhập nghĩa tiếng Việt"
+                    : "Hãy nhập từ / cụm từ tiếng Anh"
+            );
 
 
     $("wordPracticeInputLabel")
         .textContent =
-        isEnglishToVietnamese
-            ? "Nghĩa tiếng Việt của bạn"
-            : "Từ tiếng Anh của bạn";
+        isQuizStudy
+            ? "Đáp án của bạn"
+            : (
+                isEnglishToVietnamese
+                    ? "Nghĩa tiếng Việt của bạn"
+                    : "Từ tiếng Anh của bạn"
+            );
 
 
     input.placeholder =
-        isEnglishToVietnamese
-            ? "Nhập tiếng Việt tại đây..."
-            : "Type English here...";
+        isQuizStudy
+            ? "Nhập đáp án đúng tại đây..."
+            : (
+                isEnglishToVietnamese
+                    ? "Nhập tiếng Việt tại đây..."
+                    : "Type English here..."
+            );
 
 
     $("wordPracticePronunciation")
         .textContent =
-        isEnglishToVietnamese
+        !isQuizStudy && isEnglishToVietnamese
             ? current.pronunciation
             : "";
 
@@ -8429,7 +8854,13 @@ function renderWordPractice() {
 
     $("wordPracticePosition")
         .textContent =
-        `Từ ${wordPracticeIndex + 1} / ${total}`;
+        `${isQuizStudy ? "Câu" : "Từ"} ${wordPracticeIndex + 1} / ${total}`;
+
+
+    const directionPanel = document.querySelector("#wordPracticePage .word-direction-panel");
+    if (directionPanel) {
+        directionPanel.style.display = isQuizStudy ? "none" : "";
+    }
 
 
     const percent =
@@ -8482,6 +8913,10 @@ function getWordPracticeExpectedAnswer() {
 
     }
 
+
+    if (current.studyKind === "quiz" || current.fixedDirection) {
+        return current.back;
+    }
 
     return wordPracticeCurrentDirection ===
         "en-vi"
